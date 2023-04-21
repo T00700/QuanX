@@ -1,4 +1,4 @@
-// 2023-04-13 08:50
+// 2023-04-21 14:25
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -579,8 +579,12 @@ if (url.includes("/interface/sdk/sdkad.php")) {
   } else if (url.includes("/2/statuses/show")) {
     removeFeedAd(obj);
     // 循环引用中的商品橱窗
-    if (obj.text) {
+    if (obj?.text) {
       removeFeedAd(obj.text);
+    }
+    // 赞赏信息
+    if (obj?.reward_info) {
+      delete obj.reward_info;
     }
   } else if (url.includes("/2/statuses/unread_hot_timeline")) {
     // 首页推荐tab信息流
