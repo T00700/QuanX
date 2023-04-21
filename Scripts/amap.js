@@ -1,4 +1,4 @@
-// 2023-04-21 10:00
+// 2023-04-21 18:15
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -397,7 +397,10 @@ if (url.includes("/faas/amap-navigation/main-page")) {
       delete list.card;
     }
   }
-} else if (url.includes("/shield/search_poi/sug")) {
+} else if (
+  url.includes("/shield/search_poi/sug") ||
+  url.includes("/shield/search/sug")
+) {
   if (obj?.tip_list) {
     let newList = [];
     if (obj?.tip_list?.length > 0) {
