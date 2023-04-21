@@ -1,4 +1,4 @@
-// 2023-04-20 22:10
+// 2023-04-21 09:40
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -200,6 +200,10 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     if (obj.data?.[i]) {
       obj.data[i] = { status: 1, version: "", value: "" };
     }
+  }
+} else if (url.includes("/shield/search/common/coupon/info")) {
+  if (obj.data) {
+    obj.data = {};
   }
 } else if (url.includes("/shield/search/nearbyrec_smart")) {
   // 附近页面
