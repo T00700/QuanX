@@ -1,5 +1,5 @@
 # ======= 高德地图 ======= #
-# 2023-04-20 21:55
+# 2023-04-21 08:35
 
 # 其他
 ^http:\/\/amdc\.m\.taobao\.com\/amdc\/mobileDispatch$ AMapiPhone url-and-header reject-dict
@@ -20,7 +20,6 @@
 ^https:\/\/m5\.amap\.com\/ws\/mapapi\/poi\/infolite\/\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/amap.js
 ^https:\/\/m5\.amap\.com\/ws\/shield\/frogserver\/aocs\/updatable\/1\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/amap.js
 ^https:\/\/m5\.amap\.com\/ws\/valueadded\/weather\/v2\? url reject-dict
-^https:\/\/mps\.amap\.com\/ws\/mps\/scene\? url reject
 ^https:\/\/sns\.amap\.com\/ws\/msgbox\/pull(_mp)?\? url reject-dict
 
 # 我的页面,个人主页,卡片,足迹
@@ -39,4 +38,4 @@
 ^https:\/\/m5-zb\.amap\.com\/ws\/promotion-web\/resource\?? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/amap.js
 ^https:\/\/m5-zb\.amap\.com\/ws\/sharedtrip\/taxi\/order_detail_car_tips\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/amap.js
 
-hostname = m5.amap.com, m5-zb.amap.com, mps.amap.com, sns.amap.com
+hostname = m5.amap.com, m5-zb.amap.com, sns.amap.com
