@@ -1,4 +1,4 @@
-# 2023-04-22 08:40
+# 2023-04-22 20:08
 
 # ======= A ======= #
 # 安全浏览限制解除
@@ -10,6 +10,11 @@ HOST, safebrowsing.urlsec.qq.com, REJECT
 HOST, token.safebrowsing.apple, REJECT
 HOST, vs6.bj2ct.u3.ucweb.com, REJECT
 HOST-SUFFIX, u3.ucweb.com, REJECT
+
+# ======= B ======= #
+# 哔哩哔哩
+HOST, mall.bilibili.com, REJECT
+HOST, passport.bilibili.com, REJECT
 
 # ======= C ======= #
 # Clue 智库
