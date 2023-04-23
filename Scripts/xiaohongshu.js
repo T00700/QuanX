@@ -1,10 +1,14 @@
-// 2023-03-04 11:10
+// 2023-04-23 07:33
 
 const url = $request.url;
 if (!$response.body) $done({});
 let obj = JSON.parse($response.body);
 
-if (url.includes("/v1/search/hot_list")) {
+if (url.includes("/v1/search/banner_list")) {
+  if (obj.data) {
+    obj.data = {};
+  }
+} else if (url.includes("/v1/search/hot_list")) {
   if (obj.data?.items) {
     obj.data.items = [];
   }
