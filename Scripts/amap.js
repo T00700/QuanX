@@ -1,4 +1,4 @@
-// 2023-04-22 13:00
+// 2023-04-24 15:20
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -133,7 +133,7 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     "collect",
     "deviceml_force_recommend",
     "deviceml_update_apk_conf",
-    "footprint", // 足迹
+    // "footprint", // 足迹
     "gd_code_cover",
     "gd_notch_logo",
     "his_input_tip",
@@ -148,7 +148,7 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     "info_env_setting",
     "ip_square",
     "ip_square_share",
-    "isNewSearchMapCard", // 可能是足迹
+    // "isNewSearchMapCard", // 可能是足迹
     "isPoiBubbleDisplay",
     "lab_beta",
     "lab_screenrecording",
