@@ -1,4 +1,4 @@
-// 2023-04-01 08:55
+// 2023-04-25 08:28
 
 const url = $request.url;
 let obj = JSON.parse($response.body);
@@ -114,7 +114,7 @@ if (!$response.body) {
       obj.data.vip.due_date = 2208960000; // Unix 时间戳 2040-01-01 00:00:00
       obj.data.vip.role = 3;
     }
-  } else if (url.includes("/x/v2/feed/index")) {
+  } else if (url.includes("/x/v2/feed/index?")) {
     // 推荐广告
     if (obj.data?.items) {
       obj.data.items = obj.data.items.filter((i) => {
@@ -131,15 +131,21 @@ if (!$response.body) {
             // return false;
             // }
             return false;
-            // ad_player大视频广告 ad_web_gif大gif广告 ad_web_s普通小广告 ad_av创作推广广告 ad_inline_3d 上方大的视频3d广告
+            // ad_av 创作推广广告
+            // ad_inline_3d 上方大的视频3d广告
+            // ad_inline_eggs 上方大的视频广告
+            // ad_player 大视频广告
+            // ad_web_gif 大gif广告
+            // ad_web_s 普通小广告
           } else if (
             cardType === "cm_v2" &&
             [
-              "ad_web_s",
               "ad_av",
-              "ad_web_gif",
+              "ad_inline_3d",
+              "ad_inline_eggs",
               "ad_player",
-              "ad_inline_3d"
+              "ad_web_gif",
+              "ad_web_s"
             ].includes(cardGoto)
           ) {
             return false;
@@ -156,6 +162,15 @@ if (!$response.body) {
         }
         return true;
       });
+    }
+  } else if (url.includes("/x/v2/feed/index/story")) {
+    if (obj.data?.items) {
+      obj.data.items = obj.data.items.filter(
+        (i) => !(
+          i.hasOwnProperty("ad_info") ||
+          i.card_goto.includes("ad")
+        )
+      );
     }
   } else if (url.includes("/x/v2/search/square")) {
     // 热搜广告
