@@ -31,8 +31,8 @@
 ^https:\/\/api\.weibo\.cn\/2\/video\/redpacket\? url reject-dict
 ^https:\/\/api\.weibo\.cn\/!\/sug\/list\/finderchange\? url reject-dict
 
-# 开屏广告 //boot.biz.weibo.com, *.uve.weibo.com
-^https:\/\/boot(realtime)?\.(biz|uve)\.weibo\.com\/v[12]\/ad\/realtime$ url reject-dict
+# 开屏广告 //*.uve.weibo.com
+^https:\/\/bootrealtime\.uve\.weibo\.com\/v2\/ad\/realtime$ url reject-dict
 ^https:\/\/bootpreload\.uve\.weibo\.com\/v1\/ad\/preload$ url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/weibo.js
 ^https:\/\/sdkapp\.uve\.weibo\.com\/interface\/sdk\/(get-lbs-cell-info\.php$|sdkconfig\.php\?) url reject
 ^https:\/\/sdkapp\.uve\.weibo\.com\/interface\/sdk\/sdkad\.php$ url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/weibo.js
@@ -47,4 +47,4 @@
 ^https:\/\/shop\.sc\.weibo\.com\/h5\/jump\/error\?(.*&)?url= url script-echo-response https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/noRedirect.js
 ^https:\/\/(sinaurl|t)\.cn\/ url script-response-header https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/noRedirect.js
 
-hostname = api.weibo.cn, boot.biz.weibo.com, *.uve.weibo.com, card.weibo.com, weibo.com, weibo.cn, shop.sc.weibo.com, t.cn, sinaurl.cn
+hostname = api.weibo.cn, *.uve.weibo.com, card.weibo.com, weibo.com, weibo.cn, shop.sc.weibo.com, t.cn, sinaurl.cn
