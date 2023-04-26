@@ -1,4 +1,4 @@
-// 2023-04-23 07:33
+// 2023-04-26 20:10
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -69,6 +69,12 @@ if (url.includes("/v1/search/banner_list")) {
       }
     }
     obj.data = newItems;
+  }
+} else if (url.includes("/v10/search/notes")) {
+  if (obj.data?.items) {
+    obj.data.items = obj.data.items.filter(
+      (i) => !i.model_type.includes("ads")
+    );
   }
 }
 
