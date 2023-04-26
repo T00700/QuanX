@@ -6,6 +6,7 @@ HOST, sgfindershort.wechat.com, WeChat
 HOST, sgilinkshort.wechat.com, WeChat
 HOST, sglong.wechat.com, WeChat
 HOST, sgminorshort.wechat.com, WeChat
+HOST, sgquic.wechat.com, WeChat
 HOST, sgshort.wechat.com, WeChat
 HOST, tencentmap.wechat.com, WeChat
 HOST-SUFFIX, qlogo.cn, WeChat
@@ -30,3 +31,4 @@ IP-CIDR, 101.32.133.209/32, WeChat
 IP-CIDR, 101.32.133.53/32, WeChat
 IP-CIDR, 129.226.107.244/32, WeChat
 IP-CIDR, 129.226.3.47/32, WeChat
+IP-CIDR, 162.62.163.63/32, WeChat
