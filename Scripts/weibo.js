@@ -1,4 +1,4 @@
-// 2023-04-23 19:55
+// 2023-04-26 12:55
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -234,7 +234,19 @@ if (url.includes("/interface/sdk/sdkad.php")) {
     if (obj.items?.[0]?.items) {
       let item = obj.items?.[0]?.items;
       for (let i of item) {
-        removeAvatar(i.data);
+        removeAvatar(i?.data);
+      }
+    }
+  } else if (url.includes("/2/flowlist")) {
+    if (obj.items) {
+      let item = obj.items;
+      for (let i of item) {
+        if (i.items) {
+          let ii = i?.items;
+          for (let l of ii) {
+            removeAvatar(l?.data);
+          }
+        }
       }
     }
   } else if (url.includes("/2/messageflow/notice")) {
@@ -667,18 +679,6 @@ function isAd(data) {
 
 // 移除头像挂件,关注按钮
 function removeAvatar(data) {
-  if (data?.buttons) {
-    delete data.buttons;
-  }
-  if (data?.cardid) {
-    delete data.cardid;
-  }
-  if (data?.icons) {
-    delete data.icons;
-  }
-  if (data?.pic_bg_new) {
-    delete data.pic_bg_new;
-  }
   if (data?.user?.avatargj_id) {
     delete data.user.avatargj_id;
   }
@@ -690,6 +690,18 @@ function removeAvatar(data) {
   }
   if (data?.user?.icons) {
     delete data.user.icons;
+  }
+  if (data?.buttons) {
+    delete data.buttons;
+  }
+  if (data?.cardid) {
+    delete data.cardid;
+  }
+  if (data?.icons) {
+    delete data.icons;
+  }
+  if (data?.pic_bg_new) {
+    delete data.pic_bg_new;
   }
   return data;
 }
