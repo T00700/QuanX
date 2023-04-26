@@ -1,5 +1,5 @@
 # https://github.com/limbopro/Adblock4limbo/blob/main/Adblock4limbo.list
-# 2023-02-18
+# 2023-02-23
 
 # https://javmost.xyz/
 ;HOST, delivery-node-aziz.voe-network.net, REJECT
@@ -274,9 +274,22 @@ HOST-SUFFIX, cdn.viglink.com, REJECT
 # www.tz659.com
 HOST, nggfe.fdgem.com, REJECT
 HOST, rthmnj.xyz, REJECT
-HOST-SUFFIX,  jknmthwd.xyz, REJECT
+HOST-SUFFIX, jknmthwd.xyz, REJECT
 HOST, koprtgh.omhoa.com, REJECT
 HOST, hbftgh.ibjkqnhjwd.xyz, REJECT
 HOST, kmopoer.jkbuymjhp.xyz, REJECT
 HOST, kmef.ikjwmfeds.xyz, REJECT
 HOST, hnrtg.iujkegbpo.xyz, REJECT
+HOST-SUFFIX, tcc.qscvli.com, REJECT
+HOST, fg.knlk2md.cn, REJECT
+HOST, tg.gtlpaj.com, REJECT
+HOST-SUFFIX, gtlpaj.com, REJECT
+HOST-SUFFIX, knlk2md.cn, REJECT
+HOST-SUFFIX, 7tad.cn, REJECT
+HOST, tc.vpubmi.com, REJECT
+HOST-SUFFIX, qoiw1xw.cn, REJECT
+HOST-SUFFIX, purpleads.io, REJECT
+
+# m.yhpdm.com
+HOST-SUFFIX, fg.knlk2md.cn, REJECT
+HOST-SUFFIX, tg.gtlpaj.com, REJECT

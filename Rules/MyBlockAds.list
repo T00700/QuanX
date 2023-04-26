@@ -1,4 +1,4 @@
-# 2023-04-22 20:08
+# 2023-04-26 10:45
 
 # ======= A ======= #
 # 安全浏览限制解除
@@ -107,7 +107,6 @@ HOST, iadmusicmatvideo.music.126.net, REJECT
 HOST-SUFFIX, 163jiasu.com, REJECT
 # 微博 开屏广告
 HOST, adstrategy.biz.weibo.com, REJECT
-;HOST, boot.biz.weibo.com, REJECT
 HOST, kadmimage.biz.weibo.com, REJECT
 HOST, sdkaction.biz.weibo.com, REJECT
 HOST, sdkclick.biz.weibo.com, REJECT
@@ -140,3 +139,6 @@ HOST, sugar.zhihu.com, REJECT
 IP-CIDR, 118.89.204.198/32, REJECT
 IP-CIDR, 103.41.167.237/32, REJECT
 IP6-CIDR, 2402:4e00:1200:ed00:0:9089:6dac:96b6/128, REJECT
+# 字节跳动
+HOST, ad.zijieapi.com, REJECT
+HOST-WILDCARD, p?-ad-sign.byteimg.com, REJECT
