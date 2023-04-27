@@ -1,4 +1,4 @@
-# 2023-04-27 20:40
+# 2023-04-27 22:40
 
 # ======= A ======= #
 # 安全浏览限制解除
@@ -30,10 +30,13 @@ HOST, images.ctfassets.net, REJECT
 # Flurry
 HOST, data.flurry.com, REJECT
 # Foreca & Google
+HOST, adservice.google.com, REJECT
 HOST, googleads.g.doubleclick-cn.net, REJECT
 HOST, googleads.g.doubleclick.net, REJECT
 HOST, pubads.g.doubleclick.net, REJECT
 HOST, pagead2.googlesyndication.com, REJECT
+HOST, www.googleadservices.com, REJECT
+HOST-WILDCARD, adservice.google.com.??, REJECT
 
 # ======= H ======= #
 # HTTPDNS 服务器
