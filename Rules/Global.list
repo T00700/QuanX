@@ -472,29 +472,31 @@ HOST-SUFFIX, linkedin.com, PROXY
 HOST-SUFFIX, licdn.com, PROXY
 HOST-SUFFIX, msn.com, PROXY
 HOST-SUFFIX, skype.com, PROXY
-# Gitlab
+# > Gitlab
 HOST-SUFFIX, gitlab.com, PROXY
-# Quantumult X
+# > Quantumult X
 HOST-SUFFIX, quantumult.app, PROXY
-# Surge
+# > Surge
 HOST, surge.mitsea.com, PROXY
 HOST-SUFFIX, nssurge.com, PROXY
 HOST-SUFFIX, surge-activation.com, PROXY
-# Stash
+# > Stash
 HOST-SUFFIX, stash.ws, PROXY
 HOST-SUFFIX, stash.wiki, PROXY
 HOST-SUFFIX, stash-activation.com, PROXY
-# 机场
+# > Punycode
+HOST-WILDCARD, *xn--*, PROXY
+# ---(机场)---
 HOST, sub.jsy88.net, PROXY
-# 魔法学院
+# > 魔法学院
 HOST, link.002.se, PROXY
-# 独角兽
+# > 独角兽
 HOST, unicorncloud.club, PROXY
-# Teacat
+# > Teacat
 HOST, teacat.cloud, PROXY
 HOST, rss.teacat001.xyz, PROXY
-# EFCloud
+# > EFCloud
 HOST, www.efcloud.net, PROXY
-# iKuuu
+# > iKuuu
 HOST, ikuuu.co, PROXY
 HOST, api.ndsxfkjfvhzdsfio.quest, PROXY
