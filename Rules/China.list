@@ -1,3 +1,6 @@
+# https://github.com/DivineEngine/Profiles/blob/master/Quantumult/Filter/China.list
+# 2022-11-11
+
 # China Area Network
 HOST-SUFFIX, flyert.com, DIRECT
 HOST-SUFFIX, gandi.net, DIRECT
