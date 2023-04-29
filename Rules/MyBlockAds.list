@@ -1,6 +1,9 @@
-# 2023-04-27 22:40
+# 2023-04-29 08:32
 
 # ======= A ======= #
+# Apple
+HOST, api-adservices.apple.com, REJECT
+HOST-SUFFIX, iadsdk.apple.com, REJECT
 # 安全浏览限制解除
 HOST, lookup.api.bsb.baidu.com, REJECT
 HOST, proxy.safebrowsing.apple, REJECT
@@ -13,6 +16,8 @@ HOST-SUFFIX, safebrowsing.apple, REJECT
 HOST-SUFFIX, u3.ucweb.com, REJECT
 
 # ======= B ======= #
+# 百度
+HOST-SUFFIX, pos.baidu.com, REJECT
 # 哔哩哔哩
 HOST, mall.bilibili.com, REJECT
 HOST, passport.bilibili.com, REJECT
@@ -41,7 +46,7 @@ HOST-WILDCARD, adservice.google.com.??, REJECT
 # ======= H ======= #
 # HTTPDNS 服务器
 ## 阿里云
-IP-CIDR, 203.107.1.1/32, REJECT
+IP-CIDR, 203.107.1.1/24, REJECT
 ## 百度贴吧
 IP-CIDR, 186.76.76.200/32, REJECT
 
@@ -70,9 +75,7 @@ HOST, tmeadcomm.y.qq.com, REJECT
 
 # ======= L ======= #
 # 蓝奏云
-HOST, pos.baidu.com, REJECT
 HOST, statics.woozooo.com, REJECT
-HOST, wn.pos.baidu.com, REJECT
 
 # ======= M ======= #
 # 美颜相机
