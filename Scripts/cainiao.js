@@ -1,4 +1,4 @@
-// 2023-04-29 18:15
+// 2023-04-29 19:15
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -50,6 +50,17 @@ if (url.includes("nbpresentation.protocol.homepage.get.cn")) {
             i?.materialContentMapper?.advRecGmtModifiedTime)
         )
     );
+  }
+} else if (url.includes("guoguo.nbnetflow.ads.mshow.cn")) {
+  if (obj.data) {
+    // 1316 头部banner
+    // 1332 我的页面横版图片
+    const item = ["1316", "1332"];
+    for (let i of item) {
+      if (obj.data?.[i]) {
+        delete obj.data[i];
+      }
+    }
   }
 }
 
