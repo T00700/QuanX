@@ -151,10 +151,7 @@ if (url.includes("/x/resource/show/skin")) {
         } else if (cardType === "small_cover_v10" && cardGoto === "game") {
           return false;
           // 创作推广-大视频广告
-        } else if (
-          cardType === "cm_double_v9" &&
-          cardGoto === "ad_inline_av"
-        ) {
+        } else if (cardType === "cm_double_v9" && cardGoto === "ad_inline_av") {
           return false;
         }
       }
@@ -166,10 +163,11 @@ if (url.includes("/x/resource/show/skin")) {
     // vertical_live 直播内容
     // vertical_pgc 大会员专享
     obj.data.items = obj.data.items.filter(
-      (i) => !(
-        i.hasOwnProperty("ad_info") ||
-        ["ad", "vertical_live", "vertical_pgc"].includes(i.card_goto)
-      )
+      (i) =>
+        !(
+          i.hasOwnProperty("ad_info") ||
+          ["ad", "vertical_live", "vertical_pgc"].includes(i.card_goto)
+        )
     );
   }
 } else if (url.includes("/x/v2/search/square")) {
@@ -235,8 +233,9 @@ if (url.includes("/x/resource/show/skin")) {
     };
   }
   if (obj.data?.new_tab_info?.outer_list?.length > 0) {
-    obj.data.new_tab_info.outer_list =
-      obj.data.new_tab_info.outer_list.filter((i) => i.biz_id !== 33);
+    obj.data.new_tab_info.outer_list = obj.data.new_tab_info.outer_list.filter(
+      (i) => i.biz_id !== 33
+    );
   }
 }
 

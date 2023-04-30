@@ -32,7 +32,7 @@ switch (getCube(url)) {
   case "嘀嗒出行-开屏广告":
     try {
       let obj = JSON.parse(body);
-      if (obj.hasOwnProperty("startupPages") == true) {
+      if (obj.hasOwnProperty("startupPages")) {
         obj.show_time = 1;
         obj.full_screen = 0;
         let startupPages = [];

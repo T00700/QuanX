@@ -52,7 +52,8 @@ if (url.includes("/business/v1.0/users/feature/list")) {
     };
   } else if (url.includes("/v1/users/me")) {
     obj.membershipIdentity = "svip";
-    obj.membershipIcon = "https://gw.alicdn.com/imgextra/i3/O1CN01iPKCuZ1urjDgiry5c_!!6000000006091-2-tps-60-60.png";
+    obj.membershipIcon =
+      "https://gw.alicdn.com/imgextra/i3/O1CN01iPKCuZ1urjDgiry5c_!!6000000006091-2-tps-60-60.png";
   }
   $done({ body: JSON.stringify(obj) });
 }
