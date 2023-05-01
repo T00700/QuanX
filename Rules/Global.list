@@ -488,7 +488,7 @@ HOST-SUFFIX, stash.ws, PROXY
 HOST-SUFFIX, stash.wiki, PROXY
 HOST-SUFFIX, stash-activation.com, PROXY
 # > Punycode
-HOST-WILDCARD, *xn--*, PROXY
+HOST-KEYWORD, xn--, PROXY
 # ---(机场)---
 HOST, sub.jsy88.net, PROXY
 # > 魔法学院
