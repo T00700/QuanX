@@ -1,4 +1,4 @@
-# 2023-05-01 19:45
+# 2023-05-05 18:45
 
 # ======= A ======= #
 # Apple
@@ -18,6 +18,12 @@ HOST-SUFFIX, u3.ucweb.com, REJECT
 # ======= B ======= #
 # 百度
 HOST-SUFFIX, pos.baidu.com, REJECT
+# 百度地图
+HOST, afd.baidu.com, REJECT
+HOST, afdconf.baidu.com, REJECT
+HOST, httpdns.baidubce.com, REJECT
+HOST, lc.map.baidu.com, REJECT
+IP-CIDR, 180.76.76.200/32, REJECT
 # 哔哩哔哩
 HOST, mall.bilibili.com, REJECT
 HOST, passport.bilibili.com, REJECT
