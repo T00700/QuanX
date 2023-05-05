@@ -1,4 +1,4 @@
-// 2023-05-05 09:18
+// 2023-05-05 22:50
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -435,12 +435,13 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     if (obj?.tip_list?.length > 0) {
       for (let item of obj.tip_list) {
         if (
-          ["toplist"].includes(item.tip?.result_type) ||
+          ["12"].includes(item?.tip?.datatype_spec) ||
+          ["toplist"].includes(item?.tip?.result_type) ||
           [
             "exct_query_sug_merge_theme",
             "query_sug_merge_theme",
             "sp"
-          ].includes(item.tip?.task_tag)
+          ].includes(item?.tip?.task_tag)
         ) {
           continue;
         } else {
@@ -448,6 +449,25 @@ if (url.includes("/faas/amap-navigation/main-page")) {
         }
       }
       obj.tip_list = newList;
+    }
+  } else if (obj?.city_list) {
+    let newList = [];
+    if (obj?.city_list?.length > 0) {
+      for (let item of obj.city_list) {
+        let newTip = [];
+        if (item?.tip_list?.length > 0) {
+          for (let ii of item.tip_list) {
+            if (["12"].includes(ii?.tip?.datatype_spec)) {
+              continue;
+            } else {
+              newTip.push(ii);
+            }
+          }
+          item.tip_list = newTip;
+        }
+        newList.push(item);
+      }
+      obj.city_list = newList;
     }
   }
 } else if (url.includes("/shield/search_poi/tips_operation_location")) {
