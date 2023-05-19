@@ -1,4 +1,4 @@
-// 2023-05-08 14:30
+// 2023-05-19 17:10
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -7,7 +7,10 @@ let obj = JSON.parse($response.body);
 if (url.includes("nbpresentation.homepage.merge.get.cn")) {
   if (obj.data) {
     // 移除 反馈组件
-    const item = ["mtop.cainiao.nbmensa.research.researchservice.acquire.cn@2"];
+    const item = [
+      "mtop.cainiao.nbmensa.research.researchservice.acquire.cn@2",
+      "mtop.cainiao.nbmensa.research.researchservice.acquire.cn@3"
+    ];
     for (let i of item) {
       if (obj.data?.[i]) {
         delete obj.data[i];
@@ -15,10 +18,11 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
     }
   }
 } else if (url.includes("nbpresentation.protocol.homepage.get.cn")) {
-  if (obj.data.result) {
-    let list = obj.data.result.dataList;
+  let res = obj.data.result;
+  if (res) {
+    let list = res.dataList;
     if (list) {
-      obj.data.result.dataList = list.filter((i) => {
+      list = list.filter((i) => {
         // 顶部图标
         if (i.type.includes("icons_scroll_unable")) {
           if (i.bizData.items) {
