@@ -1,4 +1,4 @@
-// 2023-05-19 08:25
+// 2023-05-19 09:18
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -104,8 +104,11 @@ if (url.includes("/api/cloud/config/all")) {
           i.fields.body.video.id = videoID;
         }
       } else if (i.type === "common_card") {
-        // 推广视频
-        if (i.extra?.type === "zvideo") {
+        if (i.extra?.type === "drama") {
+          // 直播内容
+          return false;
+        } else if (i.extra?.type === "zvideo") {
+          // 推广视频
           let videoUrl = i.common_card.feed_content.video.customized_page_url;
           let videoID = getUrlParamValue(videoUrl, "videoID");
           if (videoID) {
