@@ -1,4 +1,4 @@
-// 2023-04-25 15:35
+// 2023-05-19 14:48
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -129,12 +129,6 @@ if (url.includes("/x/resource/show/skin")) {
           // return false;
           // }
           return false;
-          // ad_av 创作推广广告
-          // ad_inline_3d 上方大的视频3d广告
-          // ad_inline_eggs 上方大的视频广告
-          // ad_player 大视频广告
-          // ad_web_gif 大gif广告
-          // ad_web_s 普通小广告
         } else if (
           cardType === "cm_v2" &&
           [
@@ -147,11 +141,14 @@ if (url.includes("/x/resource/show/skin")) {
           ].includes(cardGoto)
         ) {
           return false;
-          // 游戏广告
-        } else if (cardType === "small_cover_v10" && cardGoto === "game") {
+        } else if (cardType === "small_cover_v9" && cardGoto === "live") {
+          // 直播内容
           return false;
-          // 创作推广-大视频广告
+        } else if (cardType === "small_cover_v10" && cardGoto === "game") {
+          // 游戏广告
+          return false;
         } else if (cardType === "cm_double_v9" && cardGoto === "ad_inline_av") {
+          // 创作推广 大视频广告
           return false;
         }
       }
