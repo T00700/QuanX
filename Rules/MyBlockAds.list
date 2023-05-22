@@ -1,4 +1,4 @@
-# 2023-05-05 18:45
+# 2023-05-22 10:00
 
 # ======= A ======= #
 # Apple
@@ -29,6 +29,8 @@ HOST, mall.bilibili.com, REJECT
 HOST, passport.bilibili.com, REJECT
 
 # ======= C ======= #
+# ChatGPT
+HOST, o33249.ingest.sentry.io, REJECT
 # Clue 智库
 HOST, api.helloclue.com, REJECT
 HOST, brahe.apptimize.com, REJECT
