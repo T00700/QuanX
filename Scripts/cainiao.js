@@ -1,4 +1,4 @@
-// 2023-05-19 17:10
+// 2023-05-24 11:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -69,7 +69,8 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
   if (obj.data) {
     // 1316 头部banner
     // 1332 我的页面横版图片
-    const item = ["1316", "1332"];
+    // 1340 查快递小妙招
+    const item = ["1316", "1332", "1340"];
     for (let i of item) {
       if (obj.data?.[i]) {
         delete obj.data[i];
