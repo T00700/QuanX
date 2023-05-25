@@ -18,11 +18,10 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
     }
   }
 } else if (url.includes("nbpresentation.protocol.homepage.get.cn")) {
-  let res = obj.data.result;
-  if (res) {
-    let list = res.dataList;
-    if (list) {
-      list = list.filter((i) => {
+  if (obj.data.result) {
+    let res = obj.data.result;
+    if (res.dataList) {
+      res.dataList = res.dataList.filter((i) => {
         // 顶部图标
         if (i.type.includes("icons_scroll_unable")) {
           if (i.bizData.items) {
@@ -44,7 +43,7 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
         } else {
           return true;
         }
-        list.forEach((i) => {
+        res.dataList.forEach((i) => {
           i.bizData.items.forEach((ii) => {
             ii.rightIcon = null;
             ii.bubbleText = null;
