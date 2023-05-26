@@ -1,4 +1,4 @@
-// 2023-05-26 11:25
+// 2023-05-26 17:20
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -62,6 +62,7 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
       (i) => ![
         "29766",
         "30656",
+        "30657",
         "30658",
         "30659",
         "31491",
