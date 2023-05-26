@@ -1,4 +1,4 @@
-// 2023-05-24 11:05
+// 2023-05-26 10:50
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -53,15 +53,24 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
     }
   }
 } else if (url.includes("guoguo.nbnetflow.ads.show.cn")) {
-  // 底部标签页
+  // 我的页面
   if (obj.data.result) {
+    // 30656-30659 休闲娱乐
+    // 31788 签到领红包
+    // 32926 出库码推广
     obj.data.result = obj.data.result.filter(
-      (i) =>
-        !(
-          i?.materialContentMapper?.group_id?.includes("entertainment") ||
-          (i?.materialContentMapper?.bgImg &&
-            i?.materialContentMapper?.advRecGmtModifiedTime)
-        )
+      (i) => ![
+        "29766",
+        "30656",
+        "30658",
+        "30659",
+        "31627",
+        "31788",
+        "32926",
+        "33114",
+        "33116",
+        "33122"
+      ].includes(i?.id)
     );
   }
 } else if (url.includes("guoguo.nbnetflow.ads.mshow.cn")) {
