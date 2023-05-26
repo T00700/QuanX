@@ -1,4 +1,4 @@
-// 2023-05-26 17:20
+// 2023-05-26 22:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -59,20 +59,21 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
     // 31788 签到领红包
     // 32926 出库码推广
     obj.data.result = obj.data.result.filter(
-      (i) => ![
-        "29766",
-        "30656",
-        "30657",
-        "30658",
-        "30659",
-        "31491",
-        "31627",
-        "31788",
-        "32926",
-        "33114",
-        "33116",
-        "33122"
-      ].includes(i?.id)
+      (i) =>
+        ![
+          "29766",
+          "30656",
+          "30657",
+          "30658",
+          "30659",
+          "31491",
+          "31627",
+          "31788",
+          "32926",
+          "33114",
+          "33116",
+          "33122"
+        ].includes(i?.id)
     );
   }
 } else if (url.includes("guoguo.nbnetflow.ads.mshow.cn")) {
