@@ -1,4 +1,4 @@
-// 2023-05-26 22:05
+// 2023-05-27 08:25
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -15,6 +15,20 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
       if (obj.data?.[i]) {
         delete obj.data[i];
       }
+    }
+  }
+} else if (url.includes("nbpresentation.pickup.empty.page.get.cn")) {
+  if (obj.data.result) {
+    let ggContent = obj.data.result.content;
+    if (ggContent.middle) {
+      ggContent.middle = ggContent.middle.filter(
+        (i) =>
+          ![
+            "guoguo_pickup_empty_page_relation_add", // 添加亲友
+            "guoguo_pickup_helper_feedback", // 反馈组件
+            "guoguo_pickup_helper_tip_view" // 取件小助手
+          ].includes(i.template.name)
+      );
     }
   }
 } else if (url.includes("nbpresentation.protocol.homepage.get.cn")) {
@@ -55,21 +69,18 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
 } else if (url.includes("guoguo.nbnetflow.ads.show.cn")) {
   // 我的页面
   if (obj.data.result) {
-    // 30656-30659 休闲娱乐
-    // 31788 签到领红包
-    // 32926 出库码推广
     obj.data.result = obj.data.result.filter(
       (i) =>
         ![
           "29766",
-          "30656",
+          "30656", // 30656-30659 休闲娱乐
           "30657",
           "30658",
           "30659",
           "31491",
           "31627",
-          "31788",
-          "32926",
+          "31788", // 31788 签到领红包
+          "32926", // 32926 出库码推广
           "33114",
           "33116",
           "33122"
