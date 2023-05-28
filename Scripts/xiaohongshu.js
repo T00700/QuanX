@@ -1,4 +1,4 @@
-// 2023-05-26 22:50
+// 2023-05-28 08:45
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -80,9 +80,8 @@ if (url.includes("/v1/search/banner_list")) {
   }
 } else if (url.includes("/v10/search/notes")) {
   if (obj.data?.items) {
-    // hot_query 大家还在搜
     obj.data.items = obj.data.items.filter(
-      (i) => !["ads", "hot_query"].includes(i.model_type)
+      (i) => i.model_type === "note"
     );
   }
 }
