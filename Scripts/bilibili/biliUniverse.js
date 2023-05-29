@@ -1,4 +1,4 @@
-// 2023-05-29 09:25
+// 2023-05-29 12:00
 
 const url = $request.url;
 const isQuanX = typeof $task !== "undefined";
@@ -27,8 +27,7 @@ const isQuanX = typeof $task !== "undefined";
   }
   // 解析链接并处理protobuf数据
   // google.protobuf.Any
-  class Any$Type extends MessageType{constructor(){super("google.protobuf.Any",[{no:1,name:"type_url",kind:"scalar",T:9},{no:2,name:"value",kind:"scalar",T:12}])}pack(message,type){return{typeUrl:this.typeNameToUrl(type.typeName),value:type.toBinary(message),}}unpack(any,type,options){if(!this.contains(any,type))throw new Error("Cannot unpack google.protobuf.Any with typeUrl '"+any.typeUrl+"' as "+type.typeName+".");return type.fromBinary(any.value,options)}contains(any,type){if(!any.typeUrl.length)return false;let wants=typeof type=="string"?type:type.typeName;let has=this.typeUrlToName(any.typeUrl);return wants===has}internalJsonWrite(any,options){if(any.typeUrl==="")return{};let typeName=this.typeUrlToName(any.typeUrl);let opt=jsonWriteOptions(options);let type=opt.typeRegistry?.find(t=>t.typeName===typeName);if(!type)throw new globalThis.Error("Unable to convert google.protobuf.Any with typeUrl '"+any.typeUrl+"' to JSON. The specified type "+typeName+" is not available in the type registry.");let value=type.fromBinary(any.value,{readUnknownField:false});let json=type.internalJsonWrite(value,opt);if(typeName.startsWith("google.protobuf.")||!isJsonObject(json))json={value:json};json["@type"]=any.typeUrl;return json}internalJsonRead(json,options,target){if(!isJsonObject(json))throw new globalThis.Error("Unable to parse google.protobuf.Any from JSON "+typeofJsonValue(json)+".");if(typeof json["@type"]!="string"||json["@type"]=="")return this.create();let typeName=this.typeUrlToName(json["@type"]);let type=options?.typeRegistry?.find(t=>t.typeName==typeName);if(!type)throw new globalThis.Error("Unable to parse google.protobuf.Any from JSON. The specified type "+typeName+" is not available in the type registry.");let value;if(typeName.startsWith("google.protobuf.")&&json.hasOwnProperty("value"))value=type.fromJson(json["value"],options);else{let copy=Object.assign({},json);delete copy["@type"];value=type.fromJson(copy,options)}if(target===undefined)target=this.create();target.typeUrl=json["@type"];target.value=type.toBinary(value);return target}typeNameToUrl(name){if(!name.length)throw new Error("invalid type name: "+name);return"type.googleapis.com/"+name}typeUrlToName(url){if(!url.length)throw new Error("invalid type url: "+url);let slash=url.lastIndexOf("/");let name=slash>0?url.substring(slash+1):url;if(!name.length)throw new Error("invalid type url: "+url);return name}create(value){const message={typeUrl:"",value:new Uint8Array(0)};globalThis.Object.defineProperty(message,MESSAGE_TYPE,{enumerable:false,value:this});if(value!==undefined)reflectionMergePartial(this,message,value);return message}internalBinaryRead(reader,length,options,target){let message=target??this.create(),end=reader.pos+length;while(reader.pos<end){let[fieldNo,wireType]=reader.tag();switch(fieldNo){case 1:message.typeUrl=reader.string();break;case 2:message.value=reader.bytes();break;default:let u=options.readUnknownField;if(u==="throw")throw new globalThis.Error(`Unknown field ${fieldNo}(wire type ${wireType})for ${this.typeName}`);let d=reader.skip(wireType);if(u!==false)(u===true?UnknownFieldHandler.onRead:u)(this.typeName,message,fieldNo,wireType,d)}}return message}internalBinaryWrite(message,writer,options){if(message.typeUrl!=="")writer.tag(1,WireType.LengthDelimited).string(message.typeUrl);if(message.value.length)writer.tag(2,WireType.LengthDelimited).bytes(message.value);let u=options.writeUnknownFields;if(u!==false)(u==true?UnknownFieldHandler.onWrite:u)(this.typeName,message,writer);return writer}}
-  const Any = new Any$Type();
+  class Any$Type extends MessageType{constructor(){super("google.protobuf.Any",[{no:1,name:"type_url",kind:"scalar",T:9},{no:2,name:"value",kind:"scalar",T:12}])}pack(message,type){return{typeUrl:this.typeNameToUrl(type.typeName),value:type.toBinary(message),}}unpack(any,type,options){if(!this.contains(any,type))throw new Error("Cannot unpack google.protobuf.Any with typeUrl '"+any.typeUrl+"' as "+type.typeName+".");return type.fromBinary(any.value,options)}contains(any,type){if(!any.typeUrl.length)return false;let wants=typeof type=="string"?type:type.typeName;let has=this.typeUrlToName(any.typeUrl);return wants===has}internalJsonWrite(any,options){if(any.typeUrl==="")return{};let typeName=this.typeUrlToName(any.typeUrl);let opt=jsonWriteOptions(options);let type=opt.typeRegistry?.find(t=>t.typeName===typeName);if(!type)throw new globalThis.Error("Unable to convert google.protobuf.Any with typeUrl '"+any.typeUrl+"' to JSON. The specified type "+typeName+" is not available in the type registry.");let value=type.fromBinary(any.value,{readUnknownField:false});let json=type.internalJsonWrite(value,opt);if(typeName.startsWith("google.protobuf.")||!isJsonObject(json))json={value:json};json["@type"]=any.typeUrl;return json}internalJsonRead(json,options,target){if(!isJsonObject(json))throw new globalThis.Error("Unable to parse google.protobuf.Any from JSON "+typeofJsonValue(json)+".");if(typeof json["@type"]!="string"||json["@type"]=="")return this.create();let typeName=this.typeUrlToName(json["@type"]);let type=options?.typeRegistry?.find(t=>t.typeName==typeName);if(!type)throw new globalThis.Error("Unable to parse google.protobuf.Any from JSON. The specified type "+typeName+" is not available in the type registry.");let value;if(typeName.startsWith("google.protobuf.")&&json.hasOwnProperty("value"))value=type.fromJson(json["value"],options);else{let copy=Object.assign({},json);delete copy["@type"];value=type.fromJson(copy,options)}if(target===undefined)target=this.create();target.typeUrl=json["@type"];target.value=type.toBinary(value);return target}typeNameToUrl(name){if(!name.length)throw new Error("invalid type name: "+name);return"type.googleapis.com/"+name}typeUrlToName(url){if(!url.length)throw new Error("invalid type url: "+url);let slash=url.lastIndexOf("/");let name=slash>0?url.substring(slash+1):url;if(!name.length)throw new Error("invalid type url: "+url);return name}create(value){const message={typeUrl:"",value:new Uint8Array(0)};globalThis.Object.defineProperty(message,MESSAGE_TYPE,{enumerable:false,value:this});if(value!==undefined)reflectionMergePartial(this,message,value);return message}internalBinaryRead(reader,length,options,target){let message=target??this.create(),end=reader.pos+length;while(reader.pos<end){let[fieldNo,wireType]=reader.tag();switch(fieldNo){case 1:message.typeUrl=reader.string();break;case 2:message.value=reader.bytes();break;default:let u=options.readUnknownField;if(u==="throw")throw new globalThis.Error(`Unknown field ${fieldNo}(wire type ${wireType})for ${this.typeName}`);let d=reader.skip(wireType);if(u!==false)(u===true?UnknownFieldHandler.onRead:u)(this.typeName,message,fieldNo,wireType,d)}}return message}internalBinaryWrite(message,writer,options){if(message.typeUrl!=="")writer.tag(1,WireType.LengthDelimited).string(message.typeUrl);if(message.value.length)writer.tag(2,WireType.LengthDelimited).bytes(message.value);let u=options.writeUnknownFields;if(u!==false)(u==true?UnknownFieldHandler.onWrite:u)(this.typeName,message,writer);return writer}}const Any = new Any$Type();
   if (url.includes("Search/SearchAll")) {
     // 搜索结果
     // 全部结果（综合）
@@ -46,35 +45,28 @@ const isQuanX = typeof $task !== "undefined";
     $response.body = rawBody;
   }
 })()
-  // .catch((e) => console.logErr(e))
   .finally(() => {
-    switch ($response) {
-      case undefined: // 无回复数据
-        break;
-      default: // 有回复数据，返回回复数据
-        if ($response?.headers?.["Content-Encoding"]) {
-          $response.headers["Content-Encoding"] = "identity";
-        }
-        if ($response?.headers?.["content-encoding"]) {
-          $response.headers["content-encoding"] = "identity";
-        }
-        if (isQuanX) {
-          // 返回二进制数据
-          $done({
-            headers: $response.headers,
-            bodyBytes: $response.bodyBytes.buffer.slice(
-              $response.bodyBytes.byteOffset,
-              $response.bodyBytes.byteLength + $response.bodyBytes.byteOffset
-            )
-          });
-        } else {
-          $done($response);
-        }
-        break;
+    let headers =
+      $response?.headers?.["Content-Encoding"] ||
+      $response?.headers?.["content-encoding"];
+    // 有回复数据，返回回复数据
+    if (headers) {
+      headers = "identity";
+    }
+    if (isQuanX) {
+      // 返回二进制数据
+      $done({
+        headers: $response.headers,
+        bodyBytes: $response.bodyBytes.buffer.slice(
+          $response.bodyBytes.byteOffset,
+          $response.bodyBytes.byteLength + $response.bodyBytes.byteOffset
+        )
+      });
+    } else {
+      $done($response);
     }
   });
 
-/***************** Function *****************/
 /**
  * Create New Raw Body
  * @author app2smile
