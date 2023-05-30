@@ -2,7 +2,7 @@ const number = ""; //填入邀请码或者通过$argumeent传入
 
 const http = (request, method = "post") => {
   return new Promise((resolve, reject) => {
-    $httpClient[method](request, (err, resp, data) => {
+    $task[method](request, (err, resp, data) => {
       if (resp?.status === 200) {
         resolve(JSON.parse(data));
       } else {
