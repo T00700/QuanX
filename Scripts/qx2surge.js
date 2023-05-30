@@ -12,6 +12,7 @@ hostname = %APPEND% github.com:443, raw.githubusercontent.com:443
 "http-response"                                type = "script-response-header"
 "http-request" && requires-body=1              type = "script-request-body"
 "http-request"                                 type = "script-request-header"
+$task.fetch                                    $httpClient.post
 */
 
 let req = $request.url.replace(/qx$/, "");
