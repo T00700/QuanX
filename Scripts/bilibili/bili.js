@@ -1,4 +1,4 @@
-// 2023-05-19 14:48
+// 2023-05-31 16:40
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -130,7 +130,7 @@ if (url.includes("/x/resource/show/skin")) {
           // }
           return false;
         } else if (
-          cardType === "cm_v2" &&
+          ["cm_v1", "cm_v2"].includes(cardType) &&
           [
             "ad_av",
             "ad_inline_3d",
