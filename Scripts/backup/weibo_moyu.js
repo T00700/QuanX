@@ -2,7 +2,7 @@
 > 应用名称：墨鱼自用微博&微博国际版净化脚本
 > 脚本作者：@ddgksf2013, @Zmqcherish 
 > 微信账号：墨鱼手记
-> 更新时间：2022-04-03
+> 更新时间：2022-05-31
 > 通知频道：https://t.me/ddgksf2021
 > 贡献投稿：https://t.me/ddgksf2013_bot
 > 原作者库：https://github.com/zmqcherish
@@ -12,7 +12,7 @@
 > 脚本声明：若有侵犯原作者权利，请邮箱联系删除
 ***********************************************/
 
-const version = "V2.0.106";
+const version = "V2.0.113";
 
 const mainConfig = {
     isDebug: !1,
@@ -103,17 +103,28 @@ const mainConfig = {
     user_center: "modifiedUserCenter",
     "a=get_coopen_ads": "removeIntlOpenAds",
     "php?a=search_topic": "removeSearchTopic",
-    "v1/ad/realtime": "removeRealtimeAd"
+    "v1/ad/realtime": "removeRealtimeAd",
+    "v1/ad/preload": "removeAdPreload"
   };
 function getModifyMethod(e) {
   for (let t of modifyCardsUrls) if (e.indexOf(t) > -1) return "removeCards";
   for (let o of modifyStatusesUrls)
     if (e.indexOf(o) > -1) return "removeTimeLine";
-  for (let [i, r] of Object.entries(otherUrls)) if (e.indexOf(i) > -1) return r;
+  for (let [i, a] of Object.entries(otherUrls)) if (e.indexOf(i) > -1) return a;
   return null;
 }
 function removeRealtimeAd(e) {
   return delete e.ads, (e.code = 4016), e;
+}
+function removeAdPreload(e) {
+  if (!e.ads) return e;
+  for (let t of ((e.last_ad_show_interval = 86400), e.ads))
+    (t.start_time = 2681574400),
+      (t.end_time = 2681660799),
+      (t.display_duration = 0),
+      (t.daily_display_cnt = 0),
+      (t.total_display_cnt = 0);
+  return e;
 }
 function removeIntlOpenAds(e) {
   return (
@@ -176,7 +187,8 @@ function removeMainTab(e) {
   let t = [];
   for (let o of e.items)
     isAd(o.data) ||
-      (o.data?.common_struct && delete o.data.common_struct,
+      (o.data?.page_info?.video_limit && delete o.data.page_info.video_limit,
+      o.data?.common_struct && delete o.data.common_struct,
       o.category
         ? "group" != o.category
           ? t.push(o)
@@ -218,7 +230,11 @@ function removeMain(e) {
           )),
           t.push(o);
       }
-    } else -1 == [202, 200].indexOf(o.data.card_type) && t.push(o);
+    } else {
+      if (o.data?.card_type && [202, 200].indexOf(o.data.card_type) > -1)
+        continue;
+      t.push(o);
+    }
   return (e.items = t), log("removeMain success"), e;
 }
 function topicHandler(e) {
@@ -227,15 +243,15 @@ function topicHandler(e) {
     return e;
   let o = [];
   for (let i of t) {
-    let r = !0;
+    let a = !0;
     if (i.mblog) {
-      let a = i.mblog.buttons;
-      mainConfig.removeUnfollowTopic && a && "follow" == a[0].type && (r = !1);
+      let r = i.mblog.buttons;
+      mainConfig.removeUnfollowTopic && r && "follow" == r[0].type && (a = !1);
     } else {
       if (!mainConfig.removeUnusedPart) continue;
-      if ("bottom_mix_activity" == i.itemid) r = !1;
-      else if (i?.top?.title == "正在活跃") r = !1;
-      else if (200 == i.card_type && i.group) r = !1;
+      if ("bottom_mix_activity" == i.itemid) a = !1;
+      else if (i?.top?.title == "正在活跃") a = !1;
+      else if (200 == i.card_type && i.group) a = !1;
       else {
         let n = i.card_group;
         if (!n) continue;
@@ -246,7 +262,7 @@ function topicHandler(e) {
             "chaohua_home_readpost_samecity_title"
           ].indexOf(n[0].itemid) > -1
         )
-          r = !1;
+          a = !1;
         else if (n.length > 1) {
           let d = [];
           for (let s of n)
@@ -258,7 +274,7 @@ function topicHandler(e) {
         }
       }
     }
-    r && o.push(i);
+    a && o.push(i);
   }
   return (e.cards = o), log("topicHandler success"), e;
 }
@@ -286,11 +302,14 @@ function removeSearch(e) {
   if (!e.items) return e;
   let t = [];
   for (let o of e.items)
-    if ("feed" == o.category) isAd(o.data) || t.push(o);
-    else {
-      if ("group" == o.category) continue;
-      checkSearchWindow(o) || t.push(o);
-    }
+    "feed" == o.category
+      ? isAd(o.data) ||
+        (o.data?.page_info?.video_limit && delete o.data.page_info.video_limit,
+        t.push(o))
+      : "group" == o.category
+      ? ((o.items = o.items.filter((e) => e.data?.card_type === 17)),
+        o.items.length > 0 && t.push(o))
+      : checkSearchWindow(o) || t.push(o);
   return (
     (e.items = t),
     e.loadedInfo &&
@@ -330,19 +349,19 @@ function removeCards(e) {
   let t = [];
   for (let o of e.cards) {
     if (
-      e.cardlistInfo?.page_type == "08" &&
+      e.cardlistInfo?.containerid == "232082type=1" &&
       (17 == o.card_type || 58 == o.card_type || 11 == o.card_type)
     )
       continue;
     let i = o.card_group;
     if (i && i.length > 0) {
-      let r = [];
-      for (let a of i)
-        118 == a.card_type ||
-          isAd(a.mblog) ||
-          -1 != JSON.stringify(a).indexOf("res_from:ads") ||
-          r.push(a);
-      (o.card_group = r), t.push(o);
+      let a = [];
+      for (let r of i)
+        118 == r.card_type ||
+          isAd(r.mblog) ||
+          -1 != JSON.stringify(r).indexOf("res_from:ads") ||
+          a.push(r);
+      (o.card_group = a), t.push(o);
     } else {
       let n = o.card_type;
       if ([9, 165].indexOf(n) > -1) isAd(o.mblog) || t.push(o);
@@ -414,14 +433,14 @@ function itemExtendHandler(e) {
   } catch (o) {}
   if (mainConfig.modifyMenus && e.custom_action_list) {
     let i = [];
-    for (let r of e.custom_action_list) {
-      let a = r.type,
-        n = itemMenusConfig[a];
+    for (let a of e.custom_action_list) {
+      let r = a.type,
+        n = itemMenusConfig[r];
       void 0 === n
-        ? i.push(r)
-        : "mblog_menus_copy_url" === a
-        ? i.unshift(r)
-        : n && i.push(r);
+        ? i.push(a)
+        : "mblog_menus_copy_url" === r
+        ? i.unshift(a)
+        : n && i.push(a);
     }
     e.custom_action_list = i;
   }
@@ -447,14 +466,14 @@ function updateProfileSkin(e, t) {
     let o = mainConfig[t];
     if (!o) return;
     let i = 0;
-    for (let r of e.items)
-      if (r.image)
+    for (let a of e.items)
+      if (a.image)
         try {
-          (dm = r.image.style.darkMode),
-            "alpha" != dm && (r.image.style.darkMode = "alpha"),
-            (r.image.iconUrl = o[i++]),
-            r.dot && (r.dot = []);
-        } catch (a) {}
+          (dm = a.image.style.darkMode),
+            "alpha" != dm && (a.image.style.darkMode = "alpha"),
+            (a.image.iconUrl = o[i++]),
+            a.dot && (a.dot = []);
+        } catch (r) {}
     log("updateProfileSkin success");
   } catch (n) {
     console.log("updateProfileSkin fail");
@@ -505,9 +524,9 @@ function removeComments(e) {
     o = e.datas || [];
   if (0 === o.length) return;
   let i = [];
-  for (let r of o) {
-    let a = r.adType || "";
-    -1 == t.indexOf(a) && 6 != r.type && i.push(r);
+  for (let a of o) {
+    let r = a.adType || "";
+    -1 == t.indexOf(r) && 6 != a.type && i.push(a);
   }
   log("remove 评论区相关和推荐内容"), (e.datas = i);
 }
@@ -531,7 +550,7 @@ function userHandler(e) {
     if ("group" == o.category)
       try {
         "可能感兴趣的人" == o.items[0].data.desc && (i = !1);
-      } catch (r) {}
+      } catch (a) {}
     i && (o.data?.common_struct && delete o.data.common_struct, t.push(o));
   }
   return (e.items = t), log("removeMain sub success"), e;
@@ -542,7 +561,7 @@ function nextVideoHandler(e) {
   for (let o of e.statuses)
     if (!isAd(o)) {
       let i = ["forward_redpacket_info", "shopping", "float_info", "tags"];
-      for (let r of i) o.video_info?.[r] && delete o.video_info[r];
+      for (let a of i) o.video_info?.[a] && delete o.video_info[a];
       t.push(o);
     }
   return (e.statuses = t), log("removeMainTab Success"), e;
@@ -554,7 +573,7 @@ function tabSkinHandler(e) {
     let o = e.data.list;
     for (let i of o) (i.version = t), (i.downloadlink = mainConfig.tabIconPath);
     log("tabSkinHandler success");
-  } catch (r) {
+  } catch (a) {
     log("tabSkinHandler fail");
   }
 }
