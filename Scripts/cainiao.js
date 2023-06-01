@@ -1,4 +1,4 @@
-// 2023-05-27 08:25
+// 2023-06-01 17:45
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -8,6 +8,8 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
   if (obj.data) {
     // 移除 反馈组件
     const item = [
+      "mtop.cainiao.nbmensa.research.researchservice.acquire.cn@0",
+      "mtop.cainiao.nbmensa.research.researchservice.acquire.cn@1",
       "mtop.cainiao.nbmensa.research.researchservice.acquire.cn@2",
       "mtop.cainiao.nbmensa.research.researchservice.acquire.cn@3"
     ];
@@ -53,6 +55,9 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
           }
         } else if (i.type.includes("big_banner_area")) {
           // 新人福利
+          return false;
+        } else if (i.type.includes("promotion")) {
+          // 促销活动
           return false;
         } else {
           return true;
