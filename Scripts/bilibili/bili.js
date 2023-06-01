@@ -1,4 +1,4 @@
-// 2023-05-31 16:40
+// 2023-06-01 14:25
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -52,7 +52,7 @@ if (url.includes("/x/resource/show/skin")) {
     ttl: 1,
     data: null
   };
-} else if (url.includes("/x/v2/account/mine")) {
+} else if (url.includes("/x/v2/account/mine?")) {
   // 我的页面
   // 标准版：
   // 396离线缓存 397历史记录 398我的收藏 399稍后再看 171个性装扮 172我的钱包 407联系客服 410设置
@@ -100,6 +100,25 @@ if (url.includes("/x/resource/show/skin")) {
         obj.data.vip.role = 3;
       }
     });
+  }
+} else if (url.includes("/x/v2/account/mine/ipad")) {
+  if (obj.data?.ipad_upper_sections) {
+    // 投稿 创作首页 稿件管理 有奖活动
+    delete obj.data.ipad_upper_sections;
+  }
+  if (obj.data?.ipad_recommend_sections) {
+    // 789我的关注 790我的消息 791我的钱包 792直播中心 793大会员 794我的课程 2542我的游戏
+    const itemList = [789, 790];
+    obj.data.ipad_recommend_sections = obj.data.ipad_recommend_sections.filter(
+      (i) => itemList.includes(i.id)
+    );
+  }
+  if (obj.data?.ipad_more_sections) {
+    // 797我的客服 798设置 1070青少年守护
+    const itemList = [797, 798];
+    obj.data.ipad_more_sections = obj.data.ipad_more_sections.filter((i) =>
+      itemList.includes(i.id)
+    );
   }
 } else if (url.includes("/x/v2/account/myinfo")) {
   // 会员清晰度
