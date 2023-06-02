@@ -1,4 +1,4 @@
-// 2023-06-02 11:58
+// 2023-06-02 22:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -76,24 +76,27 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
   if (obj.data.result) {
     obj.data.result = obj.data.result.filter(
       (i) =>
-        ![
-          "29524", // 开屏广告
-          "29766",
-          "30656", // 30656-30659 休闲娱乐
-          "30657",
-          "30658",
-          "30659",
-          "31491",
-          "31627",
-          "31769", // 帮同学取
-          "31788", // 签到领红包
-          "32103", // 攻略
-          "32926", // 出库码推广
-          "33114",
-          "33116",
-          "33122"
-        ].includes(i?.id)
+        !(
+          i?.materialContentMapper?.group_id?.includes("entertainment") ||
+          i?.materialContentMapper?.adItemDetail ||
+          (i?.materialContentMapper?.bgImg &&
+            i?.materialContentMapper?.advRecGmtModifiedTime)
+        )
     );
+  }
+} else if (url.includes("guoguo.nbnetflow.ads.mshow.cn")) {
+  if (obj.data) {
+    // 1275 支付宝
+    // 1308 支付宝
+    // 1316 头部banner
+    // 1332 我的页面横版图片
+    // 1340 查快递小妙招
+    const item = ["1275", "1308", "1316", "1332", "1340"];
+    for (let i of item) {
+      if (obj.data?.[i]) {
+        delete obj.data[i];
+      }
+    }
   }
 }
 
