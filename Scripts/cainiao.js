@@ -1,4 +1,4 @@
-// 2023-06-02 11:02
+// 2023-06-02 11:58
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -77,6 +77,7 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
     obj.data.result = obj.data.result.filter(
       (i) =>
         ![
+          "29524", // 开屏广告
           "29766",
           "30656", // 30656-30659 休闲娱乐
           "30657",
@@ -84,8 +85,10 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
           "30659",
           "31491",
           "31627",
-          "31788", // 31788 签到领红包
-          "32926", // 32926 出库码推广
+          "31769", // 帮同学取
+          "31788", // 签到领红包
+          "32103", // 攻略
+          "32926", // 出库码推广
           "33114",
           "33116",
           "33122"
