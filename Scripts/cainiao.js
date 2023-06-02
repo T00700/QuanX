@@ -1,4 +1,4 @@
-// 2023-06-02 09:38
+// 2023-06-02 11:02
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -70,6 +70,27 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
         });
       });
     }
+  }
+} else if (url.includes("guoguo.nbnetflow.ads.show.cn")) {
+  // 我的页面
+  if (obj.data.result) {
+    obj.data.result = obj.data.result.filter(
+      (i) =>
+        ![
+          "29766",
+          "30656", // 30656-30659 休闲娱乐
+          "30657",
+          "30658",
+          "30659",
+          "31491",
+          "31627",
+          "31788", // 31788 签到领红包
+          "32926", // 32926 出库码推广
+          "33114",
+          "33116",
+          "33122"
+        ].includes(i?.id)
+    );
   }
 }
 
