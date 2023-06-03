@@ -1,4 +1,4 @@
-// 2023-06-03 16:15
+// 2023-06-03 16:35
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -107,6 +107,7 @@ if (url.includes("nbpresentation.homepage.merge.get")) {
       "615",
       "616",
       "727",
+      "793", // 支付宝 小程序 搜索框
       "954", // 支付宝 小程序 置顶图标
       "1308", // 支付宝 小程序 横图
       "1316", // 头部 banner
