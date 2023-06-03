@@ -1,4 +1,4 @@
-// 2023-06-03 13:03
+// 2023-06-03 13:50
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -39,13 +39,14 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
   if (obj.data.result) {
     let res = obj.data.result;
     if (res.dataList) {
-      res.dataList.forEach((i) => {
+      res.dataList = res.dataList.filter((i) => {
         if (i.type.includes("kingkong")) {
           if (i.bizData.items) {
             for (let ii of i.bizData.items) {
               ii.rightIcon = null;
               ii.bubbleText = null;
             }
+            return true;
           }
         } else if (i.type.includes("icons_scroll")) {
           // 顶部图标
@@ -67,17 +68,16 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
               ii.rightIcon = null;
               ii.bubbleText = null;
             }
+            return true;
           }
         } else if (i.type.includes("big_banner_area")) {
           // 新人福利
-          if (i.bizData) {
-            i.bizData = {};
-          }
+          return false;
         } else if (i.type.includes("promotion")) {
           // 促销活动
-          if (i.bizData) {
-            i.bizData = {};
-          }
+          return false;
+        } else {
+          return true;
         }
       });
     }
