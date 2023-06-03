@@ -1,4 +1,4 @@
-// 2023-06-02 22:05
+// 2023-06-03 09:20
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -39,10 +39,11 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
     if (res.dataList) {
       res.dataList = res.dataList.filter((i) => {
         // 顶部图标
-        if (i.type.includes("icons_scroll_unable")) {
+        if (i.type.includes("icons_scroll")) {
           if (i.bizData.items) {
             const item = [
               "bgxq", // 包裹星球
+              "cncy", // 填字赚现金
               "cngy", // 免费领水果
               "cngreen", // 绿色家园
               "gjjf", // 裹酱积分
@@ -77,10 +78,10 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
     obj.data.result = obj.data.result.filter(
       (i) =>
         !(
-          i?.materialContentMapper?.group_id?.includes("entertainment") ||
-          i?.materialContentMapper?.adItemDetail ||
+          i?.materialContentMapper?.adItemDetail || // 开屏广告
           (i?.materialContentMapper?.bgImg &&
-            i?.materialContentMapper?.advRecGmtModifiedTime)
+            i?.materialContentMapper?.advRecGmtModifiedTime) || // 轮播横图
+          i?.materialContentMapper?.group_id?.includes("entertainment")
         )
     );
   }
@@ -91,7 +92,18 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
     // 1316 头部banner
     // 1332 我的页面横版图片
     // 1340 查快递小妙招
-    const item = ["1275", "1308", "1316", "1332", "1340"];
+    const item = [
+      "328",
+      "366",
+      "369",
+      "616",
+      "727",
+      "1275",
+      "1308",
+      "1316",
+      "1332",
+      "1340"
+    ];
     for (let i of item) {
       if (obj.data?.[i]) {
         delete obj.data[i];
