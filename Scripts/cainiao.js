@@ -1,10 +1,10 @@
-// 2023-06-03 14:08
+// 2023-06-03 16:15
 
 const url = $request.url;
 if (!$response.body) $done({});
 let obj = JSON.parse($response.body);
 
-if (url.includes("nbpresentation.homepage.merge.get.cn")) {
+if (url.includes("nbpresentation.homepage.merge.get")) {
   // 反馈组件
   if (obj.data) {
     const item = [
@@ -19,7 +19,7 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
       }
     }
   }
-} else if (url.includes("nbpresentation.pickup.empty.page.get.cn")) {
+} else if (url.includes("nbpresentation.pickup.empty.page.get")) {
   // 取件页面
   if (obj.data.result) {
     let ggContent = obj.data.result.content;
@@ -34,7 +34,7 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
       );
     }
   }
-} else if (url.includes("nbpresentation.protocol.homepage.get.cn")) {
+} else if (url.includes("nbpresentation.protocol.homepage.get")) {
   // 首页
   if (obj.data.result) {
     let res = obj.data.result;
@@ -82,7 +82,7 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
       });
     }
   }
-} else if (url.includes("guoguo.nbnetflow.ads.show.cn")) {
+} else if (url.includes("guoguo.nbnetflow.ads.show")) {
   // 我的页面
   if (obj.data.result) {
     obj.data.result = obj.data.result.filter(
@@ -95,7 +95,7 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
         )
     );
   }
-} else if (url.includes("guoguo.nbnetflow.ads.mshow.cn")) {
+} else if (url.includes("guoguo.nbnetflow.ads.mshow")) {
   // 首页
   if (obj.data) {
     const item = [
@@ -107,11 +107,12 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
       "615",
       "616",
       "727",
-      "1275", // 支付宝 小程序
-      "1308", // 支付宝 小程序
+      "954", // 支付宝 小程序 置顶图标
+      "1308", // 支付宝 小程序 横图
       "1316", // 头部 banner
       "1332", // 我的页面 横图
-      "1340" // 查快递 小妙招
+      "1340", // 查快递 小妙招
+      "1391" // 支付宝 小程序 寄包裹
     ];
     for (let i of item) {
       if (obj.data?.[i]) {
