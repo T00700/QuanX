@@ -1,4 +1,4 @@
-// 2023-06-03 13:50
+// 2023-06-03 14:08
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -98,24 +98,20 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
 } else if (url.includes("guoguo.nbnetflow.ads.mshow.cn")) {
   // 首页
   if (obj.data) {
-    // 3位数为家乡版本
-    // 1275 支付宝
-    // 1308 支付宝
-    // 1316 头部banner
-    // 1332 我的页面横版图片
-    // 1340 查快递小妙招
     const item = [
-      "328",
+      "10", // 物流详情页 底部横图
+      "498", // 物流详情页 左上角
+      "328", // 3位数为家乡版本
       "366",
       "369",
       "615",
       "616",
       "727",
-      "1275",
-      "1308",
-      "1316",
-      "1332",
-      "1340"
+      "1275", // 支付宝 小程序
+      "1308", // 支付宝 小程序
+      "1316", // 头部 banner
+      "1332", // 我的页面 横图
+      "1340" // 查快递 小妙招
     ];
     for (let i of item) {
       if (obj.data?.[i]) {
