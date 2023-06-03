@@ -1,12 +1,12 @@
-// 2023-06-03 09:20
+// 2023-06-03 09:30
 
 const url = $request.url;
 if (!$response.body) $done({});
 let obj = JSON.parse($response.body);
 
 if (url.includes("nbpresentation.homepage.merge.get.cn")) {
+  // 反馈组件
   if (obj.data) {
-    // 移除 反馈组件
     const item = [
       "mtop.cainiao.nbmensa.research.researchservice.acquire.cn@0",
       "mtop.cainiao.nbmensa.research.researchservice.acquire.cn@1",
@@ -20,6 +20,7 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
     }
   }
 } else if (url.includes("nbpresentation.pickup.empty.page.get.cn")) {
+  // 取件页面
   if (obj.data.result) {
     let ggContent = obj.data.result.content;
     if (ggContent.middle) {
@@ -34,6 +35,7 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
     }
   }
 } else if (url.includes("nbpresentation.protocol.homepage.get.cn")) {
+  // 首页
   if (obj.data.result) {
     let res = obj.data.result;
     if (res.dataList) {
@@ -78,15 +80,20 @@ if (url.includes("nbpresentation.homepage.merge.get.cn")) {
     obj.data.result = obj.data.result.filter(
       (i) =>
         !(
-          i?.materialContentMapper?.adItemDetail || // 开屏广告
+          // 开屏广告
+          i?.materialContentMapper?.adItemDetail ||
+          // 轮播横图
           (i?.materialContentMapper?.bgImg &&
-            i?.materialContentMapper?.advRecGmtModifiedTime) || // 轮播横图
+            i?.materialContentMapper?.advRecGmtModifiedTime) ||
+          // 推广项目
           i?.materialContentMapper?.group_id?.includes("entertainment")
         )
     );
   }
 } else if (url.includes("guoguo.nbnetflow.ads.mshow.cn")) {
+  // 首页
   if (obj.data) {
+    // 3位数为家乡版本
     // 1275 支付宝
     // 1308 支付宝
     // 1316 头部banner
