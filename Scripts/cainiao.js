@@ -1,4 +1,4 @@
-// 2023-06-03 16:35
+// 2023-06-04 18:45
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -91,7 +91,9 @@ if (url.includes("nbpresentation.homepage.merge.get")) {
           i?.materialContentMapper?.adItemDetail ||
           (i?.materialContentMapper?.bgImg &&
             i?.materialContentMapper?.advRecGmtModifiedTime) ||
-          i?.materialContentMapper?.group_id?.includes("entertainment")
+          ["common_header", "entertainment", "kuaishou"].includes(
+            i?.materialContentMapper?.group_id
+          )
         )
     );
   }
