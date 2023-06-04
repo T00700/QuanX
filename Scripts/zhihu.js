@@ -1,4 +1,4 @@
-// 2023-05-19 09:18
+// 2023-06-05 07:45
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -125,6 +125,11 @@ if (url.includes("/api/cloud/config/all")) {
           i.common_card?.footline?.elements?.[0]?.text?.panel_text?.includes(
             "广告"
           )
+        ) {
+          return false;
+        } else if (
+          i.common_card?.feed_content?.source_line?.elements?.[0]?.text?.panel_text?.includes(
+            "盐选")
         ) {
           return false;
         } else if (i?.promotion_extra) {
