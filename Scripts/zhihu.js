@@ -1,4 +1,4 @@
-// 2023-06-05 07:45
+// 2023-06-05 21:30
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -81,7 +81,13 @@ if (url.includes("/api/cloud/config/all")) {
   }
 } else if (url.includes("/next-bff")) {
   if (obj.data) {
-    obj.data = obj.data.filter((i) => !i?.origin_data?.type?.includes("ad"));
+    obj.data = obj.data.filter(
+      (i) =>
+        !(
+          i?.origin_data?.type?.includes("ad") ||
+          i?.origin_data?.resource_type?.includes("ad")
+        )
+    );
   }
 } else if (url.includes("/next-data")) {
   if (obj.data.data) {
@@ -129,7 +135,8 @@ if (url.includes("/api/cloud/config/all")) {
           return false;
         } else if (
           i.common_card?.feed_content?.source_line?.elements?.[0]?.text?.panel_text?.includes(
-            "盐选")
+            "盐选"
+          )
         ) {
           return false;
         } else if (i?.promotion_extra) {
