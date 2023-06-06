@@ -6,6 +6,7 @@
 # 鸣谢
 按字母排序
 - [@app2smile](https://github.com/app2smile/rules)
+- [@ClydeTime](https://github.com/ClydeTime)
 - [@blackmatrix7](https://github.com/blackmatrix7/ios_rule_script/tree/master)
 - [@kokoryh](https://github.com/kokoryh/Script)
 - [@Keywos](https://github.com/Keywos/rule)
