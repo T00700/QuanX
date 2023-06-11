@@ -1,4 +1,4 @@
-// 2023-06-01 14:25
+// 2023-06-11 12:38
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -137,7 +137,7 @@ if (url.includes("/x/resource/show/skin")) {
     obj.data.items = obj.data.items.filter((i) => {
       const { card_type: cardType, card_goto: cardGoto } = i;
       if (cardType && cardGoto) {
-        if (cardType === "banner_v8" && cardGoto === "banner") {
+        if (cardType.includes("banner") && cardGoto.includes("banner")) {
           // 去除判断条件 首页横版内容全部去掉
           // if (i.banner_item) {
           // for (const v of i.banner_item) {
