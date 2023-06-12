@@ -1,3 +1,5 @@
+// 2023-06-12 15:40
+
 const url = $request.url;
 const method = $request.method;
 const postMethod = "POST";
@@ -43,7 +45,13 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
   if ("config" in body) {
     if (body.config?.switch) {
       for (const item of body.config.switch) {
-        if (["platform_csj_init", "platform_ks_init", "platform_gdt_init"].includes(item.name)) {
+        if (
+          [
+            "platform_csj_init",
+            "platform_ks_init",
+            "platform_gdt_init"
+          ].includes(item.name)
+        ) {
           item.type = "0";
           // 禁止初始化穿山甲/广点通/快手
         }
@@ -51,14 +59,15 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
     }
   }
   if ("screen_fill_data_result" in body) {
-    if (body.screen_fill_data_result.screen_fill_advertisement_bear_switch === "1") {
-      body.screen_fill_data_result.screen_fill_advertisement_bear_switch = "0";
+    let result = body.screen_fill_data_result;
+    if (result.screen_fill_advertisement_bear_switch === "1") {
+      result.screen_fill_advertisement_bear_switch = "0";
     }
-    if (body.screen_fill_data_result.screen_fill_advertisement_plj_cpc_switch === "1") {
-      body.screen_fill_data_result.screen_fill_advertisement_plj_cpc_switch = "0";
+    if (result.screen_fill_advertisement_plj_cpc_switch === "1") {
+      result.screen_fill_advertisement_plj_cpc_switch = "0";
     }
-    if (body.screen_fill_data_result.screen_fill_advertisement_plj_switch === "1") {
-      body.screen_fill_data_result.screen_fill_advertisement_plj_switch = "0";
+    if (result.screen_fill_advertisement_plj_switch === "1") {
+      result.screen_fill_advertisement_plj_switch = "0";
     }
   }
   if ("ad_stlog_switch" in body) {
@@ -95,7 +104,12 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
       }
     }
   }
-  removeGoodsInfo(body.banner_list?.app);
+  if (body.banner_list) {
+    removeGoodsInfo(body.banner_list?.app);
+    if (body.banner_list?.pb_banner_ad) {
+      body.banner_list.pb_banner_ad = {};
+    }
+  }
 } else if (url.includes("c/f/excellent/personalized")) {
   removeGoodsInfo(body.banner_list?.app);
   body.thread_list = removeLive(body.thread_list);
