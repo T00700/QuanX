@@ -1,4 +1,4 @@
-// 2023-06-12 15:40
+// 2023-06-12 16:08
 
 const url = $request.url;
 const method = $request.method;
@@ -106,9 +106,7 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
   }
   if (body.banner_list) {
     removeGoodsInfo(body.banner_list?.app);
-    if (body.banner_list?.pb_banner_ad) {
-      body.banner_list.pb_banner_ad = {};
-    }
+    removeGoodsInfo(body.banner_list?.pb_banner_ad);
   }
 } else if (url.includes("c/f/excellent/personalized")) {
   removeGoodsInfo(body.banner_list?.app);
