@@ -22,6 +22,7 @@ HOST, wustat.windows.com, DIRECT
 HOST, ntservicepack.microsoft.com, DIRECT
 # ------
 # > Kuwo
+HOST-SUFFIX, kugou.com, DIRECT
 HOST-SUFFIX, kuwo.cn, DIRECT
 # > PayPal
 HOST-SUFFIX, paypal.com, DIRECT
