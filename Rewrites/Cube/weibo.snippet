@@ -1,7 +1,7 @@
 #!name = 微博
 #!desc = 全面净化
 #!author = RuCu6 zmqcherish
-#!update = 2023-05-27 19:30
+#!update = 2023-06-21 20:50
 
 # 首页 签到,发布按钮,侧边栏,右上角红包,侧边栏提醒,超话tab悬浮,顶部直播
 ^https:\/\/api\.weibo\.cn\/2\/(checkin\/show|client\/publisher_list|push\/active)\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/weibo.js
@@ -24,6 +24,7 @@
 ^https:\/\/api\.weibo\.cn\/2\/!\/huati\/(discovery_home_bottom_getdotinfo|mobile_discovery_searchchange)\? url reject-dict
 
 # 消息页
+^https:\/\/api\.weibo\.cn\/2\/direct_messages\/user_list\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/weibo.js
 ^https:\/\/api\.weibo\.cn\/2\/messageflow\/notice\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/weibo.js
 
 # 发现页 热门微博信息流,搜索列表,热搜提醒,猜你想搜,视频流红包
