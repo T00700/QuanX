@@ -1,4 +1,4 @@
-// 2023-05-05 22:50
+// 2023-06-21 08:50
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -86,6 +86,7 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     "bubble",
     "charlie", // 横版推广 单单立减 领专属优惠 体验问卷
     "icon",
+    "other",
     "popup",
     "push", // 顶部通知 发单立享优惠
     "tips"

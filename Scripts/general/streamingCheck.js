@@ -5,7 +5,7 @@ For Quantumult-X 598+ ONLY!!
 2022-12-16
 
 [task_local]
-event-interaction https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/general/streamingCheck.js, tag=Check Streaming Media, img-url=checkmark.seal.system, enabled=true
+event-interaction https://gitlab.com/RuCu6/QuanX/-/raw/main/Scripts/general/streamingCheck.js, tag=Check Streaming Media, img-url=checkmark.seal.system, enabled=true
 **/
 
 const BASE_URL = "https://www.netflix.com/title/";
