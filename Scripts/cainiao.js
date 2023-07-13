@@ -1,4 +1,4 @@
-// 2023-07-13 20:15
+// 2023-07-13 20:50
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -97,6 +97,9 @@ if (url.includes("nbfriend.message.conversation.list")) {
 } else if (url.includes("guoguo.nbnetflow.ads.show")) {
   // 我的页面
   if (obj.data.result) {
+    // 29338 寄件会员
+    // 29339 裹酱积分
+    // 33927 绿色能量
     obj.data.result = obj.data.result.filter(
       (i) =>
         !(
@@ -106,7 +109,7 @@ if (url.includes("nbfriend.message.conversation.list")) {
           ["common_header", "entertainment", "kuaishou"].includes(
             i?.materialContentMapper?.group_id
           ) ||
-          ["32103"].includes(i.id)
+          ["29338", "29339", "32103", "33927"].includes(i.id)
         )
     );
   }
