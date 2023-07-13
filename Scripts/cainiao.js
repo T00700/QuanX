@@ -1,10 +1,16 @@
-// 2023-07-06 08:33
+// 2023-07-13 20:15
 
 const url = $request.url;
 if (!$response.body) $done({});
 let obj = JSON.parse($response.body);
 
-if (url.includes("nbpresentation.homepage.merge.get")) {
+if (url.includes("nbfriend.message.conversation.list")) {
+  if (obj.data.data) {
+    obj.data.data = obj.data.data.filter((i) =>
+      i?.conversationId?.includes("logistic_message")
+    );
+  }
+} else if (url.includes("nbpresentation.homepage.merge.get")) {
   // 反馈组件
   if (obj.data) {
     const item = [
