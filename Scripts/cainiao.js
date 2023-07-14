@@ -1,4 +1,4 @@
-// 2023-07-13 20:50
+// 2023-07-14 07:22
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -131,7 +131,8 @@ if (url.includes("nbfriend.message.conversation.list")) {
       "1316", // 头部 banner
       "1332", // 我的页面 横图
       "1340", // 查快递 小妙招
-      "1391" // 支付宝 小程序 寄包裹
+      "1391", // 支付宝 小程序 寄包裹
+      "1525" // 幸运包裹
     ];
     for (let i of item) {
       if (obj.data?.[i]) {
