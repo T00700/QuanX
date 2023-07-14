@@ -1,4 +1,4 @@
-// 2023-05-28 08:45
+// 2023-07-14 11:45
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -15,6 +15,13 @@ if (url.includes("/v1/search/banner_list")) {
 } else if (url.includes("/v1/system_service/config")) {
   // 整体配置
   const item = ["app_theme", "loading_img", "splash", "store"];
+  if (obj.data) {
+    item.forEach((i) => {
+      delete obj.data[i];
+    });
+  }
+} else if (url.includes("/v2/note/widgets")) {
+  const item = ["generic"];
   if (obj.data) {
     item.forEach((i) => {
       delete obj.data[i];
