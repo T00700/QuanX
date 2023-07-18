@@ -1,4 +1,4 @@
-// 2023-07-17 16:15
+// 2023-07-18 11:25
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -20,7 +20,7 @@ if (url.includes("/apps/v1/users/home/widgets")) {
   if (obj.identity) {
     obj.identity = "svip";
   }
-  if (obj.features.length) {
+  if (obj.features) {
     obj.features.forEach((i) => {
       if (i.intercept === true) {
         i.intercept = false;
@@ -55,7 +55,7 @@ if (url.includes("/apps/v1/users/home/widgets")) {
         code: "svip.8t",
         promotedAt: 1262275200,
         expire: 2209046399,
-        name: "8TB超级会员"
+        name: "超级会员"
       }
     ],
     mediumIcon:
