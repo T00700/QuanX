@@ -1,4 +1,4 @@
-// 2023-06-01 21:45
+// 2023-07-19 22:35
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -115,7 +115,7 @@ if (body) {
       }
       break;
     // 小米商城-开屏广告
-    case /^https:\/\/api\.m\.mi\.com\/v1\/app\/start$/.test(url):
+    case /^https:\/\/api\.m\.mi\.com\/v1\/app\/start/.test(url):
       try {
         let obj = JSON.parse(body);
         obj.code = 0;
@@ -126,6 +126,18 @@ if (body) {
         body = JSON.stringify(obj);
       } catch (error) {
         console.log(`小米商城-开屏广告, 出现异常: ` + error);
+      }
+      break;
+    // 小米商城-物流页推广
+    case /^https:\/\/api\.m\.mi\.com\/v1\/order\/expressView/.test(url):
+      try {
+        let obj = JSON.parse(body);
+        if (obj.data?.bottom?.ad_info) {
+          delete obj.data.bottom.ad_info;
+        }
+        body = JSON.stringify(obj);
+      } catch (error) {
+        console.log(`小米商城-物流页推广, 出现异常: ` + error);
       }
       break;
     default:
