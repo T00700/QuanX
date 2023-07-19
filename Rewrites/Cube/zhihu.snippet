@@ -1,7 +1,7 @@
 #!name = 知乎
 #!desc = 在知识的海洋里狗刨
 #!author = RuCu6 app2smile
-#!update = 2023-06-23 11:35
+#!update = 2023-07-19 22:05
 
 # 首页 悬浮图标,顶部横幅,开屏广告,关注页推荐,推荐信息流,热榜信息流,热榜直播,回答底部卡片
 ^https:\/\/api\.zhihu\.com\/commercial_api\/app_float_layer url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/zhihu.js
@@ -21,14 +21,14 @@
 ^https:\/\/api\.zhihu\.com\/feed\/render\/revisit\/current_reading url reject-dict
 ^https:\/\/api\.zhihu\.com\/search\/preset_words url reject-dict
 ^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\? url response-body "recommend_queries":\{.+\} response-body "recommend_queries":{}
-^https:\/\/www\.zhihu\.com\/api\/v4\/search\/related_queries\/(answer|article)\/\d+ url reject-dict
+^https:\/\/www\.zhihu\.com\/api\/v4\/search\/related_queries\/(article|answer)\/\d+ url reject-dict
 
 # 回答详情页,评论区顶部,下一个回答
-^https:\/\/api\.zhihu\.com\/comment_v5\/answers\/\d+\/list-headers url reject-dict
+^https:\/\/api\.zhihu\.com\/comment_v5\/(articles|answers)\/\d+\/list-headers url reject-dict
 ^https:\/\/api\.zhihu\.com\/next-(bff|data|render)\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/zhihu.js
-^https:\/\/api\.zhihu\.com\/(v4\/)?questions\/\d+\/(feeds|answers)\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/zhihu.js
+^https:\/\/api\.zhihu\.com\/(v4\/)?questions\/\d+\/(answers|feeds)\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/zhihu.js
 ^https:\/\/api\.zhihu\.com\/v5\.1\/topics\/answer\/\d+\/relation url reject-dict
-^https:\/\/www\.zhihu\.com\/api\/v4\/(answers|articles)\/\d+\/recommendations? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/zhihu.js
+^https:\/\/www\.zhihu\.com\/api\/v4\/(articles|answers)\/\d+\/recommendations? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/zhihu.js
 
 # 其他,服务器推送配置
 ^https:\/\/api\.zhihu\.com\/ab\/api\/v1\/products\/zhihu\/platforms\/ios\/config url reject
@@ -41,7 +41,7 @@
 ^https:\/\/api\.zhihu\.com\/distribute\/rhea\/qa_ad_card\/h5\/recommendation\? url reject-dict
 ^https:\/\/www\.zhihu\.com\/api\/v4\/hot_recommendation url reject
 ^https:\/\/www\.zhihu\.com\/api\/v4\/mcn\/v2\/linkcards\? url reject
-^https:\/\/www\.zhihu\.com\/api\/v4/(questions|anwsers)\/\d+/related-readings url reject
+^https:\/\/www\.zhihu\.com\/api\/v4/(anwsers|questions)\/\d+/related-readings url reject
 ^https:\/\/www\.zhihu\.com\/commercial_api\/banners_v3\/mobile_banner url reject
 ^https:\/\/zhuanlan\.zhihu\.com\/api\/articles\/\d+\/recommendation url reject
 
