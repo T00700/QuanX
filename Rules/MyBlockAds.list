@@ -1,4 +1,4 @@
-# 2023-07-16 19:05
+# 2023-07-19 15:30
 
 # ======= A ======= #
 ## 阿里云
@@ -126,6 +126,8 @@ HOST, mtrace.qq.com, REJECT
 HOST, pgdt.gtimg.cn, REJECT
 
 # ======= W ======= #
+# 网上国网
+HOST, h5-api.feiersmart.com, REJECT
 # 网易云音乐
 HOST, gdt.qq.com, REJECT
 HOST, httpdns.n.netease.com, REJECT
