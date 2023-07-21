@@ -1,4 +1,4 @@
-// 2023-07-14 07:22
+// 2023-07-21 08:35
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -61,7 +61,8 @@ if (url.includes("nbfriend.message.conversation.list")) {
               "gjjf", // 裹酱积分
               "jkymd", // 集卡赢免单
               "ljjq", // 领寄件券
-              "ttlhb" // 天天领红包
+              "ttlhb", // 天天领红包
+              "xybg" // 幸运包裹
             ];
             i.bizData.items = i.bizData.items.filter(
               (ii) => !item.includes(ii.key)
@@ -132,6 +133,7 @@ if (url.includes("nbfriend.message.conversation.list")) {
       "1332", // 我的页面 横图
       "1340", // 查快递 小妙招
       "1391", // 支付宝 小程序 寄包裹
+      "1428", // 幸运号
       "1525" // 幸运包裹
     ];
     for (let i of item) {
