@@ -1,6 +1,5 @@
-// 2023-07-23 15:55
+// 2023-07-23 16:15
 
-const url = $request.url;
 if (!$response.body) $done({});
 let obj = JSON.parse($response.body);
 
@@ -16,15 +15,6 @@ if (obj.data) {
       obj.data.popularV3.elements.edges.filter(
         (i) => i?.node?.adPayload === null
       );
-  } else if (obj.data?.postsInfoByIds) {
-    // Popular
-    // let newItems = [];
-    // for (let item of obj.data.postsInfoByIds) {
-    //   if (item?.__typename !== "ProfilePost") {
-    //     newItems.push(item);
-    //   }
-    // }
-    // obj.data.postsInfoByIds = newItems;
   } else if (obj.data?.subredditInfoByName?.elements?.edges) {
     obj.data.subredditInfoByName.elements.edges =
       obj.data.subredditInfoByName.elements.edges.filter(
