@@ -1,4 +1,4 @@
-# 2023-07-19 15:30
+# 2023-07-25 16:40
 
 # ======= A ======= #
 ## 阿里云
@@ -151,6 +151,10 @@ HOST, sdkconfig.ad.xiaomi.com, REJECT
 ;HOST, hub5idx.v6.shub.sandai.net, REJECT
 
 # ======= Y ======= #
+# 优酷
+HOST, amdc.m.youku.com, REJECT
+HOST, yk-ssp.ad.youku.com, REJECT
+HOST, ykad-data.youku.com, REJECT
 # 云闪付 开屏广告
 HOST, ads.95516.com, REJECT
 HOST, cm-10-138.getui.com, REJECT
