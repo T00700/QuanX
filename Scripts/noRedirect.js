@@ -53,7 +53,7 @@ if (oldurl.indexOf("links.jianshu.com/go") !== -1) {
   newurl = decodeURIComponent(weibor2.exec(oldurl)[2]);
 } else if (oldurl.indexOf("sinaurl.cn") !== -1 || oldurl.indexOf("t.cn") !== -1) {
   let headers = $response.headers;
-  newurl = headers.Location;
+  newurl = headers.Location || headers.location;
 }
 
 newurl = newurl.indexOf("http") == 0 ? newurl : "http://" + newurl;
