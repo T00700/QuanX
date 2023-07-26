@@ -1,4 +1,4 @@
-// 2023-07-20 09:55
+// 2023-07-26 18:05
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -45,9 +45,7 @@ if (body) {
       }
       break;
     // JavDB
-    case /^https:\/\/(jdforrepam|api\.huikaiju)\.com\/api\/v1\/startup\?/.test(
-      url
-    ):
+    case /^https:\/\/api\.yijingluowangluo\.xyz\/api\/v1\/startup\?/.test(url):
       try {
         let obj = JSON.parse(body);
         if (obj.data.splash_ad) {
