@@ -1,4 +1,4 @@
-// 2023-07-26 18:05
+// 2023-07-26 18:15
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -45,12 +45,17 @@ if (body) {
       }
       break;
     // JavDB
-    case /^https:\/\/api\.yijingluowangluo\.xyz\/api\/v1\/startup\?/.test(url):
+    case /^https:\/\/api\.yijingluowangluo\.xyz\/api\/v1\/(ads|startup)/.test(
+      url
+    ):
       try {
         let obj = JSON.parse(body);
-        if (obj.data.splash_ad) {
+        if (obj.data?.splash_ad) {
           obj.data.splash_ad.enabled = false;
           obj.data.splash_ad.overtime = 0;
+        }
+        if (obj.data?.ads) {
+          obj.data.ads = {};
         }
         body = JSON.stringify(obj);
       } catch (error) {
