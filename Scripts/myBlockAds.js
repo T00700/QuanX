@@ -1,4 +1,4 @@
-// 2023-07-26 18:15
+// 2023-07-28 16:15
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -56,6 +56,10 @@ if (body) {
         }
         if (obj.data?.ads) {
           obj.data.ads = {};
+        }
+        if (obj.data?.user) {
+          obj.data.user.vip_expired_at = "2101-06-08T17:35:01.000+08:00";
+          obj.data.user.is_vip = true;
         }
         body = JSON.stringify(obj);
       } catch (error) {
