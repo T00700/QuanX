@@ -1,4 +1,4 @@
-// 2023-07-30 16:00
+// 2023-07-31 07:20
 
 const url = $request.url;
 const header = $request.headers;
@@ -6,10 +6,9 @@ let ua = header["User-Agent"] || header["user-agent"];
 if (!$response.body) $done({});
 let obj = JSON.parse($response.body);
 
-if (ua.includes("Pomodoro") || ua.includes("/11521")) {
+if (ua.includes("Pomodoro/11521")) {
   if (obj.subscriber) {
     obj.subscriber.non_subscriptions = {};
-
     obj.subscriber.original_application_version = "11521";
     obj.subscriber.other_purchases = {};
     obj.subscriber.management_url =
