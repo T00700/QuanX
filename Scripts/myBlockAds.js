@@ -1,4 +1,4 @@
-// 2023-07-28 16:15
+// 2023-07-30 16:25
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -45,7 +45,7 @@ if (body) {
       }
       break;
     // JavDB
-    case /^https:\/\/api\.yijingluowangluo\.xyz\/api\/v1\/(ads|startup)/.test(
+    case /^https:\/\/api\.yijingluowangluo\.xyz\/api\/v1\/(ads|startup|users)/.test(
       url
     ):
       try {
