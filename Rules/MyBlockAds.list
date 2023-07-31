@@ -1,4 +1,4 @@
-# 2023-07-27 20:25
+# 2023-07-31 09:15
 
 # ======= A ======= #
 ## 阿里云
@@ -94,6 +94,12 @@ HOST, tmeadcomm.y.qq.com, REJECT
 HOST, statics.woozooo.com, REJECT
 
 # ======= M ======= #
+# 美团
+HOST, al-log.d.meituan.net, REJECT
+HOST, babel-statistics-android.d.meituan.net, REJECT
+HOST, maplocatesdksnapshot.d.meituan.net, REJECT
+HOST, metrics-picture.d.meituan.net, REJECT
+HOST, route-stats.d.meituan.net, REJECT
 # 美颜相机
 HOST, aaid.uyunad.com, REJECT
 HOST, adui.tg.meitu.com, REJECT
