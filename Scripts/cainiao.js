@@ -1,4 +1,4 @@
-// 2023-07-21 08:35
+// 2023-08-01 10:20
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -73,8 +73,8 @@ if (url.includes("nbfriend.message.conversation.list")) {
             }
             return true;
           }
-        } else if (i.type.includes("big_banner_area")) {
-          // 新人福利
+        } else if (i.type.includes("banner_area")) {
+          // 新人福利 幸运抽奖
           return false;
         } else if (i.type.includes("promotion")) {
           // 促销活动
@@ -107,7 +107,7 @@ if (url.includes("nbfriend.message.conversation.list")) {
           i?.materialContentMapper?.adItemDetail ||
           (i?.materialContentMapper?.bgImg &&
             i?.materialContentMapper?.advRecGmtModifiedTime) ||
-          ["common_header", "entertainment", "kuaishou"].includes(
+          ["common_header_banner", "entertainment", "kuaishou_banner"].includes(
             i?.materialContentMapper?.group_id
           ) ||
           ["29338", "29339", "32103", "33927"].includes(i.id)
