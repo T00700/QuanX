@@ -1,4 +1,4 @@
-// 2023-07-01 18:08
+// 2023-08-04 13:50
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -180,11 +180,14 @@ if (url.includes("/api/cloud/config/all")) {
   }
 } else if (url.includes("/v4/questions") || url.includes("/questions")) {
   // 问题回答列表广告
-  if (obj.data.ad_info) {
+  if (obj?.data?.ad_info) {
     delete obj.data.ad_info;
   }
-  if (obj.ad_info) {
+  if (obj?.ad_info) {
     delete obj.ad_info;
+  }
+  if (obj?.query_info) {
+    delete obj.query_info;
   }
 }
 
