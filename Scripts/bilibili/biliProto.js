@@ -1,4 +1,4 @@
-// 2023-06-28 18:40
+// 2023-08-05 17:50
 
 const url = $request.url;
 const isQuanX = typeof $task !== "undefined";
@@ -40,7 +40,7 @@ const isQuanX = typeof $task !== "undefined";
         data.topicList = null;
       }
       // 有直播,不去除upList
-      if (data.upList?.showLiveNum === 0) {
+      if (data.upList) {
         data.upList = null;
       }
       if (data.dynamicList?.list?.length) {
