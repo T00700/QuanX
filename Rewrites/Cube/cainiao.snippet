@@ -1,7 +1,7 @@
 #!name = 菜鸟
 #!desc = 移除推广模块
 #!author = RuCu6 Keywos
-#!update = 2023-07-14 09:02
+#!update = 2023-08-05 09:05
 
 # 其他
 ^http:\/\/amdc\.m\.taobao\.com\/amdc\/mobileDispatch Cainiao4iPhone url-and-header reject-dict
@@ -19,7 +19,8 @@
 # 消息中心
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.nbfriend\.message\.conversation\.list\.cn url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cainiao.js
 
-# 发现页 裹裹券
+# 发现页 数字角标 裹裹券
+^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.com\.cainiao\.cnactivitycenter\.getavailabletaskcredit\.cn url reject-dict
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.com\.cainiao\.longquan\.place\.getpageresourcecontent\.cn url reject-dict
 
 # 支付宝 菜鸟小程序
