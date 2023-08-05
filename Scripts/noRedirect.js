@@ -60,8 +60,9 @@ newurl = newurl.indexOf("http") == 0 ? newurl : "http://" + newurl;
 const isQuanX = typeof $notify != "undefined";
 const isLoon = typeof $loon != "undefined";
 const newstatus = isQuanX ? "HTTP/1.1 302 Temporary Redirect" : 302;
-
-const noredirect = isLoon ? {status: newstatus,body: "loon",headers: { Location: newurl }} : {status: newstatus,headers: { Location: newurl }};
+const noredirect = isLoon
+  ? { status: newstatus, body: "loon", headers: { Location: newurl } }
+  : { status: newstatus, headers: { Location: newurl } };
 
 let resp = isQuanX ? noredirect : { response: noredirect };
 resp = typeof $response != "undefined" ? noredirect : resp;
