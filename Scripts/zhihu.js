@@ -1,4 +1,4 @@
-// 2023-08-04 13:50
+// 2023-08-05 09:50
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -169,6 +169,7 @@ if (url.includes("/api/cloud/config/all")) {
       }
       return true;
     });
+    fixPos(obj.data);
   }
 } else if (url.includes("/v2/topstory/hot-lists/everyone-seeing")) {
   // 热榜信息流
@@ -192,6 +193,13 @@ if (url.includes("/api/cloud/config/all")) {
 }
 
 $done({ body: JSON.stringify(obj) });
+
+// 修复offset
+function fixPos(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    arr[i].offset = i + 1;
+  }
+}
 
 function getUrlParamValue(url, queryName) {
   return Object.fromEntries(
