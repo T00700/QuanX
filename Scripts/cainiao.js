@@ -1,4 +1,4 @@
-// 2023-08-05 09:05
+// 2023-08-07 11:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -18,7 +18,9 @@ if (url.includes("nbfriend.message.conversation.list")) {
       "nbmensa.research.researchservice.acquire", // 调查问卷
       "nbpresentation.protocol.homepage" // 顶部图标
     ];
-    obj.data = Object.entries(obj.data).filter(([key]) => !item.includes(key));
+    obj.data = Object.fromEntries(
+      Object.entries(obj.data).filter(([key, value]) => !item.includes(key))
+    );
   }
 } else if (url.includes("nbpresentation.pickup.empty.page.get")) {
   // 取件页面
@@ -93,7 +95,9 @@ if (url.includes("nbfriend.message.conversation.list")) {
       "1425", // 攻略
       "1332" // 横图
     ];
-    obj.data = Object.entries(obj.data).filter(([key]) => !item.includes(key));
+    obj.data = Object.fromEntries(
+      Object.entries(obj.data).filter(([key, value]) => !item.includes(key))
+    );
   }
 } else if (url.includes("guoguo.nbnetflow.ads.show")) {
   // 我的页面
@@ -133,6 +137,7 @@ if (url.includes("nbfriend.message.conversation.list")) {
       "1332", // 我的页面 横图
       "1340", // 查快递 小妙招
       "1391", // 支付宝 小程序 寄包裹
+      "1410", // 导入拼多多、抖音快递
       "1428", // 幸运号
       "1524", // 抽现金
       "1525" // 幸运包裹
