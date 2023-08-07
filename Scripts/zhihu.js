@@ -1,4 +1,4 @@
-// 2023-08-05 09:50
+// 2023-08-07 07:27
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -59,11 +59,16 @@ if (url.includes("/api/cloud/config/all")) {
     obj.config.is_show_followguide_alert = false;
   }
 } else if (url.includes("/api/v4/answers")) {
-  if (obj.paging) {
-    delete obj.paging;
+  if (obj?.biz_ext?.share_guide) {
+    obj.biz_ext.share_guide.has_positive_bubble = false;
+    obj.biz_ext.share_guide.has_time_bubble = false;
+    obj.biz_ext.share_guide.hit_share_guide_cluster = false;
   }
   if (obj.data) {
     delete obj.data;
+  }
+  if (obj.paging) {
+    delete obj.paging;
   }
 } else if (url.includes("/api/v4/articles")) {
   const item = ["ad_info", "paging", "recommend_info"];
