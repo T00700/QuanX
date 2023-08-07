@@ -1,44 +1,28 @@
+// 2023-08-07 19:25
+
+if (!$response.body) $done({});
 let obj = JSON.parse($response.body);
 
 obj = {
   product_infos: [
     {
-      product_id: "5310897792128633390",
-      start_time: 1417260485,
-      end_time: 2147483648,
-      buy_time: "1417260485",
-      cluster: "offlinedl",
-      detail_cluster: "offlinedl",
-      product_name: "gz_telecom_exp"
-    },
-    {
+      cur_svip_type: "Crack",
       product_name: "svip2_nd",
-      product_description: "超级会员",
-      function_num: 0,
-      start_time: 1553702399,
-      buy_description: "",
-      buy_time: 0,
-      product_id: "1",
+      product_description: "解锁倍速+画质",
+      function_num: 510004015,
+      start_time: 1672502400,
+      buy_description: "无下载加速",
+      buy_time: 980784000,
+      product_id: "问好",
       auto_upgrade_to_svip: 0,
-      end_time: 1672502399,
+      end_time: 4070880000,
       cluster: "vip",
       detail_cluster: "svip",
       status: 0
     }
   ],
-  currenttime: 1573473597,
-  reminder: {
-    reminderWithContent: [],
-    advertiseContent: []
-  },
-  request_id: 7501873289383875000,
-  guide_data: {
-    title: "超级会员 SVIP",
-    content: "已拥有极速下载+视频倍速特权",
-    button: {
-      text: "会员中心",
-      action_url: "https://pan.baidu.com/wap/vip/user?from=myvip2#svip"
-    }
+  level_info: {
+    current_level: 10
   }
 };
 
