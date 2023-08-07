@@ -1,4 +1,4 @@
-// 2023-08-07 11:05
+// 2023-08-07 12:35
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -8,18 +8,6 @@ if (url.includes("nbfriend.message.conversation.list")) {
   if (obj.data.data) {
     obj.data.data = obj.data.data.filter((i) =>
       i?.conversationId?.includes("logistic_message")
-    );
-  }
-} else if (url.includes("nbpresentation.homepage.merge.get")) {
-  // 反馈组件
-  if (obj.data) {
-    const item = [
-      "adkeyword", // 底部信息流
-      "nbmensa.research.researchservice.acquire", // 调查问卷
-      "nbpresentation.protocol.homepage" // 顶部图标
-    ];
-    obj.data = Object.fromEntries(
-      Object.entries(obj.data).filter(([key, value]) => !item.includes(key))
     );
   }
 } else if (url.includes("nbpresentation.pickup.empty.page.get")) {
@@ -96,7 +84,7 @@ if (url.includes("nbfriend.message.conversation.list")) {
       "1332" // 横图
     ];
     obj.data = Object.fromEntries(
-      Object.entries(obj.data).filter(([key, value]) => !item.includes(key))
+      Object.entries(obj.data).filter(([key]) => !item.includes(key))
     );
   }
 } else if (url.includes("guoguo.nbnetflow.ads.show")) {
