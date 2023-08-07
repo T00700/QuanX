@@ -1,4 +1,4 @@
-// 2023-08-07 15:15
+// 2023-08-07 16:15
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -376,8 +376,9 @@ if (url.includes("/faas/amap-navigation/main-page")) {
       for (let item of obj.tip_list) {
         if (
           ["12"].includes(item?.tip?.datatype_spec) ||
-          ["toplist"].includes(item?.tip?.result_type) ||
+          ["ad", "poi_ad", "toplist"].includes(item?.tip?.result_type) ||
           [
+            "ad",
             "exct_query_sug_merge_theme",
             "query_sug_merge_theme",
             "sp"
