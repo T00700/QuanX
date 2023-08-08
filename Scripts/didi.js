@@ -1,4 +1,4 @@
-// 2023-08-02 16:50
+// 2023-08-08 08:55
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -9,7 +9,7 @@ if (url.includes("/driverGuard/getShieldStatus")) {
     obj.data.shieldInfo = [];
   }
 } else if (url.includes("/driverlife/client/driver/homepage")) {
-  if (obj.data?.cardList?.length) {
+  if (obj.data?.cardList?.length > 0) {
     obj.data.cardList = obj.data.cardList.filter(
       (i) => i?.componentId === "diamond-fixed"
     );
