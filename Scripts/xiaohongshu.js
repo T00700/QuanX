@@ -1,4 +1,4 @@
-// 2023-08-13 15:35
+// 2023-08-13 17:30
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -134,9 +134,7 @@ if (url.includes("/v1/search/banner_list")) {
   }
 } else if (url.includes("/v10/search/notes")) {
   if (obj.data?.items) {
-    obj.data.items = obj.data.items.filter(
-      (i) => i.model_type === "note"
-    );
+    obj.data.items = obj.data.items.filter((i) => i.model_type === "note");
   }
 }
 
