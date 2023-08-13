@@ -1,4 +1,4 @@
-// 2023-07-14 11:45
+// 2023-08-13 14:35
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -26,6 +26,54 @@ if (url.includes("/v1/search/banner_list")) {
     item.forEach((i) => {
       delete obj.data[i];
     });
+  }
+} else if (
+  url.includes("/v2/note/feed") ||
+  url.includes("/v3/note/redtube") ||
+  url.includes("/v3/note/videofeed")
+) {
+  if (obj.data?.length > 0) {
+    if (obj.data[0].note_list) {
+      for (let i of obj.data[0].note_list) {
+        if (i?.media_save_config) {
+          i.media_save_config.disable_save = false;
+          i.media_save_config.disable_watermark = true;
+          i.media_save_config.disable_weibo_cover = true;
+        }
+        if (i?.share_info) {
+          i.share_info.function_entries = [
+            { type: "video_download" },
+            { type: "generate_image" },
+            { type: "copy_link" },
+            { type: "native_voice" },
+            { type: "video_speed" },
+            { type: "dislike" },
+            { type: "report" },
+            { type: "video_feedback" }
+          ];
+        }
+      }
+    } else {
+      for (let i of obj.data) {
+        if (i?.media_save_config) {
+          i.media_save_config.disable_save = false;
+          i.media_save_config.disable_watermark = true;
+          i.media_save_config.disable_weibo_cover = true;
+        }
+        if (i?.share_info) {
+          i.share_info.function_entries = [
+            { type: "video_download" },
+            { type: "generate_image" },
+            { type: "copy_link" },
+            { type: "native_voice" },
+            { type: "video_speed" },
+            { type: "dislike" },
+            { type: "report" },
+            { type: "video_feedback" }
+          ];
+        }
+      }
+    }
   }
 } else if (url.includes("/v2/system_service/splash_config")) {
   // 开屏广告
