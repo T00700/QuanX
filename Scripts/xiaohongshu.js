@@ -1,4 +1,4 @@
-// 2023-08-13 14:35
+// 2023-08-13 15:35
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -29,7 +29,6 @@ if (url.includes("/v1/search/banner_list")) {
   }
 } else if (
   url.includes("/v2/note/feed") ||
-  url.includes("/v3/note/redtube") ||
   url.includes("/v3/note/videofeed")
 ) {
   if (obj.data?.length > 0) {
