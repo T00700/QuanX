@@ -1,4 +1,4 @@
-// 2023-08-10 12:05
+// 2023-08-14 11:00
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -180,7 +180,12 @@ if (url.includes("/api/cloud/config/all")) {
     );
   }
 } else if (url.includes("/v4/questions") || url.includes("/questions")) {
-  // 问题回答列表广告
+  // 问题回答列表
+  if (obj?.data?.length > 0) {
+    obj.data = obj.data.filter(
+      (i) => !i?.target?.answer_type?.includes("paid")
+    );
+  }
   if (obj?.data?.ad_info) {
     delete obj.data.ad_info;
   }
