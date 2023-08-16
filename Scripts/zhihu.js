@@ -1,17 +1,30 @@
-// 2023-08-16 11:11
+// 2023-08-16 15:25
 
 if (!$response.body) $done({});
 const url = $request.url;
 let obj = JSON.parse($response.body);
 
 if (url.includes("/api.zhihu.com/v4/answers/")) {
+  const item = [
+    "attached_info",
+    "relationship",
+    "relevant_info",
+    "reward_info",
+    "suggest_edit"
+  ];
+  item.forEach((i) => {
+    delete obj[i];
+  });
   if (obj?.biz_ext?.share_guide) {
     obj.biz_ext.share_guide.has_positive_bubble = false;
     obj.biz_ext.share_guide.has_time_bubble = false;
     obj.biz_ext.share_guide.hit_share_guide_cluster = false;
   }
+  if (obj?.is_copyable) {
+    obj.is_copyable = true;
+  }
 } else if (url.includes("/api/cloud/config/all")) {
-  if (obj.data?.configs) {
+  if (obj?.data?.configs) {
     obj.data.configs.forEach((i) => {
       if (i.configKey === "feed_gray_theme") {
         if (i.configValue) {
@@ -29,10 +42,10 @@ if (url.includes("/api.zhihu.com/v4/answers/")) {
     });
   }
 } else if (url.includes("/api/v4/answers")) {
-  if (obj.data) {
+  if (obj?.data) {
     delete obj.data;
   }
-  if (obj.paging) {
+  if (obj?.paging) {
     delete obj.paging;
   }
 } else if (url.includes("/api/v4/articles")) {
@@ -41,8 +54,8 @@ if (url.includes("/api.zhihu.com/v4/answers/")) {
     delete obj[i];
   });
 } else if (url.includes("/appcloud2.zhihu.com/v3/config")) {
-  if (obj.config) {
-    if (obj.config.homepage_feed_tab) {
+  if (obj?.config) {
+    if (obj.config?.homepage_feed_tab) {
       obj.config.homepage_feed_tab.tab_infos =
         obj.config.homepage_feed_tab.tab_infos.filter((i) => {
           if (i.tab_type === "activity_tab") {
@@ -54,18 +67,18 @@ if (url.includes("/api.zhihu.com/v4/answers/")) {
           }
         });
     }
-    if (obj.config.hp_channel_tab) {
+    if (obj.config?.hp_channel_tab) {
       delete obj.config.hp_channel_tab;
     }
-    if (obj.config.zombie_conf) {
+    if (obj.config?.zombie_conf) {
       obj.config.zombie_conf.zombieEnable = false;
     }
-    if (obj.config.gray_mode) {
+    if (obj.config?.gray_mode) {
       obj.config.gray_modeenable = false;
       obj.config.gray_mode.start_time = "2208960000";
       obj.config.gray_mode.end_time = "2209046399";
     }
-    if (obj.config.zhcnh_thread_sync) {
+    if (obj.config?.zhcnh_thread_sync) {
       obj.config.zhcnh_thread_sync.LocalDNSSetHostWhiteList = [];
       obj.config.zhcnh_thread_sync.isOpenLocalDNS = "0";
       obj.config.zhcnh_thread_sync.ZHBackUpIP_Switch_Open = "0";
@@ -82,11 +95,11 @@ if (url.includes("/api.zhihu.com/v4/answers/")) {
     delete obj;
   }
 } else if (url.includes("/moments_v3")) {
-  if (obj.data) {
+  if (obj?.data?.length > 0) {
     obj.data = obj.data.filter((i) => !i?.title?.includes("为您推荐"));
   }
 } else if (url.includes("/next-bff")) {
-  if (obj.data) {
+  if (obj?.data?.length > 0) {
     obj.data = obj.data.filter(
       (i) =>
         !(
@@ -97,14 +110,14 @@ if (url.includes("/api.zhihu.com/v4/answers/")) {
     );
   }
 } else if (url.includes("/next-data")) {
-  if (obj.data.data) {
+  if (obj?.data?.data?.length > 0) {
     obj.data.data = obj.data.data.filter(
       (i) =>
         !(i?.type?.includes("ad") || i?.data?.answer_type?.includes("PAID"))
     );
   }
 } else if (url.includes("/next-render")) {
-  if (obj.data) {
+  if (obj?.data?.length > 0) {
     obj.data = obj.data.filter(
       (i) =>
         !(
@@ -136,7 +149,7 @@ if (url.includes("/api.zhihu.com/v4/answers/")) {
   }
 } else if (url.includes("/topstory/hot-lists/everyone-seeing")) {
   // 热榜信息流
-  if (obj.data.data) {
+  if (obj?.data?.data?.length > 0) {
     // 合作推广
     obj.data.data = obj.data.data.filter(
       (i) => !i.target?.metrics_area?.text?.includes("合作推广")
@@ -144,7 +157,7 @@ if (url.includes("/api.zhihu.com/v4/answers/")) {
   }
 } else if (url.includes("/topstory/recommend")) {
   // 推荐信息流
-  if (obj.data) {
+  if (obj?.data?.length > 0) {
     obj.data = obj.data.filter((i) => {
       if (
         i.type === "market_card" &&
