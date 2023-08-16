@@ -1,10 +1,16 @@
-// 2023-08-14 11:00
+// 2023-08-16 10:25
 
 if (!$response.body) $done({});
 const url = $request.url;
 let obj = JSON.parse($response.body);
 
-if (url.includes("/api/cloud/config/all")) {
+if (url.includes("/api.zhihu.com/v4/answers/")) {
+  if (obj?.biz_ext?.share_guide) {
+    obj.biz_ext.share_guide.has_positive_bubble = false;
+    obj.biz_ext.share_guide.has_time_bubble = false;
+    obj.biz_ext.share_guide.hit_share_guide_cluster = false;
+  }
+} else if (url.includes("/api/cloud/config/all")) {
   if (obj.data?.configs) {
     obj.data.configs.forEach((i) => {
       if (i.configKey === "feed_gray_theme") {
@@ -22,6 +28,18 @@ if (url.includes("/api/cloud/config/all")) {
       }
     });
   }
+} else if (url.includes("/api/v4/answers")) {
+  if (obj.data) {
+    delete obj.data;
+  }
+  if (obj.paging) {
+    delete obj.paging;
+  }
+} else if (url.includes("/api/v4/articles")) {
+  const item = ["ad_info", "paging", "recommend_info"];
+  item.forEach((i) => {
+    delete obj[i];
+  });
 } else if (url.includes("/appcloud2.zhihu.com/v3/config")) {
   if (obj.config) {
     if (obj.config.homepage_feed_tab) {
@@ -58,18 +76,6 @@ if (url.includes("/api/cloud/config/all")) {
     obj.config.zvideo_max_number = 1;
     obj.config.is_show_followguide_alert = false;
   }
-} else if (url.includes("/api/v4/answers")) {
-  if (obj.data) {
-    delete obj.data;
-  }
-  if (obj.paging) {
-    delete obj.paging;
-  }
-} else if (url.includes("/api/v4/articles")) {
-  const item = ["ad_info", "paging", "recommend_info"];
-  item.forEach((i) => {
-    delete obj[i];
-  });
 } else if (url.includes("/commercial_api/app_float_layer")) {
   // 悬浮图标
   if ("feed_egg" in obj) {
@@ -179,7 +185,7 @@ if (url.includes("/api/cloud/config/all")) {
       (i) => !i.target?.metrics_area?.text?.includes("合作推广")
     );
   }
-} else if (url.includes("/v4/questions") || url.includes("/questions")) {
+} else if (url.includes("/questions/")) {
   // 问题回答列表
   if (obj?.data?.length > 0) {
     obj.data = obj.data.filter(
