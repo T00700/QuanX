@@ -1,4 +1,4 @@
-// 2023-08-16 10:25
+// 2023-08-16 11:11
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -118,6 +118,30 @@ if (url.includes("/api.zhihu.com/v4/answers/")) {
         )
     );
   }
+} else if (url.includes("/questions/")) {
+  // 问题回答列表
+  if (obj?.data?.length > 0) {
+    obj.data = obj.data.filter(
+      (i) => !i?.target?.answer_type?.includes("paid")
+    );
+  }
+  if (obj?.data?.ad_info) {
+    delete obj.data.ad_info;
+  }
+  if (obj?.ad_info) {
+    delete obj.ad_info;
+  }
+  if (obj?.query_info) {
+    delete obj.query_info;
+  }
+} else if (url.includes("/topstory/hot-lists/everyone-seeing")) {
+  // 热榜信息流
+  if (obj.data.data) {
+    // 合作推广
+    obj.data.data = obj.data.data.filter(
+      (i) => !i.target?.metrics_area?.text?.includes("合作推广")
+    );
+  }
 } else if (url.includes("/topstory/recommend")) {
   // 推荐信息流
   if (obj.data) {
@@ -176,30 +200,6 @@ if (url.includes("/api.zhihu.com/v4/answers/")) {
       return true;
     });
     fixPos(obj.data);
-  }
-} else if (url.includes("/v2/topstory/hot-lists/everyone-seeing")) {
-  // 热榜信息流
-  if (obj.data.data) {
-    // 合作推广
-    obj.data.data = obj.data.data.filter(
-      (i) => !i.target?.metrics_area?.text?.includes("合作推广")
-    );
-  }
-} else if (url.includes("/questions/")) {
-  // 问题回答列表
-  if (obj?.data?.length > 0) {
-    obj.data = obj.data.filter(
-      (i) => !i?.target?.answer_type?.includes("paid")
-    );
-  }
-  if (obj?.data?.ad_info) {
-    delete obj.data.ad_info;
-  }
-  if (obj?.ad_info) {
-    delete obj.ad_info;
-  }
-  if (obj?.query_info) {
-    delete obj.query_info;
   }
 }
 
