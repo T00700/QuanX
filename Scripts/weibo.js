@@ -1,4 +1,4 @@
-// 2023-07-05 22:25
+// 2023-08-17 15:35
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -547,6 +547,10 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         if (!isAd(item.data)) {
           if (item.category === "feed") {
             removeFeedAd(item.data);
+            if (item.data?.title?.structs) {
+              // 移除 未关注人消息 (你关注的博主，他自己关注的别的博主的微博消息)
+              continue;
+            }
             newItems.push(item);
           } else if (item.category === "feedBiz") {
             // 管理特别关注按钮
