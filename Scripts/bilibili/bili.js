@@ -1,4 +1,4 @@
-// 2023-06-11 12:38
+// 2023-08-17 08:20
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -169,6 +169,9 @@ if (url.includes("/x/resource/show/skin")) {
         } else if (cardType === "cm_double_v9" && cardGoto === "ad_inline_av") {
           // 创作推广 大视频广告
           return false;
+        } else if (cardType === "ogv_small_cover" && cardGoto === "bangumi") {
+          // 纪录片
+          return false;
         }
       }
       return true;
@@ -182,6 +185,7 @@ if (url.includes("/x/resource/show/skin")) {
       (i) =>
         !(
           i.hasOwnProperty("ad_info") ||
+          i.hasOwnProperty("story_cart_icon") ||
           ["ad", "vertical_live", "vertical_pgc"].includes(i.card_goto)
         )
     );
