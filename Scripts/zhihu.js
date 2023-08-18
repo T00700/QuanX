@@ -1,17 +1,11 @@
-// 2023-08-16 15:25
+// 2023-08-18 08:40
 
 if (!$response.body) $done({});
 const url = $request.url;
 let obj = JSON.parse($response.body);
 
 if (url.includes("/api.zhihu.com/v4/answers/")) {
-  const item = [
-    "attached_info",
-    "relationship",
-    "relevant_info",
-    "reward_info",
-    "suggest_edit"
-  ];
+  const item = ["attached_info", "reward_info"];
   item.forEach((i) => {
     delete obj[i];
   });
