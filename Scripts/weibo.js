@@ -1,4 +1,4 @@
-// 2023-08-21 23:30
+// 2023-08-22 00:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -600,7 +600,25 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         } else if (item.category === "group") {
           if (item?.itemId === null) {
             // 超话页顶部乱七八糟
-            continue;
+            if (item?.items?.length > 0) {
+              let newII = [];
+              for (let ii of item.items) {
+                if (ii?.data?.itemid?.includes("mine_topics")) {
+                  // 保留我的超话
+                  newII.push(ii);
+                } else if (ii?.data?.itemid?.includes("_tab_search_input")) {
+                  // 保留搜索框
+                  if (ii?.data?.hotwords) {
+                    // 删除热搜词
+                    ii.data.hotwords = [{ word: "搜索超话" }];
+                  }
+                  newII.push(ii);
+                }
+              }
+              item.items = newII;
+            } else {
+              continue;
+            }
           }
           newItems.push(item);
         } else if (item.category === "cell") {
