@@ -1,10 +1,13 @@
-/*
+// 2023-08-19 16:00
+
+/**
 [rewrite_local]
 ^https:\/\/tiku\.fenbi\.com\/activity\/app\/launcher\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/fenbi.js
 
 [mitm]
 hostname = tiku.fenbi.com
 */
+
 //^https:\/\/tiku\.fenbi\.com\/iphone\/(shenlun|xingce|sqgj)\/banners\/v2?.* url script-response-body https://raw.githubusercontent.com/githubacct001/QuantumultX/secret/Rewrite/Fenbi/fbgk.js
 
 const url = $request.url;
