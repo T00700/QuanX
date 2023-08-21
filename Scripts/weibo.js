@@ -1,4 +1,4 @@
-// 2023-08-21 23:10
+// 2023-08-21 23:30
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -243,6 +243,10 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         removeAvatar(item?.data);
         if (item?.itemId?.includes("_infeed_may_interest_in_")) {
           // 你可能感兴趣的超话
+          continue;
+        }
+        if (item?.itemId === null) {
+          // 横版博主卡片
           continue;
         }
         newItems.push(item);
@@ -590,6 +594,7 @@ if (url.includes("/interface/sdk/sdkad.php")) {
           if (![4, 197, 1012].includes(item?.data?.card_type)) {
             // 4 你可能感兴趣的超话
             // 197 你可能感兴趣的超话
+            // 1012 热门超话
             newItems.push(item);
           }
         } else if (item.category === "group") {
