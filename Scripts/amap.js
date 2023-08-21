@@ -1,4 +1,4 @@
-// 2023-08-07 16:15
+// 2023-08-21 16:42
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -18,6 +18,13 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     obj.data.mapBizList = obj.data.mapBizList.filter(
       (i) => i.dataKey === "FindCarVirtualCard" // 显示关联车辆位置
     );
+  }
+} else if (url.includes("/perception/drive/routePlan")) {
+  if (obj?.data?.front_end) {
+    const item = ["global_guide_data", "route_search"];
+    item.forEach((i) => {
+      delete obj.data.front_end[i];
+    });
   }
 } else if (url.includes("/promotion-web/resource")) {
   // 打车页面
