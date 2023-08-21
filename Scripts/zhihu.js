@@ -1,23 +1,10 @@
-// 2023-08-18 08:40
+// 2023-08-21 11:45
 
 if (!$response.body) $done({});
 const url = $request.url;
 let obj = JSON.parse($response.body);
 
-if (url.includes("/api.zhihu.com/v4/answers/")) {
-  const item = ["attached_info", "reward_info"];
-  item.forEach((i) => {
-    delete obj[i];
-  });
-  if (obj?.biz_ext?.share_guide) {
-    obj.biz_ext.share_guide.has_positive_bubble = false;
-    obj.biz_ext.share_guide.has_time_bubble = false;
-    obj.biz_ext.share_guide.hit_share_guide_cluster = false;
-  }
-  if (obj?.is_copyable) {
-    obj.is_copyable = true;
-  }
-} else if (url.includes("/api/cloud/config/all")) {
+if (url.includes("/api/cloud/config/all")) {
   if (obj?.data?.configs) {
     obj.data.configs.forEach((i) => {
       if (i.configKey === "feed_gray_theme") {
