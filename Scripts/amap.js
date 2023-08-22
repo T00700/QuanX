@@ -1,4 +1,4 @@
-// 2023-08-21 20:40
+// 2023-08-22 08:20
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -372,9 +372,9 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     ) {
       delete list.card;
     }
-    let map = obj.data.list_data.content[0].map;
-    if (map?.main_point) {
-      delete map.main_point;
+    let map0 = obj.data.list_data.content[0].map;
+    if (map0?.main_point) {
+      delete map0.main_point;
     }
   } else if (obj?.data?.district?.poi_list) {
     // 搜索列表详情页
@@ -386,6 +386,11 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     // 景点门票 酒店特惠 特色美食 休闲玩乐
     if (poi?.feed_rec_tab) {
       delete poi.feed_rec_tab;
+    }
+  } else if (obj?.data?.modules) {
+    let map1 = obj.data.modules.not_parse_result.data.list_data.content[0].map;
+    if (map1?.main_point) {
+      delete map1.main_point;
     }
   }
 } else if (url.includes("/shield/search_poi/sug")) {
