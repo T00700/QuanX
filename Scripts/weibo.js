@@ -1,4 +1,4 @@
-// 2023-08-22 00:00
+// 2023-08-22 09:30
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -587,6 +587,10 @@ if (url.includes("/interface/sdk/sdkad.php")) {
             // 头像挂件,关注按钮
             removeAvatar(item.data);
             if (!isAd(item.data)) {
+              if (item.data?.title?.text?.includes("新人导师")) {
+                // 萌新帖 互动赢新人导师
+                delete item.data.title;
+              }
               newItems.push(item);
             }
           }
