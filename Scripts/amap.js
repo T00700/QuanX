@@ -1,4 +1,4 @@
-// 2023-08-22 08:50
+// 2023-08-23 12:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -387,7 +387,7 @@ if (url.includes("/faas/amap-navigation/main-page")) {
     if (poi?.feed_rec_tab) {
       delete poi.feed_rec_tab;
     }
-  } else if (obj?.data?.modules) {
+  } else if (obj?.data?.modules?.not_parse_result) {
     let list = obj.data.modules.not_parse_result.data.list_data.content[0];
     // 详情页 底部 房产推广
     if (list?.hookInfo) {
