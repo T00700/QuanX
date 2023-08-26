@@ -1,4 +1,4 @@
-// 2023-08-25 21:00
+// 2023-08-26 07:50
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -10,11 +10,8 @@ if (body) {
     case /^http:\/\/t7z\.cupid\.iqiyi\.com\/mixer\?/.test(url):
       try {
         let obj = JSON.parse(body);
-        const item = ["adSlots"];
-        for (let i of item) {
-          if (obj?.[i]) {
-            delete obj[i];
-          }
+        if (obj?.adSlots) {
+          delete obj.adSlots;
         }
         body = JSON.stringify(obj);
       } catch (error) {
@@ -233,10 +230,12 @@ if (body) {
     case /^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get/.test(url):
       try {
         let obj = JSON.parse(body);
-        const item = ["ad", "ykad", "watermark"];
-        for (let i of item) {
-          if (obj.data.data?.[i]) {
-            delete obj.data.data[i];
+        if (obj.data?.data) {
+          const item = ["ad", "ykad", "watermark"];
+          for (let i of item) {
+            if (obj.data.data?.[i]) {
+              delete obj.data.data[i];
+            }
           }
         }
         body = JSON.stringify(obj);
