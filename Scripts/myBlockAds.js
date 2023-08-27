@@ -227,7 +227,9 @@ if (body) {
       }
       break;
     // 优酷-播放广告
-    case /^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get/.test(url):
+    case /^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get/.test(
+      url
+    ):
       try {
         let obj = JSON.parse(body);
         if (obj.data?.data) {
