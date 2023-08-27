@@ -1,0 +1,18 @@
+#!name = cnftp
+#!desc = China Film and Television Platform.
+#!author = RuCu6 Zoo
+#!update = 2023-08-28 07:40
+
+# 爱奇艺
+^http:\/\/t7z\.cupid\.iqiyi\.com\/mixer\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/myBlockAds.js
+
+# 芒果tv
+
+# 腾讯视频
+^http:\/\/[0-9\.:]*\/?(defaultts|vmind\.qqvideo)\.tc\.qq\.com\/\w+ url reject
+^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+ url reject-dict
+
+# 优酷 //un-acs.youku.com
+^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/myBlockAds.js
+
+hostname = un-acs.youku.com
