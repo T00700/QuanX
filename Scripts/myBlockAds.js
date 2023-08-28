@@ -1,4 +1,4 @@
-// 2023-08-26 07:50
+// 2023-08-28 09:10
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -6,18 +6,6 @@ let body = $response.body;
 
 if (body) {
   switch (true) {
-    // 爱奇艺-播放广告
-    case /^http:\/\/t7z\.cupid\.iqiyi\.com\/mixer\?/.test(url):
-      try {
-        let obj = JSON.parse(body);
-        if (obj?.adSlots) {
-          delete obj.adSlots;
-        }
-        body = JSON.stringify(obj);
-      } catch (error) {
-        console.log(`爱奇艺-播放广告, 出现异常: ` + error);
-      }
-      break;
     // 百度网盘-开屏广告
     case /^https:\/\/pan\.baidu\.com\/api\/getsyscfg\?/.test(url):
       try {
