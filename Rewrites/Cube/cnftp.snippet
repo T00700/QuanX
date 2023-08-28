@@ -1,10 +1,14 @@
 #!name = cnftp
 #!desc = China Film and Television Platform.
 #!author = RuCu6 Zoo
-#!update = 2023-08-28 07:50
+#!update = 2023-08-28 11:45
 
-# 爱奇艺
-^http:\/\/t7z\.cupid\.iqiyi\.com\/mixer\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/myBlockAds.js
+# 播放广告
+^http:\/\/(kjp|t7z)\.cupid\.iqiyi\.com\/mixer\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/iqiyi.js
+# 首页,卡片广告,左上角天气,搜索框填充
+^https:\/\/cards\.iqiyi\.com\/(views_home\/3\.0\/qy_home|waterfall\/3\.0\/feed)\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/iqiyi.js
+^https:\/\/iface2\.iqiyi\.com\/control\/3\.0\/init_proxy\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/iqiyi.js
+^https:\/\/search\.video\.iqiyi\.com\/q\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/iqiyi.js
 
 # 芒果tv //*.mgtv.com
 ^http://dc.bz.mgtv.com/dynamic/v1/channel/index/.+ url script-response-body https://raw.githubusercontent.com/Crazy-Z7/AdGuard/main/NoAdMgTV.conf
@@ -42,4 +46,4 @@
 # 优酷 //un-acs.youku.com
 ^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/myBlockAds.js
 
-hostname = *.mgtv.com, un-acs.youku.com
+hostname = *.iqiyi.com, -i.vip.iqiyi.com, *.mgtv.com, un-acs.youku.com
