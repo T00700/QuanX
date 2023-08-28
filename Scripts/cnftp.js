@@ -1,4 +1,4 @@
-// 2023-08-28 16:20
+// 2023-08-28 20:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -8,18 +8,56 @@ const isYK = url.includes("youku.com/");
 let obj = JSON.parse($response.body);
 
 if (isIQY) {
-  if (url.includes("/control/")) {
+  if (url.includes("/bottom_theme?")) {
+    // 底部菜单
+    if (obj?.cards?.length > 0) {
+      let card = obj.cards[0];
+      if (card?.items?.length > 0) {
+        // 35发现 184随刻视频
+        card.items = card.items.filter((i) => !["35", "184"]?.includes(i?._id));
+      }
+    }
+  } else if (url.includes("/control/")) {
     // 左上角天气图标
     if (obj?.content?.weather) {
       delete obj.content.weather;
+    }
+  } else if (url.includes("/getMyMenus?")) {
+    // 我的页面
+    if (obj?.data?.length > 0) {
+      obj.data = obj.data.filter(
+        (i) =>
+          !["wd_liebiao_2", "wd_liebiao_3", "wd_liebiao_4"]?.includes(
+            i?.statistic?.block
+          )
+      );
+    }
+  } else if (url.includes("/home_top_menu?")) {
+    // 顶部菜单
+    if (obj?.cards?.length > 0) {
+      let card = obj.cards[0];
+      if (card?.items?.length > 0) {
+        // 1017直播 8196热点 4525518866820370中国梦
+        card.items = card.items.filter(
+          (i) => !["1017", "8196", "4525518866820370"]?.includes(i?._id)
+        );
+        for (let i = 0; i < card.items.length; i++) {
+          card.items[i].show_order = i + 1;
+        }
+      }
+    } else if (obj?.nav_group_data?.length > 0) {
+      // 右上角版块 仅保留我的频道
+      // 好像不生效
+      obj.nav_group_data = obj.nav_group_data.filter(
+        (i) => i?.group_key === "default_group"
+      );
     }
   } else if (url.includes("/mixer?")) {
     // 开屏页 播放页
     if (obj) {
       const item = ["adSlots", "splashLottieFile", "splashUiConfig"];
       for (let i of item) {
-        if (obj?.[i])
-          delete obj[i];
+        if (obj?.[i]) delete obj[i];
       }
     }
   } else if (url.includes("/search.video.iqiyi.com/")) {
@@ -28,21 +66,53 @@ if (isIQY) {
       obj.cache_expired_sec = 1;
     }
     if (obj?.data) {
-      obj.data = [{ "query": "搜索内容" }]
+      obj.data = [{ query: "搜索内容" }];
     }
     if (obj?.show_style?.roll_period) {
       obj.show_style.roll_period = 1000;
     }
+  } else if (url.includes("/views_category/")) {
+    // 电视剧版块
+    if (obj?.cards?.length > 0) {
+      obj.cards = obj.cards.filter(
+        (i) =>
+          i.hasOwnProperty("alias_name") &&
+          !i?.alias_name?.includes("ad_trueview")
+      );
+    }
+  } else if (url.includes("/views_comment/")) {
+    // 播放页评论区
+    if (obj?.cards?.length > 0) {
+      obj.cards = obj.cards.filter(
+        (i) =>
+          i.hasOwnProperty("alias_name") &&
+          !i?.alias_name?.includes("comment_resource_convention_card")
+      );
+    }
   } else if (url.includes("/views_home/")) {
     // 首页信息流样式1
     if (obj?.cards?.length > 0) {
-      obj.cards = obj.cards.filter((i) =>
-        ![
-          "ad_mobile_flow", // 信息流广告
-          "ad_trueview", //信息流广告
-          "focus", // 顶部横版广告
-          "qy_home_vip_opr_banner" // 会员营销banner
-        ].includes(i?.alias_name)
+      obj.cards = obj.cards.filter(
+        (i) =>
+          ![
+            "ad_mobile_flow", // 信息流广告            "ad_trueview", //信息流广告
+            "focus", // 顶部横版广告
+            "qy_home_vip_opr_banner" // 会员营销banner
+          ]?.includes(i?.alias_name)
+      );
+    }
+  } else if (url.includes("/views_plt/")) {
+    // 播放详情页
+    if (obj?.cards?.length > 0) {
+      obj.cards = obj.cards.filter(
+        (i) =>
+          ![
+            "play_ad_no_vip", // 视频关联广告
+            "play_custom_card", // 偶像练习生定制卡片
+            "play_vip_promotion", // 会员推广
+            "play_water_fall_like", // 猜你喜欢
+            "play_water_fall_like_title" // 猜你喜欢标题
+          ]?.includes(i?.alias_name)
       );
     }
   } else if (url.includes("/views_search/")) {
@@ -61,7 +131,7 @@ if (isIQY) {
             "search_small_card_ad", // 搜索短视频小图广告
             "search_topbanner_text", // 为你推荐标题
             "search_vip_banner" // vip营销
-          ].includes(card?.strategy_com_id)
+          ]?.includes(card?.strategy_com_id)
         ) {
           continue;
         } else {
