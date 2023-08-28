@@ -1,15 +1,18 @@
-// 2023-08-28 13:00
+// 2023-08-28 14:35
 
 const url = $request.url;
 if (!$response.body) $done({});
+const isIQY = url.includes("iqiyi.com/");
+const isMG = url.includes("mgtv.com/");
+const isYK = url.includes("youku.com/");
 let obj = JSON.parse($response.body);
 
-if (url.includes("iqiyi.com")) {
-  if (url.includes("/control/3.0/init_proxy")) {
+if (isIQY) {
+  if (url.includes("/control/3.0/init_proxy?")) {
     if (obj?.content?.weather) {
       delete obj.content.weather;
     }
-  } else if (url.includes("/mixer")) {
+  } else if (url.includes("/mixer?")) {
     if (obj) {
       const item = ["adSlots", "splashLottieFile", "splashUiConfig"];
       for (let i of item) {
@@ -17,7 +20,7 @@ if (url.includes("iqiyi.com")) {
           delete obj[i];
       }
     }
-  } else if (url.includes("search.video.iqiyi.com/")) {
+  } else if (url.includes("/search.video.iqiyi.com/")) {
     if (obj?.cache_expired_sec) {
       obj.cache_expired_sec = 1;
     }
@@ -48,13 +51,13 @@ if (url.includes("iqiyi.com")) {
       }
     }
   }
-} else if (url.includes("mgtv.com")) {
+} else if (isMG) {
   if (url.includes("/dynamic/v1/channel/index/")) {
     if (obj?.data?.items) {
       delete obj.data.items;
     }
   }
-} else if (url.includes("youku.com")) {
+} else if (isYK) {
   if (url.includes("/mtop.youku.play.ups.appinfo.get/")) {
     if (obj.data?.data) {
       const item = ["ad", "ykad", "watermark"];
