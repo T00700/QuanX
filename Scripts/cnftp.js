@@ -1,4 +1,4 @@
-// 2023-08-28 14:35
+// 2023-08-28 14:50
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -25,7 +25,7 @@ if (isIQY) {
       obj.cache_expired_sec = 1;
     }
     if (obj?.data) {
-      obj.data = [{ "query": "搜索电影、电视剧" }]
+      obj.data = [{ "query": "搜索内容" }]
     }
     if (obj?.show_style?.roll_period) {
       obj.show_style.roll_period = 1000;
