@@ -1,4 +1,4 @@
-// 2023-08-28 20:30
+// 2023-08-28 20:40
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -97,7 +97,8 @@ if (isIQY) {
       obj.cards = obj.cards.filter(
         (i) =>
           ![
-            "ad_mobile_flow", // 信息流广告            "ad_trueview", //信息流广告
+            "ad_mobile_flow", // 信息流广告
+            "ad_trueview", //信息流广告
             "focus", // 顶部横版广告
             "qy_home_vip_opr_banner" // 会员营销banner
           ]?.includes(i?.alias_name)
