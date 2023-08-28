@@ -1,4 +1,4 @@
-// 2023-08-28 09:10
+// 2023-08-28 13:00
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -212,25 +212,6 @@ if (body) {
         body = JSON.stringify(obj);
       } catch (error) {
         console.log(`小米商城-详情页推荐搭配, 出现异常: ` + error);
-      }
-      break;
-    // 优酷-播放广告
-    case /^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get/.test(
-      url
-    ):
-      try {
-        let obj = JSON.parse(body);
-        if (obj.data?.data) {
-          const item = ["ad", "ykad", "watermark"];
-          for (let i of item) {
-            if (obj.data.data?.[i]) {
-              delete obj.data.data[i];
-            }
-          }
-        }
-        body = JSON.stringify(obj);
-      } catch (error) {
-        console.log(`优酷-播放广告, 出现异常: ` + error);
       }
       break;
     default:
