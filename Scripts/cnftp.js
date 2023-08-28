@@ -1,4 +1,4 @@
-// 2023-08-28 20:00
+// 2023-08-28 20:30
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -77,7 +77,9 @@ if (isIQY) {
       obj.cards = obj.cards.filter(
         (i) =>
           i.hasOwnProperty("alias_name") &&
-          !i?.alias_name?.includes("ad_trueview")
+          !["ad_mobile_flow", "ad_trueview", "tv-jiaodiantu"]?.includes(
+            i?.alias_name
+          )
       );
     }
   } else if (url.includes("/views_comment/")) {
