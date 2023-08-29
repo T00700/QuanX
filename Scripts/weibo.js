@@ -1,4 +1,4 @@
-// 2023-08-27 18:18
+// 2023-08-29 11:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -325,9 +325,17 @@ if (url.includes("/interface/sdk/sdkad.php")) {
               newItems.push(item);
             }
           }
+          if (item?.header?.data?.icon) {
+            // 置顶微博背景图
+            delete item.header.data.icon;
+          }
         } else if (item.category === "feed") {
           if (!isAd(item.data)) {
             removeFeedAd(item.data);
+            if (item?.data?.title?.structs?.length > 0) {
+              // 赞过的微博
+              continue;
+            }
             newItems.push(item);
           }
         }
