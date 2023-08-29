@@ -1,4 +1,4 @@
-// 2023-08-29 23:50
+// 2023-08-29 00:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -516,6 +516,15 @@ if (url.includes("/interface/sdk/sdkad.php")) {
             if (group?.mblog) {
               // 头像挂件,关注按钮
               removeAvatar(group.mblog);
+              if (group?.mblog?.title_source) {
+                delete group.mblog.title_source;
+              }
+              if (group?.mblog?.source_tag_struct) {
+                delete group.mblog.source_tag_struct;
+              }
+              if (group?.mblog?.extend_info) {
+                delete group.mblog.extend_info;
+              }
             }
             let cardType = group.card_type;
             // 3 信息流商家卡片
@@ -531,10 +540,10 @@ if (url.includes("/interface/sdk/sdkad.php")) {
                   if (group?.mblog?.common_struct) {
                     delete group.mblog.common_struct;
                   }
-                  newGroup.push(group);
                 }
               }
             }
+            newGroup.push(group);
           }
           card.card_group = newGroup;
           newCards.push(card);
@@ -545,6 +554,12 @@ if (url.includes("/interface/sdk/sdkad.php")) {
               removeAvatar(card.mblog);
               if (card?.mblog?.title_source) {
                 delete card.mblog.title_source;
+              }
+              if (card?.mblog?.source_tag_struct) {
+                delete card.mblog.source_tag_struct;
+              }
+              if (card?.mblog?.extend_info) {
+                delete card.mblog.extend_info;
               }
               newCards.push(card);
             }
