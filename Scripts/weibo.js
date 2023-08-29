@@ -1,4 +1,4 @@
-// 2023-08-29 11:00
+// 2023-08-29 13:30
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -307,6 +307,10 @@ if (url.includes("/interface/sdk/sdkad.php")) {
       );
     }
   } else if (url.includes("/2/profile/container_timeline")) {
+    // 个人主页关注弹窗
+    if (obj?.loadedInfo?.follow_guide_info) {
+      delete obj.loadedInfo.follow_guide_info;
+    }
     // 个人主页信息流
     if (obj?.items?.length > 0) {
       let newItems = [];
