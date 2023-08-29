@@ -1,4 +1,4 @@
-// 2023-08-29 21:30
+// 2023-08-29 21:35
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -320,20 +320,6 @@ if (isIQY) {
           delete obj.data.data[i];
         }
       }
-    }
-  } else if (url.includes("relationrecommend.wirelessrecommend.recommend/")) {
-    if (obj?.data?.q?.length > 0) {
-      obj.data.q = ["搜索内容"];
-    }
-    delete obj.data.track_info;
-    if (obj?.data?.result?.length > 0) {
-      obj.data.result = [
-        {
-          search_id: "搜索内容",
-          id: "搜索内容",
-          extData: { search_id: "搜索内容" }
-        }
-      ];
     }
   }
 }
