@@ -1,4 +1,4 @@
-// 2023-08-29 21:35
+// 2023-08-29 22:40
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -57,7 +57,7 @@ if (isIQY) {
     if (obj) {
       const item = ["adSlots", "splashLottieFile", "splashUiConfig"];
       for (let i of item) {
-        if (obj?.[i]) delete obj[i];
+        delete obj[i];
       }
     }
   } else if (url.includes("/search.video.iqiyi.com/")) {
@@ -191,9 +191,7 @@ if (isIQY) {
     if (obj?.data) {
       const item = ["tipContent", "tipContentNew"];
       for (let i of item) {
-        if (obj.data?.[i]) {
-          delete obj.data[i];
-        }
+        delete obj.data[i];
       }
     }
   } else if (url.includes("columbus.home.query/")) {
@@ -316,9 +314,7 @@ if (isIQY) {
     if (obj?.data?.data) {
       const item = ["ad", "ykad", "watermark"];
       for (let i of item) {
-        if (obj?.data?.data?.[i]) {
-          delete obj.data.data[i];
-        }
+        delete obj.data.data[i];
       }
     }
   }
