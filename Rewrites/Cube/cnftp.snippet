@@ -1,7 +1,7 @@
 #!name = cnftp
 #!desc = China Film and Television Platform.
 #!author = RuCu6 Zoo
-#!update = 2023-08-28 19:20
+#!update = 2023-08-29 18:25
 
 # 爱奇艺 //-i.vip.iqiyi.com, *.iqiyi.com
 # 开屏广告,播放广告
@@ -56,7 +56,11 @@
 ^http:\/\/[0-9\.:]*\/?(defaultts|vmind\.qqvideo)\.tc\.qq\.com\/\w+ url reject
 ^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+ url reject-dict
 
-# 优酷 //un-acs.youku.com
+# 优酷 //acs.youku.com, un-acs.youku.com
+# 首页,我的页面
+^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.columbus\.(home|uc)\.query url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
+# 青少年模式弹窗
+^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.huluwa\.dispatcher\.youthmode\.config2 url reject-dict
 ^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
 
-hostname = -i.vip.iqiyi.com, *.iqiyi.com, *.mgtv.com, un-acs.youku.com
+hostname = -i.vip.iqiyi.com, *.iqiyi.com, *.mgtv.com, acs.youku.com, un-acs.youku.com

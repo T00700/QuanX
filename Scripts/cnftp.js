@@ -1,4 +1,4 @@
-// 2023-08-28 20:40
+// 2023-08-29 18:20
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -187,7 +187,42 @@ if (isIQY) {
     }
   }
 } else if (isYK) {
-  if (url.includes("/mtop.youku.play.ups.appinfo.get/")) {
+  if (url.includes("columbus.home.query/")) {
+    if (obj?.data?.["2019061000"]?.data) {
+      let objData = obj.data["2019061000"].data;
+      if (objData?.data?.indexPositionResult) {
+        objData.data.indexPositionResult = [];
+      }
+      if (objData?.nodes?.length > 0) {
+        let newNodes = [];
+        for (let item of objData.nodes) {
+          if (item?.id === 9340) {
+            // 首页菜单 9340少儿
+            continue;
+          } else if (item?.id === 2373) {
+            if (item?.nodes?.length > 0) {
+              let newII = [];
+              for (let ii of item.nodes) {
+                if (ii?.id === 35505) {
+                  // 35505 优惠购会员横幅
+                  continue;
+                } else {
+                  newII.push(ii);
+                }
+              }
+              item.nodes = newII;
+            }
+            newNodes.push(item);
+          } else {
+            newNodes.push(item);
+          }
+        }
+        objData.nodes = newNodes;
+      }
+    }
+  } else if (url.includes("columbus.uc.query/")) {
+    
+  } else if (url.includes("play.ups.appinfo.get/")) {
     if (obj.data?.data) {
       const item = ["ad", "ykad", "watermark"];
       for (let i of item) {
