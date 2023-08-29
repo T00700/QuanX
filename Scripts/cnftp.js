@@ -1,4 +1,4 @@
-// 2023-08-29 18:20
+// 2023-08-29 21:30
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -187,7 +187,16 @@ if (isIQY) {
     }
   }
 } else if (isYK) {
-  if (url.includes("columbus.home.query/")) {
+  if (url.includes("/collect-api/get_push_interval_config_wx?")) {
+    if (obj?.data) {
+      const item = ["tipContent", "tipContentNew"];
+      for (let i of item) {
+        if (obj.data?.[i]) {
+          delete obj.data[i];
+        }
+      }
+    }
+  } else if (url.includes("columbus.home.query/")) {
     if (obj?.data?.["2019061000"]?.data) {
       let objData = obj.data["2019061000"].data;
       if (objData?.data?.indexPositionResult) {
@@ -200,17 +209,31 @@ if (isIQY) {
             // 首页菜单 9340少儿
             continue;
           } else if (item?.id === 2373) {
+            // 首页信息流
             if (item?.nodes?.length > 0) {
-              let newII = [];
-              for (let ii of item.nodes) {
-                if (ii?.id === 35505) {
+              let newItem = [];
+              for (let i of item.nodes) {
+                if (i?.id === 35505) {
                   // 35505 优惠购会员横幅
                   continue;
+                } else if (i?.id === 29490) {
+                  // 信息流广告
+                  if (i?.nodes?.length > 0) {
+                    let newII = [];
+                    for (let ii of i.nodes) {
+                      if (ii?.typeName === "PHONE_FEED_CARD_B_AD") {
+                        // 汇川广告
+                        continue;
+                      }
+                      newII.push(ii);
+                    }
+                    i.nodes = newII;
+                  }
                 } else {
-                  newII.push(ii);
+                  newItem.push(i);
                 }
               }
-              item.nodes = newII;
+              item.nodes = newItem;
             }
             newNodes.push(item);
           } else {
@@ -221,15 +244,96 @@ if (isIQY) {
       }
     }
   } else if (url.includes("columbus.uc.query/")) {
-    
+    if (obj?.data?.["2019061000"]?.data) {
+      let objData = obj.data["2019061000"].data;
+      if (objData?.nodes?.length > 0) {
+        let objNodes = objData.nodes[0];
+        if (objNodes?.nodes?.length > 0) {
+          let newNodes = [];
+          for (let item of objNodes.nodes) {
+            if (item?.id === 32275) {
+              // 个人中心二楼
+              continue;
+            } else if (item?.id === 28912) {
+              // 我的下载 收藏 购买 场景
+              if (item?.nodes?.length > 0) {
+                let newII = [];
+                for (let ii of item.nodes) {
+                  if (ii?.id === 110429) {
+                    // 免费兑换VIP
+                    continue;
+                  }
+                  newII.push(ii);
+                }
+                item.nodes = newII;
+              }
+              newNodes.push(item);
+            } else if (item?.id === 22570) {
+              // 横版轮播图
+              continue;
+            } else if (item?.id === 36014) {
+              // 业务区 星光币 优酷购 数字藏品
+              continue;
+            } else if (item?.id === 36015) {
+              // 功能区 卡卷包 商城 设置
+              if (item?.nodes?.length > 0) {
+                let node0 = item.nodes[0];
+                if (node0?.nodes?.length > 0) {
+                  let newII = [];
+                  for (let ii of node0.nodes) {
+                    // 683364卡卷包 683359个性商城 683501TV助手 683367设置
+                    // 683368我的客服 683502意见反馈 683366有奖调研 683372更多
+                    if (![683359, 683364, 683366, 683501]?.includes(ii?.id)) {
+                      newII.push(ii);
+                    }
+                  }
+                  node0.nodes = newII;
+                }
+              }
+              newNodes.push(item);
+            } else {
+              newNodes.push(item);
+            }
+          }
+          objNodes.nodes = newNodes;
+        }
+      }
+    }
+  } else if (url.includes("haidai.lantern.appconfig.get/")) {
+    if (obj?.data?.model?.configInfo?.bottomNavigate) {
+      let bottom = obj.data.model.configInfo.bottomNavigate;
+      if (bottom?.data?.bottomTabList?.length > 0) {
+        bottom.data.bottomTabList = bottom.data.bottomTabList.filter(
+          (i) => !["DONGTAI", "SEARCH"]?.includes(i?.type)
+        );
+      }
+    }
+  } else if (url.includes("huluwa.dispatcher.youthmode.config2/")) {
+    if (obj?.data?.result) {
+      obj.data.result = {};
+    }
   } else if (url.includes("play.ups.appinfo.get/")) {
-    if (obj.data?.data) {
+    if (obj?.data?.data) {
       const item = ["ad", "ykad", "watermark"];
       for (let i of item) {
-        if (obj.data.data?.[i]) {
+        if (obj?.data?.data?.[i]) {
           delete obj.data.data[i];
         }
       }
+    }
+  } else if (url.includes("relationrecommend.wirelessrecommend.recommend/")) {
+    if (obj?.data?.q?.length > 0) {
+      obj.data.q = ["搜索内容"];
+    }
+    delete obj.data.track_info;
+    if (obj?.data?.result?.length > 0) {
+      obj.data.result = [
+        {
+          search_id: "搜索内容",
+          id: "搜索内容",
+          extData: { search_id: "搜索内容" }
+        }
+      ];
     }
   }
 }
