@@ -1,4 +1,4 @@
-// 2023-08-30 19:10
+// 2023-08-30 19:25
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -71,10 +71,9 @@ if (url.includes("/interface/sdk/sdkad.php")) {
     if (obj?.cards?.length > 0) {
       let newCards = [];
       for (let card of obj.cards) {
-        let cardGroup = card.card_group;
-        if (cardGroup?.length > 0) {
+        if (card?.card_group?.length > 0) {
           let newGroup = [];
-          for (let group of cardGroup) {
+          for (let group of card.card_group) {
             let cardType = group.card_type;
             // 120,145 视频版块轮播图
             // 192 横版热门视频 电影 颜值 电视剧等
@@ -509,30 +508,31 @@ if (url.includes("/interface/sdk/sdkad.php")) {
     if (obj?.cards?.length > 0) {
       let newCards = [];
       for (let card of obj.cards) {
-        let cardGroup = card.card_group;
-        if (cardGroup?.length > 0) {
+        if (card?.card_group?.length > 0) {
           let newGroup = [];
-          for (let group of cardGroup) {
+          for (let group of card.card_group) {
             if (group?.mblog) {
-              // 头像挂件,关注按钮
-              removeAvatar(group.mblog);
-              if (group?.mblog?.title_source) {
-                delete group.mblog.title_source;
+              if (!isAd(group.mblog)) {
+                // 头像挂件,关注按钮
+                removeAvatar(group.mblog);
+                if (group?.mblog?.title_source) {
+                  delete group.mblog.title_source;
+                }
+                if (group?.mblog?.source_tag_struct) {
+                  delete group.mblog.source_tag_struct;
+                }
+                if (group?.mblog?.extend_info) {
+                  delete group.mblog.extend_info;
+                }
+                // 商品橱窗
+                if (group?.mblog?.common_struct) {
+                  delete group.mblog.common_struct;
+                }
+                newGroup.push(group);
               }
-              if (group?.mblog?.source_tag_struct) {
-                delete group.mblog.source_tag_struct;
-              }
-              if (group?.mblog?.extend_info) {
-                delete group.mblog.extend_info;
-              }
+            } else {
+              newGroup.push(group);
             }
-            if (!isAd(group.mblog)) {
-              // 商品橱窗
-              if (group?.mblog?.common_struct) {
-                delete group.mblog.common_struct;
-              }
-            }
-            newGroup.push(group);
           }
           card.card_group = newGroup;
           newCards.push(card);
