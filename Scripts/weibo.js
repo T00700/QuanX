@@ -1,4 +1,4 @@
-// 2023-08-30 16:25
+// 2023-08-30 19:10
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -526,21 +526,10 @@ if (url.includes("/interface/sdk/sdkad.php")) {
                 delete group.mblog.extend_info;
               }
             }
-            let cardType = group.card_type;
-            // 3 信息流商家卡片
-            // 17 正在热搜卡片
-            // 22 信息流横版广告图
-            // 25 超话卡片(单个)
-            // 42 正在热搜标题
-            // 182 超话卡片(多个)
-            if (![3, 17, 22, 25, 42, 118, 182]?.includes(cardType)) {
-              if (group?.mblog) {
-                if (!isAd(group.mblog)) {
-                  // 商品橱窗
-                  if (group?.mblog?.common_struct) {
-                    delete group.mblog.common_struct;
-                  }
-                }
+            if (!isAd(group.mblog)) {
+              // 商品橱窗
+              if (group?.mblog?.common_struct) {
+                delete group.mblog.common_struct;
               }
             }
             newGroup.push(group);

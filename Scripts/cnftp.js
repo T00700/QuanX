@@ -1,4 +1,4 @@
-// 2023-08-29 22:40
+// 2023-08-30 18:45
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -13,8 +13,14 @@ if (isIQY) {
     if (obj?.cards?.length > 0) {
       let card = obj.cards[0];
       if (card?.items?.length > 0) {
-        // 35发现 184随刻视频
-        card.items = card.items.filter((i) => !["35", "184"]?.includes(i?._id));
+        // 29首页 31会员中心 34我的 35发现 184随刻视频
+        card.items = card.items.filter((i) =>
+          ["29", "31", "34"]?.includes(i?._id)
+        );
+        // 修复位置
+        for (let i = 0; i < card.items.length; i++) {
+          card.items[i].show_order = i + 1;
+        }
       }
     }
   } else if (url.includes("/control/")) {
@@ -188,6 +194,7 @@ if (isIQY) {
   }
 } else if (isYK) {
   if (url.includes("/collect-api/get_push_interval_config_wx?")) {
+    // 热剧弹窗
     if (obj?.data) {
       const item = ["tipContent", "tipContentNew"];
       for (let i of item) {
@@ -195,6 +202,7 @@ if (isIQY) {
       }
     }
   } else if (url.includes("columbus.home.query/")) {
+    // 首页
     if (obj?.data?.["2019061000"]?.data) {
       let objData = obj.data["2019061000"].data;
       if (objData?.data?.indexPositionResult) {
@@ -242,6 +250,7 @@ if (isIQY) {
       }
     }
   } else if (url.includes("columbus.uc.query/")) {
+    // 我的页面
     if (obj?.data?.["2019061000"]?.data) {
       let objData = obj.data["2019061000"].data;
       if (objData?.nodes?.length > 0) {
@@ -298,21 +307,29 @@ if (isIQY) {
       }
     }
   } else if (url.includes("haidai.lantern.appconfig.get/")) {
+    // 底部菜单
     if (obj?.data?.model?.configInfo?.bottomNavigate) {
       let bottom = obj.data.model.configInfo.bottomNavigate;
       if (bottom?.data?.bottomTabList?.length > 0) {
-        bottom.data.bottomTabList = bottom.data.bottomTabList.filter(
-          (i) => !["DONGTAI", "SEARCH"]?.includes(i?.type)
+        // HOME首页 DONGTAI短视频 SEARCH淘好片 VIP_MEMBER会员 NEW_UCENTER我的
+        bottom.data.bottomTabList = bottom.data.bottomTabList.filter((i) =>
+          ["HOME", "NEW_UCENTER", "VIP_MEMBER"]?.includes(i?.type)
         );
+        // 修复位置
+        for (let i = 0; i < bottom.data.bottomTabList.length; i++) {
+          bottom.data.bottomTabList[i].menuIndex = i + 1;
+        }
       }
     }
   } else if (url.includes("huluwa.dispatcher.youthmode.config2/")) {
+    // 青少年模式弹窗
     if (obj?.data?.result) {
       obj.data.result = {};
     }
   } else if (url.includes("play.ups.appinfo.get/")) {
+    // 开屏广告 播放广告
     if (obj?.data?.data) {
-      const item = ["ad", "ykad", "watermark"];
+      const item = ["ad", "watermark", "ykad"];
       for (let i of item) {
         delete obj.data.data[i];
       }
