@@ -1,4 +1,4 @@
-// 2023-08-30 18:45
+// 2023-08-31 23:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -188,8 +188,100 @@ if (isIQY) {
   }
 } else if (isMG) {
   if (url.includes("/dynamic/v1/channel/index/")) {
-    if (obj?.data?.items) {
-      delete obj.data.items;
+    // 首页信息流
+    if (obj?.adInfo) {
+      delete obj.adInfo;
+    }
+    if (obj?.data?.length > 0) {
+      let newItems = [];
+      for (let item of obj.data) {
+        // 908热剧轮播
+        // 2237节目周边 抓娃娃 芒果卡
+        if (item?.moduleEntityId === "2237") {
+          continue;
+        }
+        newItems.push(item);
+      }
+      obj.data = newItems;
+    }
+    if (obj?.moduleIDS?.length > 0) {
+      obj.moduleIDS = obj.moduleIDS.filter(
+        (i) => !i?.moduleEntityId !== "2237"
+      );
+    }
+  } else if (url.includes("/dynamic/v1/channel/vrsList/")) {
+    // 首页顶部菜单
+    if (obj?.data?.length > 0) {
+      let newItems = [];
+      for (let item of obj.data) {
+        if (item?.vclassType === "15") {
+          // 短视频
+          continue;
+        }
+        newItems.push(item);
+      }
+      obj.data = newItems;
+    }
+  } else if (url.includes("/odin/c1/channel/index?")) {
+    // 首页信息流
+    if (obj?.data?.length > 0) {
+      let newItems = [];
+      for (let item of obj.data) {
+        if (item?.moduleType === "childslideicon") {
+          // 节目周边 抓娃娃 芒果卡
+          continue;
+        }
+        newItems.push(item);
+      }
+      obj.data = newItems;
+    }
+  } else if (url.includes("/v3/module/list?")) {
+    // 我的页面组件
+    if (obj?.data?.list?.length > 0) {
+      let newList = [];
+      for (let item of obj.data.list) {
+        // 1顶部模块 扫一扫 消息 搜索 设置
+        // 2用户信息模块 芒果卡 个人信息
+        // 3推荐位模块 购买会员 会员周边
+        // 4用户内容模块 播放记录 追更
+        // 5大芒计划 创作中心 热门作品 征稿活动
+        // 5我的小芒 电商 订单
+        // 6banner图模块 广告轮播图
+        // 7我的服务 客服 皮肤 意见反馈
+        // 8运营商专区 芒果卡 免流
+        // 8兴趣中心 抓娃娃
+        // 8推荐功能 钱包 福袋 芒果公益
+        if ([3, 5, 6, 8]?.includes(item?.moduleType)) {
+          // 推广模块
+          continue;
+        } else if (item?.moduleType === 2 && item?.title === "用户信息模块") {
+          // 用户信息
+          if (item?.data?.length > 0) {
+            let newItems = [];
+            for (let i of item.data) {
+              if (["领取芒果卡权益", "签到赢积分"]?.includes(i?.title)) {
+                continue;
+              }
+              newItems.push(i);
+            }
+            item.data = newItems;
+          }
+        } else if (item?.moduleType === 7 && item?.title === "我的服务") {
+          // 我的服务
+          if (item?.data?.length > 0) {
+            let newItems = [];
+            for (let i of item.data) {
+              if (["功能实验室", "芒果壁纸", "我的音乐"]?.includes(i?.title)) {
+                continue;
+              }
+              newItems.push(i);
+            }
+            item.data = newItems;
+          }
+        }
+        newList.push(item);
+      }
+      obj.data.list = newList;
     }
   }
 } else if (isYK) {
