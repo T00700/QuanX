@@ -1,4 +1,4 @@
-# 2023-08-29 21:50
+# 2023-08-31 17:05
 
 # ======= A ======= #
 # 阿里云
@@ -36,10 +36,6 @@ HOST, mall.bilibili.com, REJECT
 HOST, passport.bilibili.com, REJECT
 
 # ======= C ======= #
-# 菜鸟
-HOST, iyes.youku.com, REJECT
-HOST, vali.cp31.ott.cibntv.net, REJECT
-IP-CIDR, 117.161.156.227/32, REJECT
 # 彩云天气
 HOST, ad.cyapi.cn, REJECT
 # 昌原云充
@@ -166,13 +162,16 @@ HOST, sdkconfig.ad.xiaomi.com, REJECT
 ;HOST, hub5idx.v6.shub.sandai.net, REJECT
 
 # ======= Y ======= #
-# 优酷
+# 优酷 & 菜鸟
 HOST, adsmind.ugdtimg.com, REJECT
 HOST, amdc.m.youku.com, REJECT
+HOST, apiv4-iyes.youku.com, REJECT
 HOST, httpdns.alicdn.com, REJECT
 HOST, huichuan-mc.sm.cn, REJECT
 HOST, huichuan.sm.cn, REJECT
+HOST, iyes.youku.com, REJECT
 HOST, vali-ugc.cp31.ott.cibntv.net, REJECT
+HOST, vali.cp31.ott.cibntv.net, REJECT
 HOST, valipl.cp31.ott.cibntv.net, REJECT
 HOST, yk-ssp.ad.youku.com, REJECT
 HOST, ykad-data.youku.com, REJECT
