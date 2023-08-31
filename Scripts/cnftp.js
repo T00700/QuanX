@@ -1,4 +1,4 @@
-// 2023-08-31 23:00
+// 2023-09-01 07:20
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -197,7 +197,24 @@ if (isIQY) {
       for (let item of obj.data) {
         // 908热剧轮播
         // 2237节目周边 抓娃娃 芒果卡
-        if (item?.moduleEntityId === "2237") {
+        if (item?.moduleEntityId === "91") {
+          // 首页正在追模块
+          if (item?.DSLList?.length > 0) {
+            for (let i of item.DSLList) {
+              if (i?.data?.items?.length > 0) {
+                let newItems = [];
+                for (let item of i.data.items) {
+                  if (item?.id === 0) {
+                    // 正在追模块下的商品推广
+                    continue;
+                  }
+                  newItems.push(item);
+                }
+                i.data.items = newItems;
+              }
+            }
+          }
+        } else if (item?.moduleEntityId === "2237") {
           continue;
         }
         newItems.push(item);
@@ -221,6 +238,16 @@ if (isIQY) {
         newItems.push(item);
       }
       obj.data = newItems;
+    }
+  } else if (url.includes("/mobile/recommend/v2?")) {
+    if (obj?.data?.default) {
+      obj.data.default = { 0: ["搜索内容"] };
+    }
+    if (obj?.data?.recommend) {
+      obj.data.recommend = [];
+    }
+    if (obj?.interval) {
+      obj.interval = 1000;
     }
   } else if (url.includes("/odin/c1/channel/index?")) {
     // 首页信息流
