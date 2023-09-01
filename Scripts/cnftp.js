@@ -1,4 +1,4 @@
-// 2023-09-01 17:25
+// 2023-09-01 17:30
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -321,7 +321,7 @@ if (isIQY) {
       // 1正片 2花絮片段 6设备信息 7未知 8看了还会看 9精华打包 14vip
       // 15未知 17周边大放送 22未知 31系列推荐 37音乐fm入口 36为你推荐
       obj.data.categoryList = obj.data.categoryList.filter(
-        (i) => [1, 2, 6, 9, 31]?.includes(i?.dataType)
+        (i) => ![8, 14, 17]?.includes(i?.dataType)
       );
     }
   }
