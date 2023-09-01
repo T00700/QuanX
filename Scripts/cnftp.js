@@ -1,4 +1,4 @@
-// 2023-09-01 14:55
+// 2023-09-01 16:10
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -380,10 +380,7 @@ if (isIQY) {
             if (item?.nodes?.length > 0) {
               let newItem = [];
               for (let i of item.nodes) {
-                if (i?.id === 35505) {
-                  // 35505 优惠购会员横幅
-                  continue;
-                } else if (i?.id === 29490) {
+                if (i?.id === 29490) {
                   // 信息流广告
                   if (i?.nodes?.length > 0) {
                     let newII = [];
@@ -396,6 +393,14 @@ if (isIQY) {
                     }
                     i.nodes = newII;
                   }
+                } else if (i?.id === 31476) {
+                  // 正在热播右边滚动热词
+                  if (i?.data?.keywords?.length > 0) {
+                    delete i.data.keywords;
+                  }
+                } else if (i?.id === 35505) {
+                  // 优惠购会员横幅
+                  continue;
                 } else {
                   newItem.push(i);
                 }
