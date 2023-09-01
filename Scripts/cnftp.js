@@ -1,4 +1,4 @@
-// 2023-09-01 10:30
+// 2023-09-01 13:20
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -320,6 +320,48 @@ if (isIQY) {
         delete obj.data[i];
       }
     }
+  } else if (url.includes("columbus.gateway.new.execute")) {
+    // 播放详情页组件
+    if (obj?.data?.["2019030100"]?.data) {
+      let objData = obj.data["2019030100"].data;
+      if (objData?.data?.global) {
+        let config = objData.data.global;
+        if (config?.PHONE_DETAIL_TOP_TAB?.pageTabs?.length > 0) {
+          config.PHONE_DETAIL_TOP_TAB.pageTabs =
+            config.PHONE_DETAIL_TOP_TAB.pageTabs.filter(
+              (i) => ["detail", "list", "planet"]?.includes(i?.code)
+            );
+        }
+      }
+      if (objData?.nodes?.length > 0) {
+        let node0 = objData.nodes[0];
+        if (node0?.nodes?.length > 0) {
+          // 16120球区自动化组件
+          // 16121播放页选集组件
+          // 16130播放页广告组件
+          // 61115播放页活动组件
+          // 87463播放页有料不能停组件
+          // 87582播放页全屏播后推荐组件
+          // 198314播放页会员引导组件
+          // 238789播放页用户触达组件
+          // 240290播放页推荐组件
+          // 257980播放页简介组件
+          // 257982播放页功能bar组件
+          node0.nodes = node0.nodes.filter(
+            (i) =>
+              ![
+                "Phone运营banner",
+                "球区自动化组件",
+                "播放页广告组件",
+                "播放页活动组件",
+                "播放页全屏播后推荐组件",
+                "播放页会员引导组件",
+                "播放页用户触达组件"
+              ]?.includes(i?.typeName)
+          );
+        }
+      }
+    }
   } else if (url.includes("columbus.home.query/")) {
     // 首页
     if (obj?.data?.["2019061000"]?.data) {
@@ -330,10 +372,10 @@ if (isIQY) {
       if (objData?.nodes?.length > 0) {
         let newNodes = [];
         for (let item of objData.nodes) {
-          if (item?.id === 9340) {
-            // 首页菜单 9340少儿
+          if (["CHILD", "COMIC2"]?.includes(item?.data?.nodeKey)) {
+            // 首页菜单 少儿 动漫
             continue;
-          } else if (item?.id === 2373) {
+          } else if (item?.data?.nodeKey === "SELECTION") {
             // 首页信息流
             if (item?.nodes?.length > 0) {
               let newItem = [];
