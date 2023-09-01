@@ -1,7 +1,7 @@
 #!name = cnftp
 #!desc = China Film and Television Platform.
 #!author = RuCu6 Zoo
-#!update = 2023-09-01 10:30
+#!update = 2023-09-01 10:35
 
 # 爱奇艺 //-i.vip.iqiyi.com, *.iqiyi.com
 # 开屏广告,播放广告
@@ -23,7 +23,7 @@
 # 评论区
 ^https:\/\/comment-card\.iqiyi\.com\/views_comment\/3\.0\/long_video_comments\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
 
-# 芒果tv //damang.api.mgtv.com, dc.bz.mgtv.com, me.bz.mgtv.com, mobileso.bz.mgtv.com
+# 芒果tv //*.mgtv.com
 # 首页,左上角推广,信息流,顶部菜单,搜索框
 ^http:\/\/[0-9\.]+\/odin\/c1\/(channel\/ads|skin\/config)\? url reject-dict
 ^http:\/\/mob-st\.bz\.mgtv\.com\/odin\/c1\/channel\/index\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
@@ -51,4 +51,4 @@
 # 开屏广告
 ^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
 
-hostname = -i.vip.iqiyi.com, *.iqiyi.com, damang.api.mgtv.com, dc.bz.mgtv.com, me.bz.mgtv.com, mobileso.bz.mgtv.com, acs.youku.com, push.m.youku.com, un-acs.youku.com
+hostname = -i.vip.iqiyi.com, *.iqiyi.com, *.mgtv.com, acs.youku.com, push.m.youku.com, un-acs.youku.com
