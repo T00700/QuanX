@@ -1,4 +1,4 @@
-// 2023-09-01 16:10
+// 2023-09-01 17:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -91,9 +91,11 @@ if (isIQY) {
   } else if (url.includes("/views_comment/")) {
     // 播放页评论区
     if (obj?.cards?.length > 0) {
+      // 评论资源位
       obj.cards = obj.cards.filter(
         (i) =>
           i.hasOwnProperty("alias_name") &&
+          !i?.alias_name?.includes("comment_resource_card") &&
           !i?.alias_name?.includes("comment_resource_convention_card")
       );
     }
@@ -112,6 +114,10 @@ if (isIQY) {
     }
   } else if (url.includes("/views_plt/")) {
     // 播放详情页
+    if (obj?.kv_pair?.vip_fixed_card) {
+      // vip优惠卡片
+      delete obj.kv_pair.vip_fixed_card;
+    }
     if (obj?.cards?.length > 0) {
       obj.cards = obj.cards.filter(
         (i) =>
