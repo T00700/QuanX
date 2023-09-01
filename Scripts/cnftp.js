@@ -1,4 +1,4 @@
-// 2023-09-01 09:30
+// 2023-09-01 10:30
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -247,7 +247,7 @@ if (isIQY) {
       obj.data.recommend = [];
     }
     if (obj?.data?.interval) {
-      obj.data?.interval = 1000;
+      obj.data.interval = 1000;
     }
   } else if (url.includes("/odin/c1/channel/index?")) {
     // 首页信息流
