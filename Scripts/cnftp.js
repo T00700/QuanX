@@ -1,4 +1,4 @@
-// 2023-09-01 13:20
+// 2023-09-01 14:55
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -419,7 +419,7 @@ if (isIQY) {
         if (objNodes?.nodes?.length > 0) {
           let newNodes = [];
           for (let item of objNodes.nodes) {
-            if (item?.id === 32275) {
+            if (item?.id === 32775) {
               // 个人中心二楼
               continue;
             } else if (item?.id === 28912) {
@@ -451,7 +451,7 @@ if (isIQY) {
                   for (let ii of node0.nodes) {
                     // 683364卡卷包 683359个性商城 683501TV助手 683367设置
                     // 683368我的客服 683502意见反馈 683366有奖调研 683372更多
-                    if (![683359, 683364, 683366, 683501]?.includes(ii?.id)) {
+                    if ([683367, 683368, 683372, 683502]?.includes(ii?.id)) {
                       newII.push(ii);
                     }
                   }
