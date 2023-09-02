@@ -1,4 +1,4 @@
-// 2023-09-02 17:25
+// 2023-09-02 17:35
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -362,7 +362,7 @@ if (isIQY) {
       // 15未知 17周边大放送 18未知 20出品人 22未知 30未知 31系列推荐
       // 35音乐fm入口 36为你推荐 37音乐fm入口
       obj.data.categoryList = obj.data.categoryList.filter(
-        (i) => ![8, 9, 14, 17]?.includes(i?.dataType)
+        (i) => ![2, 8, 9, 14, 17]?.includes(i?.dataType)
       );
     }
   }
