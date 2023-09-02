@@ -1,4 +1,4 @@
-// 2023-09-02 11:45
+// 2023-09-02 12:50
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -21,6 +21,21 @@ if (isIQY) {
         for (let i = 0; i < card.items.length; i++) {
           card.items[i].show_order = i + 1;
         }
+      }
+    }
+  } else if (url.includes("/common_switch?")) {
+    // 通用配置
+    if (obj?.content?.resource) {
+      const item = [
+        "activities",
+        "cast_device_ad",
+        "member",
+        "second_floor_guide",
+        "speed_ad",
+        "vr"
+      ];
+      for (let i of item) {
+        delete obj.content.resource[i];
       }
     }
   } else if (url.includes("/control/")) {
