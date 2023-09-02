@@ -1,7 +1,7 @@
 #!name = cnftp
 #!desc = China Film and Television Platform.
 #!author = RuCu6
-#!update = 2023-09-01 22:35
+#!update = 2023-09-02 09:10
 
 # 爱奇艺 //-i.vip.iqiyi.com, *.iqiyi.com
 # 开屏广告,播放广告
@@ -50,7 +50,7 @@
 # 播放页,主演陪你看
 ^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.pisp\.scripts\.get url reject-dict
 # 青少年模式弹窗
-^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.huluwa\.dispatcher\.youthmode\.config2 url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
+^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.huluwa\.(dispatcher\.youthmode\.config2|user\.youthmode\.servermsg) url reject-dict
 # 热剧弹窗
 ^https:\/\/push\.m\.youku\.com\/collect-api\/get_push_interval_config_wx\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
 # 开屏广告
