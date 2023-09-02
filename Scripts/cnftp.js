@@ -1,4 +1,4 @@
-// 2023-09-02 10:05
+// 2023-09-02 11:45
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -136,10 +136,17 @@ if (isIQY) {
             "cloud_cinema_privilege_icon", // 云影院内容权益
             "cloud_cinema_star_activities", // 云影院推广横幅
             "play_ad_no_vip", // 视频关联广告
-            // "play_around", // 周边视频 花絮
+            "play_around", // 周边视频 短视频
             // "play_collection", // 选集
             "play_custom_card", // 偶像练习生定制卡片
             // "play_detail_tag", // 详情标签
+            // "play_rap_custom", // 综艺 svip舞台纯享
+            // "play_series_collection", // 综艺 选集
+            "play_splendid_collection", // 综艺 合集 正片没有的都在这里
+            // "play_type_topical_card_3", // 综艺 幕后花絮
+            "play_type_topical_card_4", // 综艺 精彩二创
+            "play_variety_custom_2", // 综艺 精彩看点
+            "play_vertical", // 综艺 竖屏内容
             "play_vip_promotion", // 会员推广
             "play_water_fall_like", // 猜你喜欢
             "play_water_fall_like_title", // 猜你喜欢标题
