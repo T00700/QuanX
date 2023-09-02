@@ -1,4 +1,4 @@
-// 2023-09-01 19:45
+// 2023-09-02 09:10
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -501,11 +501,6 @@ if (isIQY) {
           bottom.data.bottomTabList[i].menuIndex = i + 1;
         }
       }
-    }
-  } else if (url.includes("huluwa.dispatcher.youthmode.config2/")) {
-    // 青少年模式弹窗
-    if (obj?.data?.result) {
-      obj.data.result = {};
     }
   } else if (url.includes("play.ups.appinfo.get/")) {
     // 开屏广告 播放广告
