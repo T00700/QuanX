@@ -1,4 +1,4 @@
-// 2023-09-02 12:50
+// 2023-09-02 13:10
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -362,10 +362,11 @@ if (isIQY) {
     }
   } else if (url.includes("/v10/video/info?")) {
     if (obj?.data?.categoryList?.length > 0) {
-      // 1正片 2花絮片段 6设备信息 7未知 8看了还会看 9精华打包 14vip
-      // 15未知 17周边大放送 22未知 31系列推荐 37音乐fm入口 36为你推荐
+      // 1正片 2花絮片段 6设备信息 7未知 8看了还会看 9精华打包 10未知 14vip
+      // 15未知 17周边大放送 18未知 20出品人 22未知 30未知 31系列推荐
+      // 35音乐fm入口 36为你推荐 37音乐fm入口
       obj.data.categoryList = obj.data.categoryList.filter(
-        (i) => ![8, 14, 17]?.includes(i?.dataType)
+        (i) => ![8, 9, 14, 17]?.includes(i?.dataType)
       );
     }
   }
