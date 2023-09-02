@@ -1,4 +1,4 @@
-// 2023-09-02 13:10
+// 2023-09-02 14:10
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -35,7 +35,9 @@ if (isIQY) {
         "vr"
       ];
       for (let i of item) {
-        delete obj.content.resource[i];
+        if (obj.content.resource?.[i]) {
+          delete obj.content.resource[i];
+        }
       }
     }
   } else if (url.includes("/control/")) {
@@ -78,7 +80,9 @@ if (isIQY) {
     if (obj) {
       const item = ["adSlots", "splashLottieFile", "splashUiConfig"];
       for (let i of item) {
-        delete obj[i];
+        if (obj?.[i]) {
+          delete obj[i];
+        }
       }
     }
   } else if (url.includes("/search.video.iqiyi.com/")) {
@@ -133,7 +137,9 @@ if (isIQY) {
       // 云影院卡片 vip优惠购买卡片
       const item = ["cloud_cinema", "vip_fixed_card"];
       for (let i of item) {
-        delete obj.kv_pair[i];
+        if (obj?.kv_pair?.[i]) {
+          delete obj.kv_pair[i];
+        }
       }
     }
     if (obj?.cards?.length > 0) {
@@ -376,7 +382,9 @@ if (isIQY) {
     if (obj?.data) {
       const item = ["tipContent", "tipContentNew"];
       for (let i of item) {
-        delete obj.data[i];
+        if (obj?.data?.[i]) {
+          delete obj.data[i];
+        }
       }
     }
   } else if (url.includes("columbus.gateway.new.execute")) {
@@ -552,7 +560,9 @@ if (isIQY) {
     if (obj?.data?.data) {
       const item = ["ad", "watermark", "ykad"];
       for (let i of item) {
-        delete obj.data.data[i];
+        if (obj?.data?.data?.[i]) {
+          delete obj.data.data[i];
+        }
       }
     }
   }
