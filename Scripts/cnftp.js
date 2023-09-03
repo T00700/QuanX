@@ -1,4 +1,4 @@
-// 2023-09-03 13:05
+// 2023-09-03 14:30
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -38,55 +38,6 @@ if (isIQY) {
       ];
       for (let i of item) {
         delete obj.content.resource[i];
-      }
-      if (obj?.content?.resource?.equity_prompt) {
-        delete obj.content.resource.equity_prompt.text_ad_tips;
-        obj.content.resource.equity_prompt.times_ad_tips = "0";
-      }
-    }
-    if (obj?.content?.switchs) {
-      if (obj?.content?.switchs?.views_plt) {
-        obj.content.switchs.views_plt.native_ad = "0";
-        obj.content.switchs.views_plt.skip_pre_ad = "1";
-        obj.content.switchs.views_plt.filter_ad = "1";
-      }
-      if (obj?.content?.switchs?.m_qiyi_views) {
-        obj.content.switchs.m_qiyi_views.free_ad = "1";
-        obj.content.switchs.m_qiyi_views.search_feed_ad = "0";
-        obj.content.switchs.m_qiyi_views.support_award_ad = "0";
-        obj.content.switchs.m_qiyi_views.qy_waterfall_ad = "0";
-        obj.content.switchs.m_qiyi_views.youth_pop_rate = "0";
-        obj.content.switchs.m_qiyi_views.hot_youth_model = "0";
-      }
-      if (obj?.content?.switchs?.m_qiyi_ios_tech) {
-        obj.content.switchs.m_qiyi_ios_tech.pip_pause_ad_protect = "0";
-        obj.content.switchs.m_qiyi_ios_tech.qyplayer_update_portrait_player_by_ad_detail_view = "0";
-        obj.content.switchs.m_qiyi_ios_tech.qyplayer_portrait_ad_rotation = "0";
-        obj.content.switchs.m_qiyi_ios_tech.start_ad_preload_switch = "0";
-      }
-      if (obj?.content?.switchs?.views) {
-        obj.content.switchs.views.adjust_ad_category = "";
-        obj.content.switchs.views.merge_ad_req = "0";
-        obj.content.switchs.views.more_ad = "0";
-        obj.content.switchs.views.youth_model_duration = "40000";
-        obj.content.switchs.views.youth_model = "0";
-      }
-      if (obj?.content?.switchs?.m_qiyi_views_plt) {
-        obj.content.switchs.m_qiyi_views_plt.enable_chanye_ad = "0";
-        obj.content.switchs.m_qiyi_views_plt.play_like_other_ad_pos = "0";
-        obj.content.switchs.m_qiyi_views_plt.play_like_child_vertical_ad = "";
-        obj.content.switchs.m_qiyi_views_plt.direct_ad_mutex_control = "0";
-        obj.content.switchs.m_qiyi_views_plt.play_ad_541_control = "0";
-        obj.content.switchs.m_qiyi_views_plt.plt_ad_opt_control = "0";
-      }
-      if (obj?.content?.switchs?.ios_tech) {
-        obj.content.switchs.ios_tech.ad_download = "0";
-        obj.content.switchs.ios_tech.hot_ad_back_2_fore_interval = "60000";
-      }
-      if (obj?.content?.switchs?.app_ad) {
-        delete obj.content.switchs.app_ad.app_ad_doc;
-        obj.content.switchs.app_ad.app_ad_enable = "0";
-        obj.content.switchs.app_ad.app_ad_duration = "30000";
       }
     }
   } else if (url.includes("/control/")) {
@@ -433,29 +384,51 @@ if (isIQY) {
       if (objData?.data?.global) {
         let config = objData.data.global;
         if (config?.PHONE_DETAIL_TOP_TAB?.pageTabs?.length > 0) {
+          // detail视频 list热门 planet讨论
           config.PHONE_DETAIL_TOP_TAB.pageTabs =
             config.PHONE_DETAIL_TOP_TAB.pageTabs.filter(
-              (i) => ["detail", "list", "planet"]?.includes(i?.code)
+              (i) => ["detail", "planet"]?.includes(i?.code)
             );
         }
       }
       if (objData?.nodes?.length > 0) {
-        let node0 = objData.nodes[0];
-        if (node0?.nodes?.length > 0) {
-          node0.nodes = node0.nodes.filter((i) =>
-            ![
-              "Phone运营banner",
-              "播放页广告组件",
-              "播放页会员引导组件",
-              "播放页活动组件",
-              "播放页全屏播后推荐组件",
-              "播放页推荐组件",
-              "播放页用户触达组件",
-              "播放页有料不能停组件",
-              "球区自动化组件",
-              "优酷购"
-            ]?.includes(i?.typeName)
-          );
+        if (objData?.nodes?.length === 1) {
+          let node0 = objData.nodes[0];
+          if (node0?.nodes?.length > 0) {
+            if (node0?.typeName === "NORMAL") {
+              node0.nodes = node0.nodes.filter((i) =>
+                ![
+                  "PHONE_CHD_AGE_DETAIL_2",
+                  "PHONE_CHILD_SERIES_A",
+                  "PHONE_CHILD_STAR_A",
+                  "PHONE_DEFALT_SCROLL_C",
+                  "Phone运营banner",
+                  "播放页广告组件",
+                  "播放页会员引导组件",
+                  "播放页活动组件",
+                  "播放页全屏播后推荐组件",
+                  "播放页少儿品牌专区组件",
+                  "播放页推荐组件",
+                  "播放页用户触达组件",
+                  "播放页有料不能停组件",
+                  "球区自动化组件",
+                  "优酷购"
+                ]?.includes(i?.typeName)
+              );
+            } else if (node0?.typeName === "FEED_CHILD_DRAWER_PAGINATION") {
+              // 播放页推荐信息流
+              if (node0?.nodes) {
+                node0.nodes = [];
+              }
+            } else if (node0?.typeName === "FEED_DRAWER_PAGINATION") {
+              // 播放页推荐信息流
+              if (node0?.nodes) {
+                node0.nodes = [];
+              }
+            }
+          }
+        } else {
+          objData.nodes = [];
         }
       }
     }
@@ -477,6 +450,7 @@ if (isIQY) {
             if (item?.nodes?.length > 0) {
               let newItem = [];
               for (let i of item.nodes) {
+                // 首页样式1
                 if (i?.id === 28276) {
                   if (i?.nodes?.length > 0) {
                     let newII = [];
@@ -489,6 +463,7 @@ if (isIQY) {
                     i.nodes = newII;
                   }
                 }
+                // 首页样式2
                 if (i?.id === 38820) {
                   if (i?.nodes?.length > 0) {
                     let newII = [];
@@ -510,6 +485,7 @@ if (isIQY) {
                     i.nodes = newII;
                   }
                 }
+                // 首页样式3
                 if (i?.id === 29490) {
                   // 信息流广告
                   if (i?.nodes?.length > 0) {
