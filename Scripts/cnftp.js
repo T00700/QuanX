@@ -1,4 +1,4 @@
-// 2023-09-03 17:50
+// 2023-09-03 17:55
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -456,80 +456,78 @@ if (isIQY) {
             if (item?.nodes?.length > 0) {
               let newItem = [];
               for (let i of item.nodes) {
-                // 首页样式1
-                if (i?.id === 28276) {
-                  if (i?.nodes?.length > 0) {
-                    let newII = [];
-                    for (let ii of i.nodes) {
-                      if (ii?.typeName === "PHONE_FEED_CARD_B_AD") {
-                        continue;
-                      }
-                      newII.push(ii);
-                    }
-                    i.nodes = newII;
-                  }
-                }
-                // 首页样式2
-                if (i?.id === 38820) {
-                  if (i?.nodes?.length > 0) {
-                    let newII = [];
-                    for (let ii of i.nodes) {
-                      if (ii?.typeName === "PHONE_LUNBO_AD") {
-                        if (ii?.nodes?.length > 0) {
-                          let newIII = [];
-                          for (let iii of ii.nodes) {
-                            if (iii?.data?.hasOwnProperty("ad")) {
-                              continue;
-                            }
-                            newIII.push(iii);
-                          }
-                          ii.nodes = newIII;
+                if (i?.hasOwnProperty("id")) {
+                  if (i?.id === 28276) {
+                    // 首页样式1
+                    if (i?.nodes?.length > 0) {
+                      let newII = [];
+                      for (let ii of i.nodes) {
+                        if (ii?.typeName === "PHONE_FEED_CARD_B_AD") {
+                          continue;
                         }
+                        newII.push(ii);
                       }
-                      newII.push(ii);
+                      i.nodes = newII;
                     }
-                    i.nodes = newII;
-                  }
-                }
-                // 首页样式3
-                if (i?.id === 29490) {
-                  // 信息流广告
-                  if (i?.nodes?.length > 0) {
-                    let newII = [];
-                    for (let ii of i.nodes) {
-                      if (ii?.typeName === "PHONE_FEED_CARD_B_AD") {
-                        // 汇川广告
-                        continue;
+                  } else if (i?.id === 29490) {
+                    // 首页样式2
+                    if (i?.nodes?.length > 0) {
+                      let newII = [];
+                      for (let ii of i.nodes) {
+                        if (ii?.typeName === "PHONE_FEED_CARD_B_AD") {
+                          // 汇川广告
+                          continue;
+                        }
+                        newII.push(ii);
                       }
-                      newII.push(ii);
+                      i.nodes = newII;
                     }
-                    i.nodes = newII;
-                  }
-                }
-                if (i?.id === 31476) {
-                  // 正在热播右边滚动热词
-                  if (i?.data?.keywords?.length > 0) {
-                    delete i.data.keywords;
-                  }
-                }
-                if (i?.id === 35505) {
-                  // 优惠购会员横幅
-                  continue;
-                }
-                // 首页样式4
-                if (i?.typeName === "PHONE_FEED_CARD_GROUP") {
-                  if (i?.nodes?.length > 0) {
-                    let newII = [];
-                    for (let ii of i.nodes) {
-                      if (ii?.typeName === "PHONE_FEED_CARD_S_AD") {
-                        continue;
+                  } else if (i?.id === 38820) {
+                    // 首页样式3
+                    if (i?.nodes?.length > 0) {
+                      let newII = [];
+                      for (let ii of i.nodes) {
+                        if (ii?.typeName === "PHONE_LUNBO_AD") {
+                          if (ii?.nodes?.length > 0) {
+                            let newIII = [];
+                            for (let iii of ii.nodes) {
+                              if (iii?.data?.hasOwnProperty("ad")) {
+                                continue;
+                              }
+                              newIII.push(iii);
+                            }
+                            ii.nodes = newIII;
+                          }
+                        }
+                        newII.push(ii);
                       }
-                      newII.push(ii);
+                      i.nodes = newII;
                     }
-                    i.nodes = newII;
+                  } else if (i?.id === 31476) {
+                    // 正在热播右边滚动热词
+                    if (i?.data?.keywords?.length > 0) {
+                      delete i.data.keywords;
+                    }
+                  } else if (i?.id === 35505) {
+                    // 优惠购会员横幅
+                    continue;
                   }
+                } else if (i?.hasOwnProperty("typeName")) {
+                  // 首页样式4
+                  if (i?.typeName === "PHONE_FEED_CARD_GROUP") {
+                    if (i?.nodes?.length > 0) {
+                      let newII = [];
+                      for (let ii of i.nodes) {
+                        if (ii?.typeName === "PHONE_FEED_CARD_S_AD") {
+                          continue;
+                        }
+                        newII.push(ii);
+                      }
+                      i.nodes = newII;
+                    }
+                  }
+                  newItem.push(i);
                 }
-                newItem.push(i);
               }
               item.nodes = newItem;
             }
