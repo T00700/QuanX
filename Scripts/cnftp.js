@@ -1,4 +1,4 @@
-// 2023-09-02 17:35
+// 2023-09-03 09:45
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -29,13 +29,64 @@ if (isIQY) {
       const item = [
         "activities",
         "cast_device_ad",
+        "ip_restriction_ad",
         "member",
         "second_floor_guide",
         "speed_ad",
+        "vip_tips",
         "vr"
       ];
       for (let i of item) {
         delete obj.content.resource[i];
+      }
+      if (obj?.content?.resource?.equity_prompt) {
+        delete obj.content.resource.equity_prompt.text_ad_tips;
+        obj.content.resource.equity_prompt.times_ad_tips = "0";
+      }
+    }
+    if (obj?.content?.switchs) {
+      if (obj?.content?.switchs?.views_plt) {
+        obj.content.switchs.views_plt.native_ad = "0";
+        obj.content.switchs.views_plt.skip_pre_ad = "1";
+        obj.content.switchs.views_plt.filter_ad = "1";
+      }
+      if (obj?.content?.switchs?.m_qiyi_views) {
+        obj.content.switchs.m_qiyi_views.free_ad = "1";
+        obj.content.switchs.m_qiyi_views.search_feed_ad = "0";
+        obj.content.switchs.m_qiyi_views.support_award_ad = "0";
+        obj.content.switchs.m_qiyi_views.qy_waterfall_ad = "0";
+        obj.content.switchs.m_qiyi_views.youth_pop_rate = "0";
+        obj.content.switchs.m_qiyi_views.hot_youth_model = "0";
+      }
+      if (obj?.content?.switchs?.m_qiyi_ios_tech) {
+        obj.content.switchs.m_qiyi_ios_tech.pip_pause_ad_protect = "0";
+        obj.content.switchs.m_qiyi_ios_tech.qyplayer_update_portrait_player_by_ad_detail_view = "0";
+        obj.content.switchs.m_qiyi_ios_tech.qyplayer_portrait_ad_rotation = "0";
+        obj.content.switchs.m_qiyi_ios_tech.start_ad_preload_switch = "0";
+      }
+      if (obj?.content?.switchs?.views) {
+        obj.content.switchs.views.adjust_ad_category = "";
+        obj.content.switchs.views.merge_ad_req = "0";
+        obj.content.switchs.views.more_ad = "0";
+        obj.content.switchs.views.youth_model_duration = "40000";
+        obj.content.switchs.views.youth_model = "0";
+      }
+      if (obj?.content?.switchs?.m_qiyi_views_plt) {
+        obj.content.switchs.m_qiyi_views_plt.enable_chanye_ad = "0";
+        obj.content.switchs.m_qiyi_views_plt.play_like_other_ad_pos = "0";
+        obj.content.switchs.m_qiyi_views_plt.play_like_child_vertical_ad = "";
+        obj.content.switchs.m_qiyi_views_plt.direct_ad_mutex_control = "0";
+        obj.content.switchs.m_qiyi_views_plt.play_ad_541_control = "0";
+        obj.content.switchs.m_qiyi_views_plt.plt_ad_opt_control = "0";
+      }
+      if (obj?.content?.switchs?.ios_tech) {
+        obj.content.switchs.ios_tech.ad_download = "0";
+        obj.content.switchs.ios_tech.hot_ad_back_2_fore_interval = "60000";
+      }
+      if (obj?.content?.switchs?.app_ad) {
+        delete obj.content.switchs.app_ad.app_ad_doc;
+        obj.content.switchs.app_ad.app_ad_enable = "0";
+        obj.content.switchs.app_ad.app_ad_duration = "30000";
       }
     }
   } else if (url.includes("/control/")) {
