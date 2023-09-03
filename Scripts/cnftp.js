@@ -1,4 +1,4 @@
-// 2023-09-03 10:40
+// 2023-09-03 13:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -477,6 +477,39 @@ if (isIQY) {
             if (item?.nodes?.length > 0) {
               let newItem = [];
               for (let i of item.nodes) {
+                if (i?.id === 28276) {
+                  if (i?.nodes?.length > 0) {
+                    let newII = [];
+                    for (let ii of i.nodes) {
+                      if (ii?.typeName === "PHONE_FEED_CARD_B_AD") {
+                        continue;
+                      }
+                      newII.push(ii);
+                    }
+                    i.nodes = newII;
+                  }
+                }
+                if (i?.id === 38820) {
+                  if (i?.nodes?.length > 0) {
+                    let newII = [];
+                    for (let ii of i.nodes) {
+                      if (ii?.typeName === "PHONE_LUNBO_AD") {
+                        if (ii?.nodes?.length > 0) {
+                          let newIII = [];
+                          for (let iii of ii.nodes) {
+                            if (iii?.data?.hasOwnProperty("ad")) {
+                              continue;
+                            }
+                            newIII.push(iii);
+                          }
+                          ii.nodes = newIII;
+                        }
+                      }
+                      newII.push(ii);
+                    }
+                    i.nodes = newII;
+                  }
+                }
                 if (i?.id === 29490) {
                   // 信息流广告
                   if (i?.nodes?.length > 0) {
