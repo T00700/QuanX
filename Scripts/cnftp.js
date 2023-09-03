@@ -1,4 +1,4 @@
-// 2023-09-03 14:30
+// 2023-09-03 14:42
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -499,17 +499,31 @@ if (isIQY) {
                     }
                     i.nodes = newII;
                   }
-                } else if (i?.id === 31476) {
+                }
+                if (i?.id === 31476) {
                   // 正在热播右边滚动热词
                   if (i?.data?.keywords?.length > 0) {
                     delete i.data.keywords;
                   }
-                } else if (i?.id === 35505) {
+                }
+                if (i?.id === 35505) {
                   // 优惠购会员横幅
                   continue;
-                } else {
-                  newItem.push(i);
                 }
+                // 首页样式4
+                if (i?.typeName === "PHONE_FEED_CARD_GROUP") {
+                  if (i?.nodes?.length > 0) {
+                    let newII = [];
+                    for (let ii of i.nodes) {
+                      if (ii?.typeName === "PHONE_FEED_CARD_S_AD") {
+                        continue;
+                      }
+                      newII.push(ii);
+                    }
+                    i.nodes = newII;
+                  }
+                }
+                newItem.push(i);
               }
               item.nodes = newItem;
             }
