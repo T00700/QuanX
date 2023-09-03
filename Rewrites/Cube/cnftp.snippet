@@ -1,7 +1,7 @@
 #!name = cnftp
 #!desc = China Film and Television Platform.
 #!author = RuCu6
-#!update = 2023-09-03 10:25
+#!update = 2023-09-03 10:40
 
 # 爱奇艺 //-i.vip.iqiyi.com, *.iqiyi.com
 # 开屏广告,播放广告
@@ -56,7 +56,5 @@
 ^https:\/\/push\.m\.youku\.com\/collect-api\/get_push_interval_config_wx\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
 # 开屏广告
 ^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
-# 旧版播放页
-^https:\/\/ykimg\.alicdn\.com\/online\/mtop\.youku\.columbus\.gateway\.new\.execute url reject-dict
 
-hostname = -i.vip.iqiyi.com, *.iqiyi.com, *.mgtv.com, acs.youku.com, push.m.youku.com, un-acs.youku.com, ykimg.alicdn.com
+hostname = -i.vip.iqiyi.com, *.iqiyi.com, *.mgtv.com, acs.youku.com, push.m.youku.com, un-acs.youku.com
