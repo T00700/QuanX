@@ -1,4 +1,4 @@
-// 2023-09-03 10:25
+// 2023-09-03 10:40
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -430,36 +430,32 @@ if (isIQY) {
     // 播放详情页组件
     if (obj?.data?.["2019030100"]?.data) {
       let objData = obj.data["2019030100"].data;
-      if (objData?.typeName === "DETAIL_NORMAL") {
-        delete objData.nodes;
-      } else {
-        if (objData?.data?.global) {
-          let config = objData.data.global;
-          if (config?.PHONE_DETAIL_TOP_TAB?.pageTabs?.length > 0) {
-            config.PHONE_DETAIL_TOP_TAB.pageTabs =
-              config.PHONE_DETAIL_TOP_TAB.pageTabs.filter(
-                (i) => ["detail", "list", "planet"]?.includes(i?.code)
-              );
-          }
-        }
-        if (objData?.nodes?.length > 0) {
-          let node0 = objData.nodes[0];
-          if (node0?.nodes?.length > 0) {
-            node0.nodes = node0.nodes.filter((i) =>
-              ![
-                "Phone运营banner",
-                "播放页广告组件",
-                "播放页会员引导组件",
-                "播放页活动组件",
-                "播放页全屏播后推荐组件",
-                "播放页推荐组件",
-                "播放页用户触达组件",
-                "播放页有料不能停组件",
-                "球区自动化组件",
-                "优酷购"
-              ]?.includes(i?.typeName)
+      if (objData?.data?.global) {
+        let config = objData.data.global;
+        if (config?.PHONE_DETAIL_TOP_TAB?.pageTabs?.length > 0) {
+          config.PHONE_DETAIL_TOP_TAB.pageTabs =
+            config.PHONE_DETAIL_TOP_TAB.pageTabs.filter(
+              (i) => ["detail", "list", "planet"]?.includes(i?.code)
             );
-          }
+        }
+      }
+      if (objData?.nodes?.length > 0) {
+        let node0 = objData.nodes[0];
+        if (node0?.nodes?.length > 0) {
+          node0.nodes = node0.nodes.filter((i) =>
+            ![
+              "Phone运营banner",
+              "播放页广告组件",
+              "播放页会员引导组件",
+              "播放页活动组件",
+              "播放页全屏播后推荐组件",
+              "播放页推荐组件",
+              "播放页用户触达组件",
+              "播放页有料不能停组件",
+              "球区自动化组件",
+              "优酷购"
+            ]?.includes(i?.typeName)
+          );
         }
       }
     }
