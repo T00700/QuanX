@@ -1,7 +1,7 @@
 #!name = cnftp
 #!desc = China Film and Television Platform.
 #!author = RuCu6
-#!update = 2023-09-02 13:45
+#!update = 2023-09-03 10:25
 
 # 爱奇艺 //-i.vip.iqiyi.com, *.iqiyi.com
 # 开屏广告,播放广告
@@ -44,7 +44,7 @@
 ^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+ url reject
 ^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|varietyts|vmind\.qqvideo)\.tc\.qq\.com\/\w+ url reject
 
-# 优酷 //acs.youku.com, push.m.youku.com, un-acs.youku.com
+# 优酷 //acs.youku.com, push.m.youku.com, un-acs.youku.com, ykimg.alicdn.com
 # 首页信息流,播放详情页,首页菜单,我的页面,底部菜单
 ^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.columbus\.(gateway\.new\.execute|home\.query|uc\.query) url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
 ^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.haidai\.lantern\.appconfig\.get url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
@@ -56,5 +56,7 @@
 ^https:\/\/push\.m\.youku\.com\/collect-api\/get_push_interval_config_wx\? url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
 # 开屏广告
 ^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
+# 旧版播放页
+^https:\/\/ykimg\.alicdn\.com\/online\/mtop\.youku\.columbus\.gateway\.new\.execute url reject-dict
 
-hostname = -i.vip.iqiyi.com, *.iqiyi.com, *.mgtv.com, acs.youku.com, push.m.youku.com, un-acs.youku.com
+hostname = -i.vip.iqiyi.com, *.iqiyi.com, *.mgtv.com, acs.youku.com, push.m.youku.com, un-acs.youku.com, ykimg.alicdn.com
