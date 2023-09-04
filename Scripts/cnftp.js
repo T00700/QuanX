@@ -1,4 +1,4 @@
-// 2023-09-04 19:00
+// 2023-09-04 21:25
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -75,6 +75,46 @@ if (isIQY) {
         (i) => i?.group_key === "default_group"
       );
     }
+  } else if (url.includes("/ipad_views_home/")) {
+    // ipad版本 首页信息流
+    if (obj?.cards?.length > 0) {
+      let newCards = [];
+      for (let card of obj.cards) {
+        if (card?.name?.includes("焦点图")) {
+          // 焦点图 首页顶部轮播卡片
+          if (card?.blocks?.length > 0) {
+            let newBlocks = [];
+            for (let block of card.blocks) {
+              if (block?.hasOwnProperty("buttons")) {
+                // 有buttons字段的不是广告
+                newBlocks.push(block);
+              }
+            }
+            card.blocks = newBlocks;
+          }
+        } else if (card?.name?.includes("猜你喜欢")) {
+          // 首页 猜你喜欢
+          if (card?.blocks?.length > 0) {
+            let newBlocks = [];
+            for (let block of card.blocks) {
+              if (block?.block_class?.includes("vip_activity_block")) {
+                // 开通vip的卡片
+                continue;
+              }
+              newBlocks.push(block);
+            }
+            card.blocks = newBlocks;
+          }
+        } else if (card?.name?.includes("大剧热综")) {
+          // 首页 正在热播 轮播热词
+          if (card?.top_banner?.r_blocks?.length > 0) {
+            card.top_banner.r_blocks = [];
+          }
+        }
+        newCards.push(card);
+      }
+      obj.cards = newCards;
+    }
   } else if (url.includes("/mixer?")) {
     // 开屏页 播放页
     if (obj?.errorCode === 0) {
@@ -93,6 +133,14 @@ if (isIQY) {
     }
     if (obj?.show_style?.roll_period) {
       obj.show_style.roll_period = 1000;
+    }
+  } else if (url.includes("/player_tabs?")) {
+    // ipad版本 播放详情页
+    if (obj?.cards?.length > 0) {
+      obj.cards = obj.cards.filter(
+        (i) =>
+          !["play_around", "play_like", "vip_mkt"]?.includes(i?.internal_name)
+      );
     }
   } else if (url.includes("/views_category/")) {
     // 电视剧版块
