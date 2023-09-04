@@ -1,4 +1,4 @@
-// 2023-09-03 17:55
+// 2023-09-04 19:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -77,7 +77,7 @@ if (isIQY) {
     }
   } else if (url.includes("/mixer?")) {
     // 开屏页 播放页
-    if (obj) {
+    if (obj?.errorCode === 0) {
       const item = ["adSlots", "splashLottieFile", "splashUiConfig"];
       for (let i of item) {
         delete obj[i];
