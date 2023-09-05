@@ -1,4 +1,4 @@
-// 2023-09-04 21:55
+// 2023-09-05 17:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -456,80 +456,68 @@ if (isIQY) {
             if (item?.nodes?.length > 0) {
               let newItem = [];
               for (let i of item.nodes) {
-                if (i?.hasOwnProperty("id")) {
-                  if (i?.id === 28276) {
-                    // 首页样式1
-                    if (i?.nodes?.length > 0) {
-                      let newII = [];
-                      for (let ii of i.nodes) {
-                        if (ii?.typeName === "PHONE_FEED_CARD_B_AD") {
-                          continue;
-                        }
-                        newII.push(ii);
-                      }
-                      i.nodes = newII;
-                    }
-                  } else if (i?.id === 29490) {
-                    // 首页样式2
-                    if (i?.nodes?.length > 0) {
-                      let newII = [];
-                      for (let ii of i.nodes) {
-                        if (ii?.typeName === "PHONE_FEED_CARD_B_AD") {
-                          // 汇川广告
-                          continue;
-                        }
-                        newII.push(ii);
-                      }
-                      i.nodes = newII;
-                    }
-                  } else if (i?.id === 38820) {
-                    // 首页样式3
-                    if (i?.nodes?.length > 0) {
-                      let newII = [];
-                      for (let ii of i.nodes) {
-                        if (ii?.typeName === "PHONE_LUNBO_AD") {
-                          if (ii?.nodes?.length > 0) {
-                            let newIII = [];
-                            for (let iii of ii.nodes) {
-                              if (iii?.data?.hasOwnProperty("ad")) {
-                                continue;
-                              }
-                              newIII.push(iii);
+                if (i?.id === 31476) {
+                  // 正在热播
+                  if (i?.data?.keywords?.length > 0) {
+                    // 滚动热词
+                    delete i.data.keywords;
+                  }
+                } else if (i?.id === 35505) {
+                  // 优惠购会员横幅
+                  continue;
+                } else if (i?.id === 37335) {
+                  // 首页二楼
+                  continue;
+                } else {
+                  // 第一种信息流
+                  // 16214猜你在追
+                  // 38820首页顶部轮播图
+                  if (i?.nodes?.length > 0) {
+                    let newII = [];
+                    for (let ii of i.nodes) {
+                      if (
+                        [
+                          "PHONE_FEED_CARD_B_AD",
+                          "PHONE_FEED_CARD_S_AD"
+                        ]?.includes(ii?.typeName)
+                      ) {
+                        // PHONE_FEED_CARD_B_AD 横版大图广告
+                        // PHONE_FEED_CARD_S_AD 四格小图广告
+                        continue;
+                      } else if (ii?.typeName === "PHONE_FEED_CARD_GROUP") {
+                        if (ii?.nodes?.length > 0) {
+                          let newIII = [];
+                          for (let iii of ii.nodes) {
+                            if (iii?.hasOwnProperty("typeName")) {
+                              // 有typeName字段的为广告
+                              continue;
                             }
-                            ii.nodes = newIII;
+                            newIII.push(iii);
                           }
+                          ii.nodes = newIII;
                         }
-                        newII.push(ii);
-                      }
-                      i.nodes = newII;
-                    }
-                  } else if (i?.id === 31476) {
-                    // 正在热播右边滚动热词
-                    if (i?.data?.keywords?.length > 0) {
-                      delete i.data.keywords;
-                    }
-                  } else if (i?.id === 35505) {
-                    // 优惠购会员横幅
-                    continue;
-                  }
-                } else if (i?.hasOwnProperty("typeName")) {
-                  // 首页样式4
-                  if (i?.typeName === "PHONE_FEED_CARD_GROUP") {
-                    if (i?.nodes?.length > 0) {
-                      let newII = [];
-                      for (let ii of i.nodes) {
-                        if (ii?.typeName === "PHONE_FEED_CARD_S_AD") {
-                          continue;
+                      } else if (ii?.typeName === "PHONE_LUNBO_AD") {
+                        // PHONE_LUNBO_AD 首页顶部轮播
+                        if (ii?.nodes?.length > 0) {
+                          let newIII = [];
+                          for (let iii of ii.nodes) {
+                            if (iii?.data?.hasOwnProperty("ad")) {
+                              // 有ad字段的为广告
+                              continue;
+                            }
+                            newIII.push(iii);
+                          }
+                          ii.nodes = newIII;
                         }
-                        newII.push(ii);
                       }
-                      i.nodes = newII;
+                      newII.push(ii);
                     }
+                    i.nodes = newII;
                   }
-                  newItem.push(i);
                 }
+                newItem.push(i);
+                item.nodes = newItem;
               }
-              item.nodes = newItem;
             }
             newNodes.push(item);
           } else {
