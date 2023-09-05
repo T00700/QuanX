@@ -1,4 +1,4 @@
-// 2023-09-05 22:25
+// 2023-09-06 07:35
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -478,7 +478,11 @@ if (isIQY) {
           if (["CHILD", "COMIC2"]?.includes(item?.data?.nodeKey)) {
             // 首页菜单 少儿 动漫
             continue;
-          } else if (item?.data?.nodeKey === "SELECTION") {
+          } else if (
+            ["NUSELECTION", "SELECTION"]?.includes(item?.data?.nodeKey)
+          ) {
+            // NUSELECTION 首页样式1
+            // SELECTION 首页样式2
             // 首页信息流
             if (item?.nodes?.length > 0) {
               let newItems = [];
@@ -543,8 +547,8 @@ if (isIQY) {
                   }
                 }
                 newItems.push(i);
-                item.nodes = newItems;
               }
+              item.nodes = newItems;
             }
             newNodes.push(item);
           } else {
