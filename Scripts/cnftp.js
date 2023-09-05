@@ -1,4 +1,4 @@
-// 2023-09-05 17:20
+// 2023-09-05 22:25
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -601,6 +601,54 @@ if (isIQY) {
                   }
                   node0.nodes = newII;
                 }
+              }
+              newNodes.push(item);
+            } else {
+              newNodes.push(item);
+            }
+          }
+          objNodes.nodes = newNodes;
+        }
+      }
+    }
+  } else if (url.includes("columbus.ycp.query/")) {
+    // 评论区
+    if (obj?.data?.["2019061000"]?.data) {
+      let objData = obj.data["2019061000"].data;
+      if (objData?.nodes?.length > 0) {
+        let objNodes = objData.nodes[0];
+        if (objNodes?.nodes?.length > 0) {
+          let newNodes = [];
+          for (let item of objNodes.nodes) {
+            if (item?.id === 23242) {
+              // 评论区顶部
+              if (item?.nodes?.length > 0) {
+                let newItems = [];
+                for (let i of item.nodes) {
+                  if (i?.typeName === "COMPONENT_YCP_NOTICE") {
+                    // 评论区守则 轮播通告
+                    continue;
+                  } else if (i?.id === 113941) {
+                    // 明星空降评论区
+                    continue;
+                  }
+                  newItems.push(i);
+                }
+                item.nodes = newItems;
+              }
+              newNodes.push(item);
+            } else if (item?.id === 23243) {
+              // 评论区留言
+              if (item?.nodes?.length > 0) {
+                let newItems = [];
+                for (let i of item.nodes) {
+                  if (i?.id === -1000) {
+                    // 评论区广告
+                    continue;
+                  }
+                  newItems.push(i);
+                }
+                item.nodes = newItems;
               }
               newNodes.push(item);
             } else {

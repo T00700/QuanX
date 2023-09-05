@@ -1,7 +1,7 @@
 #!name = cnftp
 #!desc = China Film and Television Platform.
 #!author = RuCu6
-#!update = 2023-09-05 17:05
+#!update = 2023-09-05 22:20
 
 # 爱奇艺 //-i.vip.iqiyi.com, *.iqiyi.com
 # 开屏广告,播放广告
@@ -45,8 +45,9 @@
 ^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|varietyts|vmind\.qqvideo)\.tc\.qq\.com\/\w+ url reject
 
 # 优酷 //acs.youku.com, push.m.youku.com, un-acs.youku.com
-# 首页信息流,播放详情页,首页菜单,我的页面,底部菜单
+# 首页信息流,播放详情页,首页菜单,我的页面,评论区,底部菜单
 ^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.columbus\.(gateway\.new\.execute|home\.feed|home\.query|uc\.query) url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
+^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.columbus\.ycp\.query url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
 ^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.haidai\.lantern\.appconfig\.get url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cnftp.js
 # 播放页,主演陪你看,弹窗动图
 ^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.(pisp\.scripts\.get|xspace\.poplayer\.position\.query) url reject-dict
