@@ -314,6 +314,7 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
     "smallListBizRec", // 周边热门酒店
     "smallOrListBizRec",
     "surroundOldSellHouse", // 同城二手房
+    "surroundRentHouse", // 附近租房
     "surround_facility",
     "surround_facility_new",
     "surround_house_tab",
