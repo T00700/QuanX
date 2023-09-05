@@ -17,16 +17,16 @@ if (url.includes("/v1/search/banner_list")) {
   // 整体配置
   const item = ["app_theme", "loading_img", "splash", "store"];
   if (obj?.data) {
-    item.forEach((i) => {
+    for (let i of item) {
       delete obj.data[i];
-    });
+    }
   }
 } else if (url.includes("/v2/note/widgets")) {
   const item = ["generic"];
   if (obj?.data) {
-    item.forEach((i) => {
+    for (let i of item) {
       delete obj.data[i];
-    });
+    }
   }
 } else if (url.includes("/v2/note/feed")) {
   // 信息流 图片
@@ -84,16 +84,16 @@ if (url.includes("/v1/search/banner_list")) {
 } else if (url.includes("/v2/system_service/splash_config")) {
   // 开屏广告
   if (obj?.data?.ads_groups?.length > 0) {
-    obj.data.ads_groups.forEach((i) => {
+    for (let i of obj.data.ads_groups) {
       i.start_time = 2208960000; // Unix 时间戳 2040-01-01 00:00:00
       i.end_time = 2209046399; // Unix 时间戳 2040-01-01 23:59:59
       if (i?.ads?.length > 0) {
-        i.ads.forEach((j) => {
-          j.start_time = 2208960000; // Unix 时间戳 2040-01-01 00:00:00
-          j.end_time = 2209046399; // Unix 时间戳 2040-01-01 23:59:59
-        });
+        for (let ii of i.ads) {
+          ii.start_time = 2208960000; // Unix 时间戳 2040-01-01 00:00:00
+          ii.end_time = 2209046399; // Unix 时间戳 2040-01-01 23:59:59
+        }
       }
-    });
+    }
   }
 } else if (url.includes("/v4/followfeed")) {
   // 关注列表
