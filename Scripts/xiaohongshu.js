@@ -1,4 +1,4 @@
-// 2023-09-05 13:00
+// 2023-09-05 13:35
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -9,6 +9,7 @@ if (url.includes("/v1/search/banner_list")) {
     obj.data = {};
   }
 } else if (url.includes("/v1/search/hot_list")) {
+  // 热搜列表
   if (obj?.data?.items?.length > 0) {
     obj.data.items = [];
   }
@@ -28,7 +29,7 @@ if (url.includes("/v1/search/banner_list")) {
     });
   }
 } else if (url.includes("/v2/note/feed")) {
-  // 信息流
+  // 信息流 图片
   if (obj?.data?.length > 0) {
     let data0 = obj.data[0];
     if (data0?.note_list?.length > 0) {
@@ -56,6 +57,7 @@ if (url.includes("/v1/search/banner_list")) {
     }
   }
 } else if (url.includes("/v3/note/videofeed")) {
+  // 信息流 视频
   if (obj?.data?.length > 0) {
     for (let item of obj.data) {
       if (item?.media_save_config) {
@@ -141,6 +143,7 @@ if (url.includes("/v1/search/banner_list")) {
     obj.data = newItems;
   }
 } else if (url.includes("/v10/search/notes")) {
+  // 搜索结果
   if (obj?.data?.items?.length > 0) {
     obj.data.items = obj.data.items.filter((i) => i.model_type === "note");
   }
