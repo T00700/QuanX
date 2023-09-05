@@ -1,4 +1,4 @@
-// 2023-09-05 17:00
+// 2023-09-05 17:20
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -438,8 +438,35 @@ if (isIQY) {
         }
       }
     }
+  } else if (url.includes("columbus.home.feed/")) {
+    // 首页 信息流2
+    if (obj?.data?.["2019061000"]?.data) {
+      let objData = obj.data["2019061000"].data;
+      if (objData?.nodes?.length > 0) {
+        let newNodes = [];
+        for (let item of objData.nodes) {
+          if (item?.typeName === "PHONE_FEED_CARD_GROUP") {
+            if (item?.nodes?.length > 0) {
+              let newItems = [];
+              for (let i of item.nodes) {
+                if (i?.hasOwnProperty("typeName")) {
+                  // 有typeName字段的为广告
+                  continue;
+                }
+                newItems.push(i);
+              }
+              item.nodes = newItems;
+            }
+            newNodes.push(item);
+          } else {
+            newNodes.push(item);
+          }
+        }
+        objData.nodes = newNodes;
+      }
+    }
   } else if (url.includes("columbus.home.query/")) {
-    // 首页
+    // 首页 信息流1
     if (obj?.data?.["2019061000"]?.data) {
       let objData = obj.data["2019061000"].data;
       if (objData?.data?.indexPositionResult) {
@@ -454,7 +481,7 @@ if (isIQY) {
           } else if (item?.data?.nodeKey === "SELECTION") {
             // 首页信息流
             if (item?.nodes?.length > 0) {
-              let newItem = [];
+              let newItems = [];
               for (let i of item.nodes) {
                 if (i?.id === 31476) {
                   // 正在热播
@@ -515,8 +542,8 @@ if (isIQY) {
                     i.nodes = newII;
                   }
                 }
-                newItem.push(i);
-                item.nodes = newItem;
+                newItems.push(i);
+                item.nodes = newItems;
               }
             }
             newNodes.push(item);
