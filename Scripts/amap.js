@@ -1,4 +1,4 @@
-// 2023-09-05 17:45
+// 2023-09-05 20:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -88,7 +88,7 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
     "_user_profile_",
     "air_card",
     "amapCoin",
-    "amap_basemap_config",
+    // "amap_basemap_config", // 基本库
     "aos_feedback",
     "apple_location_log_collect",
     "collect",
