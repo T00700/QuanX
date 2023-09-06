@@ -1,4 +1,4 @@
-// 2023-09-06 15:05
+// 2023-09-06 16:30
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -688,6 +688,13 @@ if (isIQY) {
       for (let i of item) {
         delete obj.data.data[i];
       }
+    }
+  } else if (url.includes("soku.yksearch/")) {
+    if (obj?.data?.nodes?.length > 0) {
+      // 仅保留搜索tab
+      obj.data.nodes = obj.data.nodes.filter(
+        (i) => i?.hasOwnProperty("data")
+      );
     }
   }
 }
