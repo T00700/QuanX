@@ -1,4 +1,4 @@
-// 2023-09-06 13:25
+// 2023-09-06 15:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -479,6 +479,10 @@ if (isIQY) {
             if (item?.data?.indexPositionResult?.length > 0) {
               // 剧集 电影 二楼
               item.data.indexPositionResult = [];
+            }
+            if (item?.data?.refreshImg) {
+              // 电影 综艺 纪录片 下拉刷新的背景图片
+              delete item.data.refreshImg;
             }
             // 首页 剧集 电影 全都有信息流广告
             // 去掉nodeKey的判断 直接处理下一层级
