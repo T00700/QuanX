@@ -692,9 +692,7 @@ if (isIQY) {
   } else if (url.includes("soku.yksearch/")) {
     if (obj?.data?.nodes?.length > 0) {
       // 仅保留搜索tab
-      obj.data.nodes = obj.data.nodes.filter(
-        (i) => i?.hasOwnProperty("data")
-      );
+      obj.data.nodes = obj.data.nodes.filter((i) => i?.hasOwnProperty("data"));
     }
   }
 }
