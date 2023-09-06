@@ -1,4 +1,4 @@
-// 2023-09-06 17:00
+// 2023-09-06 17:15
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -45,7 +45,8 @@ if (url.includes("/v1/search/banner_list")) {
           const additem = { type: "video_download" };
           let func = item.share_info.function_entries;
           if (!["video_download"]?.includes(func?.type)) {
-            func.push(additem);
+            // 向数组开头添加对象
+            func.unshift(additem);
           }
         }
       }
@@ -66,7 +67,8 @@ if (url.includes("/v1/search/banner_list")) {
         const additem = { type: "video_download" };
         let func = item.share_info.function_entries;
         if (!["video_download"]?.includes(func?.type)) {
-          func.push(additem);
+          // 向数组开头添加对象
+          func.unshift(additem);
         }
       }
     }
