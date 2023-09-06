@@ -1,4 +1,4 @@
-// 2023-09-06 11:20
+// 2023-09-06 13:25
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -440,8 +440,11 @@ if (isIQY) {
             if (item?.nodes?.length > 0) {
               let newItems = [];
               for (let i of item.nodes) {
-                if (i?.hasOwnProperty("typeName")) {
-                  // 有typeName字段的为广告
+                if (i?.typeName === "PHONE_FEED_CARD_S_AD") {
+                  // 首页 四格小图广告
+                  continue;
+                } else if (i?.typeName === "PHONE_H_UC_AD") {
+                  // 首页 横版独占广告
                   continue;
                 } else {
                   newItems.push(i);
@@ -472,17 +475,21 @@ if (isIQY) {
           if (["CHILD", "COMIC2"]?.includes(item?.data?.nodeKey)) {
             // 首页 少儿 动漫
             continue;
-          } else if (item?.data?.indexPositionResult?.length > 0) {
-            // 剧集 电影 二楼
-            item.data.indexPositionResult = [];
-            newNodes.push(item);
           } else {
+            if (item?.data?.indexPositionResult?.length > 0) {
+              // 剧集 电影 二楼
+              item.data.indexPositionResult = [];
+            }
             // 首页 剧集 电影 全都有信息流广告
             // 去掉nodeKey的判断 直接处理下一层级
             if (item?.nodes?.length > 0) {
               let newItems = [];
               for (let i of item.nodes) {
                 // 第二层级循环
+                if (i?.data?.crmSale) {
+                  // 季卡会员横幅
+                  delete i.data.crmSale;
+                }
                 if (["UC广告抽屉", "橱窗广告"]?.includes(i?.typeName)) {
                   // 横版独占广告
                   continue;
@@ -509,6 +516,7 @@ if (isIQY) {
                         [
                           "PHONE_FEED_CARD_B_AD", // 横版独占广告
                           "PHONE_FEED_CARD_S_AD", // 四格小图广告
+                          "PHONE_H_UC_AD", // 剧集 横版独占广告
                           "PHONE_IMG_A", // 剧集 开通会员卡片
                           "PHONE_YK_AD_BANNER" // 剧集 横版独占广告
                         ]?.includes(ii?.typeName)
@@ -519,8 +527,8 @@ if (isIQY) {
                           let newIII = [];
                           for (let iii of ii.nodes) {
                             // 第四层级循环
-                            if (iii?.hasOwnProperty("typeName")) {
-                              // 有typeName字段的为广告
+                            if (iii?.typeName === "PHONE_FEED_CARD_S_AD") {
+                              // 剧集 四格小图广告
                               continue;
                             } else if (iii?.data?.hasOwnProperty("ad")) {
                               // 有ad字段的为广告
