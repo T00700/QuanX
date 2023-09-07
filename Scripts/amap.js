@@ -1,4 +1,4 @@
-// 2023-09-07 17:05
+// 2023-09-05 22:45
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -163,46 +163,6 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
   for (let i of item) {
     if (obj?.data?.[i]) {
       obj.data[i] = { status: 1, version: "", value: "" };
-    }
-  }
-  if (obj?.data?.amap_basemap_config) {
-    let base = obj.data.amap_basemap_config;
-    base.status = 1;
-    base.version = "";
-    if (base?.value == "") {
-      base.value = JSON.stringify({ "v13Switch": 0 });
-    } else {
-      let objVal = JSON.parse(base.value);
-      const item = [
-        "cache_switch",
-        "feature_guide_switch",
-        "msgbox_show_popwindow",
-        // "new_mine_switch",
-        "recommend_poi_switch",
-        "screenshotShareOpenNew",
-        "screenshot_pic_share",
-        "v13Switch", // 13版本
-        "voice_square" // 语音包广场
-      ];
-      for (let i of item) {
-        if (objVal?.[i]) {
-          objVal[i] = 0;
-        }
-      }
-      const del = [
-        "business_position", // 推广信息
-        "fireworks", // 烟火
-        "noLoginTitle", // 未登录状态提示文本
-        "presetWord", // 搜索框填充词
-        "recommend_poi_main",
-        "splash" // 开屏广告
-      ];
-      for (let i of del) {
-        if (objVal?.[i]) {
-          delete objVal[i];
-        }
-      }
-      base.value = JSON.stringify(objVal);
     }
   }
 } else if (url.includes("/shield/search/common/coupon/info")) {
