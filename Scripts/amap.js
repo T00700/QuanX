@@ -1,4 +1,4 @@
-// 2023-09-07 21:55
+// 2023-09-07 22:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -102,7 +102,7 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
     "deviceml_force_recommend",
     "deviceml_update_apk_conf",
     "feedback_banner", // 店主专属通道
-    // "footprint", // 足迹
+    "footprint", // 足迹
     "gd_code_cover",
     "gd_notch_logo",
     "his_input_tip",
