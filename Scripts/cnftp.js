@@ -1,4 +1,4 @@
-// 2023-09-06 16:30
+// 2023-09-08 15:00
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -95,14 +95,37 @@ if (isIQY) {
       obj.show_style.roll_period = 1000;
     }
   } else if (url.includes("/views_category/")) {
-    // 电视剧版块
+    // 各菜单列表 剧集 电影 综艺
+    if (obj?.base?.statistics?.ad_str) {
+      delete obj.base.statistics.ad_str;
+    }
     if (obj?.cards?.length > 0) {
-      obj.cards = obj.cards.filter(
-        (i) =>
-          !["ad_mobile_flow", "ad_trueview", "tv-jiaodiantu"]?.includes(
-            i?.alias_name
-          )
-      );
+      let newCards = [];
+      for (let card of obj.cards) {
+        if (card?.blocks?.length > 0) {
+          let newItems = [];
+          for (let item of card.blocks) {
+            if (
+              [
+                "block_321", // 顶部轮播广告
+                "block_415", // 横版独占广告标题
+                "block_416" // 横版独占视频广告
+              ]?.includes(item?.block_name)
+            ) {
+              continue;
+            } else if (item?.buttons?.[0]?.id === "ad") {
+              continue;
+            } else {
+              newItems.push(item);
+            }
+          }
+          card.blocks = newItems;
+          newCards.push(card);
+        } else {
+          newCards.push(card);
+        }
+      }
+      obj.cards = newCards;
     }
   } else if (url.includes("/views_comment/")) {
     // 播放页评论区
@@ -117,7 +140,7 @@ if (isIQY) {
       );
     }
   } else if (url.includes("/views_home/")) {
-    // 首页信息流样式1
+    // 信息流样式1
     if (obj?.cards?.length > 0) {
       obj.cards = obj.cards.filter(
         (i) =>
@@ -213,14 +236,30 @@ if (isIQY) {
       obj.cards = newCards;
     }
   } else if (url.includes("/waterfall/")) {
-    // 首页信息流样式2
+    // 信息流样式2
     if (obj?.cards?.length > 0) {
-      let card = obj.cards[0];
-      if (card?.blocks?.length > 0) {
-        card.blocks = card.blocks.filter(
-          (i) => !i?.hasOwnProperty("block_class")
-        );
+      let newCards = [];
+      for (let card of obj.cards) {
+        if (card?.hasOwnProperty("block_class")) {
+          // 有block_class字段的为广告
+          continue;
+        } else {
+          if (card?.blocks?.length > 0) {
+            let newItems = [];
+            for (let item of card.blocks) {
+              if (item?.hasOwnProperty("block_class")) {
+                // 有block_class字段的为广告
+                continue;
+              } else {
+                newItems.push(item);
+              }
+            }
+            card.blocks = newItems;
+          }
+          newCards.push(card);
+        }
       }
+      obj.cards = newCards;
     }
   }
 } else if (isMG) {
