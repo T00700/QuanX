@@ -1,4 +1,4 @@
-// 2023-09-09 08:45
+// 2023-09-09 11:50
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -272,26 +272,35 @@ if (isIQY) {
       let newItems = [];
       for (let item of obj.data) {
         // 908热剧轮播
-        // 2237节目周边 抓娃娃 芒果卡
         if (item?.moduleEntityId === "91") {
           // 首页正在追模块
           if (item?.DSLList?.length > 0) {
+            let newLists = [];
             for (let i of item.DSLList) {
               if (i?.data?.items?.length > 0) {
-                let newItems = [];
-                for (let item of i.data.items) {
-                  if (item?.id === 0) {
+                let newII = [];
+                for (let ii of i.data.items) {
+                  if (ii?.id === 0) {
                     // 正在追模块下的商品推广
                     continue;
                   } else {
-                    newItems.push(item);
+                    newII.push(ii);
                   }
                 }
-                i.data.items = newItems;
+                i.data.items = newII;
+                newLists.push(i);
+              } else {
+                newLists.push(i);
               }
             }
+            item.DSLList = newLists;
           }
+          newItems.push(item);
+        } else if (item?.moduleEntityId === "842") {
+          // vip首月特惠
+          continue;
         } else if (item?.moduleEntityId === "2237") {
+          // 2237节目周边 抓娃娃 芒果卡
           continue;
         } else {
           newItems.push(item);
@@ -301,7 +310,7 @@ if (isIQY) {
     }
     if (obj?.moduleIDS?.length > 0) {
       obj.moduleIDS = obj.moduleIDS.filter(
-        (i) => !i?.moduleEntityId !== "2237"
+        (i) => !i?.moduleEntityId === "2237"
       );
     }
   } else if (url.includes("/dynamic/v1/channel/vrsList/")) {
