@@ -1,4 +1,4 @@
-// 2023-09-09 11:50
+// 2023-09-09 12:50
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -310,7 +310,7 @@ if (isIQY) {
     }
     if (obj?.moduleIDS?.length > 0) {
       obj.moduleIDS = obj.moduleIDS.filter(
-        (i) => !i?.moduleEntityId === "2237"
+        (i) => i?.moduleEntityId !== "2237"
       );
     }
   } else if (url.includes("/dynamic/v1/channel/vrsList/")) {
