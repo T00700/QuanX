@@ -1,4 +1,4 @@
-// 2023-09-08 15:00
+// 2023-09-09 08:45
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -717,6 +717,20 @@ if (isIQY) {
         // 修复位置
         for (let i = 0; i < bottom.data.bottomTabList.length; i++) {
           bottom.data.bottomTabList[i].menuIndex = i + 1;
+        }
+      }
+    }
+  } else if (url.includes(".huluwa.")) {
+    // 青少年模式弹窗
+    if (url.includes("dispatcher.youthmode.config2/")) {
+      if (obj?.data?.result) {
+        obj.data.result = {};
+      }
+    } else if (url.includes("user.youthmode.servermsg/")) {
+      if (obj?.data?.result) {
+        obj.data.result = {
+          "status": 0,
+          "timeStamp": 1694221200000
         }
       }
     }
