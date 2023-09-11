@@ -1,4 +1,4 @@
-// 2023-09-09 12:50
+// 2023-09-11 09:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -729,19 +729,10 @@ if (isIQY) {
         }
       }
     }
-  } else if (url.includes(".huluwa.")) {
+  } else if (url.includes("huluwa.dispatcher.youthmode.config2/")) {
     // 青少年模式弹窗
-    if (url.includes("dispatcher.youthmode.config2/")) {
-      if (obj?.data?.result) {
-        obj.data.result = {};
-      }
-    } else if (url.includes("user.youthmode.servermsg/")) {
-      if (obj?.data?.result) {
-        obj.data.result = {
-          "status": 0,
-          "timeStamp": 1694221200000
-        }
-      }
+    if (obj?.data?.result) {
+      obj.data.result = {};
     }
   } else if (url.includes("play.ups.appinfo.get/")) {
     // 开屏广告 播放广告
