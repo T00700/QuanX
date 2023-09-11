@@ -1,4 +1,4 @@
-// 2023-08-17 11:10
+// 2023-09-11 21:15
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -96,9 +96,7 @@ if (url.includes("/x/resource/show/skin")) {
         if (obj.data.vip.status === 1) {
           return false;
         } else {
-          if (obj.data?.vip_type) {
-            obj.data.vip_type = 2;
-          }
+          obj.data.vip_type = 2;
           obj.data.vip.type = 2;
           obj.data.vip.status = 1;
           obj.data.vip.vip_pay_type = 1;
@@ -179,6 +177,9 @@ if (url.includes("/x/resource/show/skin")) {
           // 创作推广 大视频广告
           return false;
         } else if (cardType === "ogv_small_cover" && cardGoto === "bangumi") {
+          // 纪录片
+          return false;
+        } else if (cardType === "small_cover_v2" && cardGoto === "pgc") {
           // 纪录片
           return false;
         }
