@@ -1,4 +1,4 @@
-// 2023-09-11 09:05
+// 2023-09-11 20:20
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -229,8 +229,10 @@ if (isIQY) {
               }
             }
             card.blocks = newBlocks;
+            newCards.push(card);
+          } else {
+            newCards.push(card);
           }
-          newCards.push(card);
         }
       }
       obj.cards = newCards;
@@ -255,8 +257,10 @@ if (isIQY) {
               }
             }
             card.blocks = newItems;
+            newCards.push(card);
+          } else {
+            newCards.push(card);
           }
-          newCards.push(card);
         }
       }
       obj.cards = newCards;
@@ -294,8 +298,10 @@ if (isIQY) {
               }
             }
             item.DSLList = newLists;
+            newItems.push(item);
+          } else {
+            newItems.push(item);
           }
-          newItems.push(item);
         } else if (item?.moduleEntityId === "842") {
           // vip首月特惠
           continue;
@@ -309,9 +315,7 @@ if (isIQY) {
       obj.data = newItems;
     }
     if (obj?.moduleIDS?.length > 0) {
-      obj.moduleIDS = obj.moduleIDS.filter(
-        (i) => i?.moduleEntityId !== "2237"
-      );
+      obj.moduleIDS = obj.moduleIDS.filter((i) => i?.moduleEntityId !== "2237");
     }
   } else if (url.includes("/dynamic/v1/channel/vrsList/")) {
     // 首页顶部菜单
@@ -382,6 +386,9 @@ if (isIQY) {
               }
             }
             item.data = newItems;
+            newList.push(item);
+          } else {
+            newList.push(item);
           }
         } else if (item?.moduleType === 7 && item?.title === "我的服务") {
           // 我的服务
@@ -395,6 +402,9 @@ if (isIQY) {
               }
             }
             item.data = newItems;
+            newList.push(item);
+          } else {
+            newList.push(item);
           }
         } else {
           newList.push(item);
@@ -499,8 +509,10 @@ if (isIQY) {
                 }
               }
               item.nodes = newItems;
+              newNodes.push(item);
+            } else {
+              newNodes.push(item);
             }
-            newNodes.push(item);
           } else {
             newNodes.push(item);
           }
@@ -590,13 +602,17 @@ if (isIQY) {
                             }
                           }
                           ii.nodes = newIII;
+                          newII.push(ii);
+                        } else {
+                          newII.push(ii);
                         }
-                        newII.push(ii);
                       }
                     }
                     i.nodes = newII;
+                    newItems.push(i);
+                  } else {
+                    newItems.push(i);
                   }
-                  newItems.push(i);
                 }
               }
               item.nodes = newItems;
@@ -631,8 +647,10 @@ if (isIQY) {
                   newII.push(ii);
                 }
                 item.nodes = newII;
+                newNodes.push(item);
+              } else {
+                newNodes.push(item);
               }
-              newNodes.push(item);
             } else if (item?.id === 22570) {
               // 横版轮播图
               continue;
@@ -653,9 +671,13 @@ if (isIQY) {
                     }
                   }
                   node0.nodes = newII;
+                  newNodes.push(item);
+                } else {
+                  newNodes.push(item);
                 }
+              } else {
+                newNodes.push(item);
               }
-              newNodes.push(item);
             } else {
               newNodes.push(item);
             }
@@ -689,8 +711,10 @@ if (isIQY) {
                   }
                 }
                 item.nodes = newItems;
+                newNodes.push(item);
+              } else {
+                newNodes.push(item);
               }
-              newNodes.push(item);
             } else if (item?.id === 23243) {
               // 评论区留言
               if (item?.nodes?.length > 0) {
@@ -704,8 +728,10 @@ if (isIQY) {
                   }
                 }
                 item.nodes = newItems;
+                newNodes.push(item);
+              } else {
+                newNodes.push(item);
               }
-              newNodes.push(item);
             } else {
               newNodes.push(item);
             }
