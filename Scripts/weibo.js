@@ -1,4 +1,4 @@
-// 2023-09-12 16:20
+// 2023-09-12 22:10
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -249,7 +249,7 @@ if (url.includes("/interface/sdk/sdkad.php")) {
   } else if (url.includes("/2/direct_messages/user_list")) {
     if (obj?.user_list?.length > 0) {
       obj.user_list = obj.user_list.filter(
-        (i) => !["活动通知"].includes(i.user.name)
+        (i) => !["活动通知", "闪聊"].includes(i?.user?.name)
       );
     }
   } else if (url.includes("/2/flowlist")) {
