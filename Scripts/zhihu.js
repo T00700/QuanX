@@ -1,4 +1,4 @@
-// 2023-08-21 11:45
+// 2023-09-13 13:20
 
 if (!$response.body) $done({});
 const url = $request.url;
@@ -160,38 +160,45 @@ if (url.includes("/api/cloud/config/all")) {
           if (videoID) {
             i.common_card.feed_content.video.id = videoID;
           }
-        } else if (i.common_card?.feed_content?.video?.id) {
-          let search = '"feed_content":{"video":{"id":';
-          let str = $response.body.substring(
-            $response.body.indexOf(search) + search.length
-          );
-          let videoID = str.substring(0, str.indexOf(","));
-          i.common_card.feed_content.video.id = videoID;
-        } else if (
-          i.common_card?.footline?.elements?.[0]?.text?.panel_text?.includes(
-            "广告"
-          )
-        ) {
+        } else if (i.extra?.type === "pin") {
           return false;
-        } else if (
-          i.common_card?.feed_content?.source_line?.elements?.[1]?.text?.panel_text?.includes(
-            "盐选"
-          )
-        ) {
-          return false;
-        } else if (i?.promotion_extra) {
-          // 营销信息
-          return false;
+        } else if (i?.extra?.type === "answer") {
+          // 回答内容
+          if (i.common_card?.feed_content?.video?.id) {
+            let search = '"feed_content":{"video":{"id":';
+            let str = $response.body.substring(
+              $response.body.indexOf(search) + search.length
+            );
+            let videoID = str.substring(0, str.indexOf(","));
+            i.common_card.feed_content.video.id = videoID;
+          } else if (
+            i.common_card?.footline?.elements?.[0]?.text?.panel_text?.includes(
+              "广告"
+            )
+          ) {
+            return false;
+          } else if (
+            i.common_card?.feed_content?.source_line?.elements?.[1]?.text?.panel_text?.includes(
+              "盐选"
+            )
+          ) {
+            return false;
+          } else if (i?.promotion_extra) {
+            // 营销信息
+            return false;
+          } else {
+            return true;
+          }
         }
-        return true;
       } else if (i.type.includes("aggregation_card")) {
         // 横排卡片 知乎热榜
         return false;
       } else if (i.type === "feed_advert") {
         // 伪装成正常内容的卡片
         return false;
+      } else {
+        return true;
       }
-      return true;
     });
     fixPos(obj.data);
   }
