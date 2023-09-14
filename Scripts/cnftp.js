@@ -1,4 +1,4 @@
-// 2023-09-11 20:20
+// 2023-09-15 07:20
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -635,6 +635,9 @@ if (isIQY) {
             if (item?.id === 32775) {
               // 个人中心二楼
               continue;
+            } else if (item?.id === 22570) {
+              // 横版轮播图
+              continue;
             } else if (item?.id === 28912) {
               // 我的下载 收藏 购买 场景
               if (item?.nodes?.length > 0) {
@@ -651,9 +654,8 @@ if (isIQY) {
               } else {
                 newNodes.push(item);
               }
-            } else if (item?.id === 22570) {
-              // 横版轮播图
-              continue;
+            } else if (item?.id === 35942) {
+              // 我的专属推荐
             } else if (item?.id === 36014) {
               // 业务区 星光币 优酷购 数字藏品
               continue;
