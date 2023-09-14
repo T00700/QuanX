@@ -1,5 +1,5 @@
 # https://github.com/limbopro/Adblock4limbo/blob/main/Adblock4limbo.list
-# 2023-02-23
+# 2023-09-13 20:36
 
 # https://javmost.xyz/
 ;HOST, delivery-node-aziz.voe-network.net, REJECT
@@ -13,8 +13,6 @@ HOST-SUFFIX, mc.yandex.ru, REJECT
 HOST-SUFFIX, amung.us, REJECT
 HOST-SUFFIX, widgets.amung.us, REJECT
 HOST-SUFFIX, s10.histats.com, REJECT
-;HOST-SUFFIX, js.wpadmngr.com, REJECT
-;HOST-SUFFIX, suzihaza.com, REJECT
 HOST-SUFFIX, eyebrowscrambledlater.com, REJECT
 HOST-SUFFIX, a.realsrv.com, REJECT
 HOST-SUFFIX, media.aso1.net, REJECT
@@ -290,6 +288,26 @@ HOST, tc.vpubmi.com, REJECT
 HOST-SUFFIX, qoiw1xw.cn, REJECT
 HOST-SUFFIX, purpleads.io, REJECT
 
-# m.yhpdm.com
+# cn1.91short.com
 HOST-SUFFIX, fg.knlk2md.cn, REJECT
 HOST-SUFFIX, tg.gtlpaj.com, REJECT
+
+# cn1.91short.com
+HOST-SUFFIX, 51.la, REJECT
+HOST-SUFFIX, dghhot.com, REJECT
+HOST-SUFFIX, tarqk5.com, REJECT
+HOST-SUFFIX, lhiefl.com, REJECT
+HOST-SUFFIX, ioacfu.com, REJECT
+
+# 91porn.com
+# HOST-SUFFIX, killcovid2021.com, REJECT
+
+# xiaobaotv.net
+HOST-SUFFIX, exemptambientcream.com, REJECT
+HOST-SUFFIX, catdomepimyth.com, REJECT
+
+# javday.tv
+HOST-SUFFIX, farwine.com, REJECT
+
+# www.xvideos.com
+HOST-SUFFIX, orbsrv.com, REJECT
