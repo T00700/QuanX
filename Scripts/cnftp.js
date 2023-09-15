@@ -1,4 +1,4 @@
-// 2023-09-15 09:05
+// 2023-09-15 18:50
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -330,6 +330,21 @@ if (isIQY) {
         }
       }
       obj.data = newItems;
+    }
+  } else if (url.includes("/mobile/config?")) {
+    const item = [
+      "XmVideoB",
+      "XmsellSwitch",
+      "damang_duanju_tab",
+      "relative_ads"
+    ];
+    for (let i of item) {
+      if (obj?.data?.[i]) {
+        obj.data[i] = "0";
+      }
+    }
+    if (obj?.data?.XmFsLvlCatAddr) {
+      obj.data.XmFsLvlCatAddr = "";
     }
   } else if (url.includes("/mobile/recommend/v2?")) {
     if (obj?.data?.default) {
