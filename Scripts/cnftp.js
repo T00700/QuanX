@@ -1,4 +1,4 @@
-// 2023-09-15 07:20
+// 2023-09-15 08:40
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -656,6 +656,7 @@ if (isIQY) {
               }
             } else if (item?.id === 35942) {
               // 我的专属推荐
+              continue;
             } else if (item?.id === 36014) {
               // 业务区 星光币 优酷购 数字藏品
               continue;
