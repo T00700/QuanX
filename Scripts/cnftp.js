@@ -1,4 +1,4 @@
-// 2023-09-15 08:40
+// 2023-09-15 09:05
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -681,6 +681,9 @@ if (isIQY) {
               } else {
                 newNodes.push(item);
               }
+            } else if (item?.id === 38466) {
+              // 横幅广告
+              continue;
             } else {
               newNodes.push(item);
             }
